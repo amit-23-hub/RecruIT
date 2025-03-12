@@ -1,0 +1,48 @@
+/* Navbar Container */
+.navbar {
+    width: 1195px;
+    height: 74px;
+    position: absolute;
+    top: 44px;
+    left: 123px;
+    border-radius: 48px;
+    background: #FFFFFF; /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 48px; /* Padding: top/bottom 16px, left/right 48px */
+    gap: 8px; /* Gap between items */
+    z-index: 4;
+  }
+  
+  /* Logo */
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #929292;
+  }
+  
+  /* Menu */
+  .menu {
+    display: flex;
+    gap: 8px; /* Gap between menu items */
+  }
+  
+  .menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px; 
+    color: #363636;
+  }
+  
+  /* Signup Button */
+  .signupButton {
+    background: #8A01DA;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }

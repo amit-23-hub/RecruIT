@@ -1,0 +1,180 @@
+.frame {
+    box-sizing: border-box;
+    position: absolute;
+    width: 1440px;
+    height: 694px;
+    left: calc(50% - 1440px / 2);
+    top: 1000px;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .group {
+    position: absolute;
+    width: 1294px;
+    height: 534px;
+    left: 73px;
+    top: calc(50% - 534px / 2 - 5px);
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 55px;
+    position: absolute;
+    width: 1294px;
+    height: 86px;
+    left: calc(50% - 1294px / 2);
+    top: 75px;
+  }
+  
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: 289px;
+    height: 75px;
+  }
+  
+  .seeHowItWorks {
+    width: 129px;
+    height: 19px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #8a01da;
+  }
+  
+  .mainTitle {
+    width: 432px;
+    height: 48px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 48px;
+    color: #363636;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 40px 10px 40px;
+    gap: 32px;
+    width: 461px;
+    height: 60px;
+    background: #f8f8f8;
+    border-radius: 50px;
+  }
+  
+  .recruitersButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 36px;
+    gap: 8px;
+    width: 212px;
+    height: 54px;
+    background: #ffffff;
+    border-radius: 79px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #363636;
+  }
+  
+  .candidatesButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 36px;
+    gap: 8px;
+    width: 212px;
+    height: 54px;
+    background: #ffffff;
+    border: 1px solid whitesmoke;
+    border-radius: 79px ;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #363636;
+  }
+  
+  .content {
+    position: absolute;
+    width: 1294px;
+    height: 400px;
+    left: calc(50% - 1500px / 2);
+    top: 10px;
+  }
+  
+  .leftContent {
+    position: absolute;
+    width: 474px;
+    height: 384px;
+    left: 73px;
+    top: 209px;
+  }
+  
+  .step {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 32px;
+    gap: 6px;
+    width: 474px;
+    height: 64px;
+    background: #ffffff;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .icon {
+    width: 32px;
+    height: 32px;
+   
+    border-radius: 6px;
+  }
+  .stepTextMain{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    color: #313131;
+    background-color: #8a01da;;
+  }
+  
+  .stepText {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    color: #313131;
+  }
+  
+  .rightContent {
+    box-sizing: border-box;
+    position: absolute;
+    width: 725px;
+    height: 400px;
+    left: 642px;
+    top: 209px;
+    background: #f6f6f6;
+    border-radius: 8px;
+  }

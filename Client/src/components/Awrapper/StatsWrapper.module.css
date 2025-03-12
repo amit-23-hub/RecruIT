@@ -1,0 +1,53 @@
+.statsWrapper {
+    position: absolute;
+    width: 1191px;
+    height: 119px;
+    left: 125px;
+    top: 865px;
+  }
+  
+  /* Stat Container */
+  .statContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Stat Item */
+  .statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Stat Value */
+  .statValue {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48.7px;
+    line-height: 73px;
+    color: #313131;
+    margin-bottom: 8px;
+  }
+  
+  /* Stat Description */
+  .statDescription {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #313131;
+  }
+  
+  /* Vertical Line */
+  .verticalLine {
+    width: 0px;
+    height: 99.5px;
+    border: 2px solid #6F6F6F;
+  }
+  

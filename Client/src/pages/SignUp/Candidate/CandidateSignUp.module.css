@@ -1,0 +1,165 @@
+/* CandidateSignUp.module.css */
+
+.signupContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+}
+
+.signupRight {
+  position: absolute;
+  right: 0;
+  width: 719px;
+  height: 768px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 466px;
+}
+
+.createAccount {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #363636;
+}
+
+.subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  color: #969696;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: #ededed;
+  border-radius: 78px;
+  position: relative;
+}
+
+.progress {
+  width: 50%;
+  height: 100%;
+  background: blue;
+  border-radius: 78px;
+}
+
+.stepText {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #000000;
+  text-align: right;
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #363636;
+}
+
+.formGroup input {
+  width: 100%;
+  height: 44px;
+  
+  border: 1px solid #e8ebec;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #969696;
+}
+
+.phoneInputGroup {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  
+}
+
+.countryCodeInput,
+.phoneNumberInput {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 10px;
+  
+  
+}
+.countryCodeInput input,
+.phoneNumberInput input {
+  height: 30px; 
+ 
+  border: 1px solid #e8ebec;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #969696;
+}
+
+.countryCodeInput {
+  width: 30%; /* Adjust width for country code input */
+}
+
+.phoneNumberInput {
+  width: 70%; /* Adjust width for phone number input */
+}
+
+.buttonContainer {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.nextButton {
+  width: 100%;
+  height: 44px;
+  background: #2e007a;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.loginLink {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #969696;
+  text-align: center;
+  width: 100%;
+}
+
+.loginLink a {
+  color: #2d86ba;
+  text-decoration: none;
+}

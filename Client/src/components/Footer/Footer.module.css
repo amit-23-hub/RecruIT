@@ -1,0 +1,86 @@
+/* Footer Container */
+.footerContainer {
+    position: absolute;
+    width: 100%; 
+    height: 150px; /* Fixed height as per design */
+    left: 0; /* Align to the left edge */
+    top: 2774px; /* Position from the top as per original design */
+    background: #190042;
+    color: #ffffff;
+    font-family: 'Mulish', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  /* Top Row (Logo and Social Media) */
+  .topRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%; /* Adjust width to fit within the screen */
+    max-width: 1200px; /* Limit maximum width for larger screens */
+    margin-bottom: 40px;
+  }
+  
+  /* Brand Logo and Name */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8.85px;
+  }
+  
+  .logo {
+    width: 25.76px;
+    height: 25.7px;
+    background: #c6bbbb;
+    border-radius: 47.6658px;
+  }
+  
+  .brandName {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22.6587px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #929292;
+  }
+  
+  /* Social Media Icons */
+  .socialMedia {
+    display: flex;
+    gap: 24px;
+  }
+  
+  .socialIcon {
+    width: 37px;
+    height: 37px;
+    background: rgba(219, 219, 219, 0.56);
+    border-radius: 18.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .socialIcon img {
+    width: 21px;
+    height: 21px;
+  }
+  
+  /* Divider Line */
+  .divider {
+    width: 100%; /* Match the width of the top row */
+     /* Match the max-width of the top row */
+    height: 0px;
+    border: 0.2px solid #ffffff; 
+  }
+  
+  /* Copyright Text */
+  .copyright {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: auto;
+    text-align: center;
+    color: #ffffff;
+  }

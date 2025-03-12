@@ -1,0 +1,138 @@
+.pageContainer {
+    background-color: #f6f6f6 !important;
+    
+  }
+
+.frame {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 60px;
+    position: absolute;
+    width: 1230px;
+    height: 543px;
+    left: 73px;
+    top: 1872px;
+    
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+ 
+  }
+  
+  .leftSection {
+    box-sizing: border-box;
+    width: 658px;
+    height: 543px;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .rightSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 36px;
+    width: 512px;
+    height: 543px;
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: 512px;
+    height: 75px;
+  }
+  
+  .subTitle {
+    width: 101px;
+    height: 19px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #8a01da;
+  }
+  
+  .mainTitle {
+    width: 512px;
+    height: 48px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 48px;
+    color: #363636;
+  }
+  
+  .features {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 28px;
+    width: 437px;
+    height: 432px;
+  }
+  
+  .feature {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 28px;
+    width: 437px;
+    height: 64px;
+  }
+  
+  .icon {
+    width: 64px;
+    height: 64px;
+    background: #eddcf7;
+    border-radius: 85px;
+    position: relative;
+  }
+  
+  .featureText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: 345px;
+    height: 53px;
+  }
+  
+  .featureText h3 {
+    width: 100%;
+    height: 24px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #363636;
+    margin: 0;
+  }
+  
+  .featureText p {
+    width: 100%;
+    height: 21px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #363636;
+    margin: 0;
+  }
