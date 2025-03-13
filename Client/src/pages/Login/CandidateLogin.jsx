@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./RecruiterLogin.module.css";
-import RLeftPortion from "../../Common/RLeftPortion"; 
+import CLeftPortion from "../../Common/CLeftPortion"; 
 
 const RecruiterLogin = () => {
   return (
     <div className={styles.loginContainer}>
    
-      <RLeftPortion />
+      <CLeftPortion />
 
       
       <div className={styles.loginRight}>

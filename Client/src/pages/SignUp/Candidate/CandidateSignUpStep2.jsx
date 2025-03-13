@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CandidateSignUpStep2.module.css";
-import LeftPortion from "../../../Common/LeftPortion"; // Import the reusable LeftPortion component
+import RLeftPortion from "../../../Common/RLeftPortion"; // Import the reusable RLeftPortion component
 
 const CandidateSignUpStep2 = ({ onNext, formData }) => {
   const [localFormData, setLocalFormData] = useState({
@@ -37,8 +37,8 @@ const CandidateSignUpStep2 = ({ onNext, formData }) => {
 
   return (
     <div className={styles.signupContainer}>
-      {/* Use the reusable LeftPortion component */}
-      <LeftPortion />
+      {/* Use the reusable RLeftPortion component */}
+      <RLeftPortion />
 
       {/* Right Side */}
       <div className={styles.signupRight}>

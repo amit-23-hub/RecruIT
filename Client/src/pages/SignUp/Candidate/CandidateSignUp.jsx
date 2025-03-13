@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./CandidateSignUp.module.css";
-import LeftPortion from "../../../Common/LeftPortion"; 
+import CLeftPortion from "../../../Common/CLeftPortion"; 
 
 const CandidateSignUp = ({ onNext }) => {
   const [formData, setFormData] = useState({
     fullName: "",
-    countryCode: "+91", // Default country code
+    countryCode: "+91", 
     phoneNumber: "",
   });
 
@@ -27,8 +27,8 @@ const CandidateSignUp = ({ onNext }) => {
 
   return (
     <div className={styles.signupContainer}>
-      {/* Use the reusable LeftPortion component */}
-      <LeftPortion />
+   
+      <CLeftPortion />
 
       {/* Right Side */}
       <div className={styles.signupRight}>

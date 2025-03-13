@@ -5,6 +5,7 @@ import SignupStep1 from './pages/SignUp/SignUp1';
 import SignupStep2 from './pages/SignUp/SignUp2';
 import SignupStep3 from './pages/SignUp/SignUp3';
 import RecruiterLogin from './pages/Login/RecruiterLogin';
+import CandidateLogin from './pages/Login/CandidateLogin';
 import CandidateSignUp from './pages/SignUp/Candidate/CandidateSignUp';
 import CandidateSignUpStep2 from './pages/SignUp/Candidate/CandidateSignUpStep2';
 import Home from './pages/HomePage/HomePage'; 
@@ -20,19 +21,15 @@ const App = () => {
 
   const handleNextStep2 = (data) => {
     setFormData({ ...formData, ...data });
-    setStep(3); // Move to Step 3 (Email Verification)
+    setStep(3);
   };
 
   return (
     <Router>
       <Routes>
-        {/* Route for the Home Page */}
         <Route path="/home" element={<Home />} />
-
-        {/* Route for the Recruiter Login Page */}
         <Route path="/login" element={<RecruiterLogin />} />
-
-        {/* Route for the Candidate Sign-Up Page */}
+        <Route path="/candidate-login" element={<CandidateLogin />} />
         <Route
           path="/candidate-signup"
           element={
@@ -43,8 +40,6 @@ const App = () => {
             </>
           }
         />
-
-        {/* Route for the Recruiter Sign-Up Process */}
         <Route
           path="/signup"
           element={
@@ -55,8 +50,6 @@ const App = () => {
             </>
           }
         />
-
-        {/* Default Route: Redirect to Home Page */}
         <Route path="/" element={<Navigate to="/home" />} />
       </Routes>
     </Router>

@@ -8,11 +8,13 @@
     align-items: center;
     justify-content: space-between;
     background: #ffffff;
+    font-family: var(--font-poppins);
+    overflow: hidden; 
   }
   
   .loginRight {
     position: absolute;
-    right: 0;
+    right: 30px;
     width: 719px;
     height: 768px;
     background: #ffffff;

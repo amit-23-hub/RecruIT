@@ -1,23 +1,13 @@
 import React from "react";
 import styles from "./SignUp3.module.css";
+import RLeftPortion from "../../Common/RLeftPortion";
 
 const SignUp3 = () => {
   return (
     <div className={styles.signupContainer}>
-      {/* Left Side */}
-      <div className={styles.signupLeft}>
-        <div className={styles.leftContent}>
-          <h2>RecruIT</h2>
-          <h1>Sign up</h1>
-          <h1>and start hiring in minutes.</h1>
-          <span>No lengthy job postings. Just instant matches.</span>
-        </div>
-      </div>
-
-      {/* Right Side */}
+      <RLeftPortion />
       <div className={styles.signupRight}>
         <div className={styles.signupForm}>
-          {/* Email Icon */}
           <div className={styles.emailIcon}>
             <svg
               width="48"
@@ -26,21 +16,11 @@ const SignUp3 = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M6 12C6 8.68629 8.68629 6 12 6H36C39.3137 6 42 8.68629 42 12V36C42 39.3137 39.3137 42 36 42H12C8.68629 42 6 39.3137 6 36V12Z"
-                fill="#313131"
-              />
-              <path
-                d="M33 22L24 28L15 22V18L24 24L33 18V22Z"
-                fill="#FF5F5F"
-              />
+              <path d="M28.5 36H6L5.9955 13.359L23.1465 25.233C23.3973 25.4065 23.695 25.4995 24 25.4995C24.305 25.4995 24.6027 25.4065 24.8535 25.233L42 13.365V27H45V12C44.9988 11.2047 44.6824 10.4423 44.12 9.87999C43.5577 9.31764 42.7953 9.00119 42 9H6C5.20435 9 4.44129 9.31607 3.87868 9.87868C3.31607 10.4413 3 11.2044 3 12V36C3.00119 36.7953 3.31764 37.5577 3.87999 38.12C4.44235 38.6824 5.20472 38.9988 6 39H28.5V36ZM38.6985 12L24 22.176L9.3015 12H38.6985Z" fill="#313131"/>
+              <path d="M39 42C42.3137 42 45 39.3137 45 36C45 32.6863 42.3137 30 39 30C35.6863 30 33 32.6863 33 36C33 39.3137 35.6863 42 39 42Z" fill="#FF5F5F"/>
             </svg>
           </div>
-
-          {/* Verification Text */}
           <h2 className={styles.verifyText}>Verify your email to proceed</h2>
-
-          {/* Email Message */}
           <p className={styles.emailMessage}>
             An email has been sent to <strong>aman.singh@bluparrot.com</strong>.
             Please click the verification link in the email to confirm your

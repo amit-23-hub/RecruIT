@@ -14,6 +14,7 @@
     padding: 0px 48px; /* Padding: top/bottom 16px, left/right 48px */
     gap: 8px; /* Gap between items */
     z-index: 4;
+    font-family: var(--font-poppins);
   }
   
   /* Logo */
@@ -21,6 +22,7 @@
     font-size: 24px;
     font-weight: bold;
     color: #929292;
+    margin-top: 35px;
   }
   
   /* Menu */
@@ -39,10 +41,11 @@
   
   /* Signup Button */
   .signupButton {
-    background: #8A01DA;
+   
     padding: 10px 20px;
+    border: 1px solid #8A01DA;
     border-radius: 20px;
-    color: white;
+    color: #8A01DA;
     text-decoration: none;
     font-size: 16px;
   }

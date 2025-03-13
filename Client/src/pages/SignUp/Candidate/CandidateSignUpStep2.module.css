@@ -8,6 +8,8 @@
     align-items: center;
     justify-content: space-between;
     background: #ffffff;
+    font-family: var(--font-poppins);
+    overflow: hidden;
   }
   
   .signupRight {

@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "../pages/SignUp/SignUp1.module.css"; 
+import Logo from "./logo";
 
-const LeftPortion = () => {
+const RLeftPortion = () => {
   return (
     <div className={styles.signupLeft}>
       <div className={styles.leftContent}>
-        <h2>RecruIT</h2>
+        <Logo/>
         <h1>Sign up</h1>
         <h1>and start hiring in minutes.</h1>
         <span>No lengthy job postings. Just instant matches.</span>
@@ -14,4 +15,4 @@ const LeftPortion = () => {
   );
 };
 
-export default LeftPortion;
+export default RLeftPortion;

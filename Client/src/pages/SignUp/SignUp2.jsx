@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SignUp2.module.css";
-import LeftPortion from "./../../Common/LeftPortion"; // Import the reusable LeftPortion component
+import RLeftPortion from "./../../Common/RLeftPortion"; // Import the reusable RLeftPortion component
 
 const SignupStep2 = ({ onNext, formData }) => {
   const [localFormData, setLocalFormData] = useState({
@@ -9,6 +9,22 @@ const SignupStep2 = ({ onNext, formData }) => {
     confirmPassword: "",
     agreeToTerms: false,
   });
+
+  const [capsLockOn, setCapsLockOn] = useState(false); // State to track Caps Lock
+
+  // Function to detect Caps Lock
+  const handleKeyPress = (e) => {
+    const isCapsLockOn = e.getModifierState("CapsLock");
+    setCapsLockOn(isCapsLockOn);
+  };
+
+  // Add event listener for Caps Lock detection
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,8 +53,8 @@ const SignupStep2 = ({ onNext, formData }) => {
 
   return (
     <div className={styles.signupContainer}>
-      {/* Use the reusable LeftPortion component */}
-      <LeftPortion />
+      {/* Use the reusable RLeftPortion component */}
+      <RLeftPortion />
 
       <div className={styles.signupRight}>
         <div className={styles.signupForm}>
@@ -67,12 +83,18 @@ const SignupStep2 = ({ onNext, formData }) => {
             </div>
 
             <div className={styles.formGroup}>
-              <label>Create Password*</label>
+              <label>
+                Create Password*
+                {capsLockOn && (
+                  <span className={styles.capsLockWarning}>Caps Lock is ON</span>
+                )}
+              </label>
               <input
                 type="password"
                 name="password"
                 value={localFormData.password}
                 onChange={handleChange}
+                onKeyDown={handleKeyPress} // Detect Caps Lock on key press
                 placeholder="••••••••"
                 required
               />

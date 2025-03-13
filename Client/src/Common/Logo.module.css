@@ -1,0 +1,27 @@
+
+  
+  .logo {
+    display: flex;
+    align-items: center;   
+    gap: 8px;
+    position: relative;
+    top: -20px; /* ✅ Logo ko upar shift karega */
+      
+  }
+  
+ 
+  .logoImg {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+  }
+  
+  
+  .logoText {
+    font-family: var(--font-DM);
+    font-size: 23px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #929292;
+  }
+  

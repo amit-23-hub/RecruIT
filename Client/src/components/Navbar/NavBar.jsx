@@ -1,10 +1,13 @@
 import React from 'react';
 import styles from './Navbar.module.css';
+import Logo from '../../Common/logo';
 
 const Navbar = () => {
   return (
     <div className={styles.navbar}>
-      <div className={styles.logo}>Logo</div>
+      <div className={styles.logo}>
+        <Logo/>
+      </div>
       <div className={styles.menu}>
         <a href="/solutions">Solutions</a>
         <a href="/pricing">Pricing</a>
