@@ -1,0 +1,27 @@
+.statsCard {
+    width: 240px;
+    height: 63px;
+    background: #FFFFFF;
+    border: 0.6px solid #E9C3FF;
+    box-shadow: 0px 2px 4px rgba(214, 214, 214, 0.25);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .title {
+    font-size: 12px;
+    color: #A0AEC0;
+  }
+  
+  .value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2D3748;
+  }

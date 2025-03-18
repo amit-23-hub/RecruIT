@@ -1,0 +1,20 @@
+.jobList {
+    background: #FFFFFF;
+    border: 1px solid #F2DDFF;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .jobItem {
+    font-size: 14px;
+    color: #313131;
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    border: 1px solid;
+    border-image: linear-gradient(90deg, #8A01DA, #F2DDFF);
+    border-image-slice: 1;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 8px;
+
+}

@@ -133,11 +133,18 @@
 
 .employerRow,
 .candidateRow {
-  margin-top: -10px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* Ensure vertical alignment */
+  justify-content: space-between;
   gap: 10px;
+}
+
+.icons {
+  display: flex;
+  align-items: center; /* Ensure vertical alignment */
+}
+.icons{
+  align-items: center;
 }
 
 .employerRow h3,
@@ -151,6 +158,6 @@
 
 .employerSection p,
 .recruiterSection p {
-  margin-top: 20px; /* Added gap between heading and paragraph */
+  margin-top: 20px;
   font-size: 16px;
 }

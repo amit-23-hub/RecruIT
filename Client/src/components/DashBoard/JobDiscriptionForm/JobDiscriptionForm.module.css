@@ -1,0 +1,42 @@
+.formContainer {
+    background: #FFF8FF;
+    
+    padding: 30px;
+    margin-bottom: 20px;
+    border: 1px solid;
+    border-image: linear-gradient(90deg, #8A01DA, #F2DDFF);
+    border-image-slice: 1;
+    border-radius: 8px;
+
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #8A01DA;
+    text-align: center;
+  }
+  
+  .inputContainer {
+    display: flex;
+    
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .inputField {
+    width: 624px;
+    height: 35px;
+    border: 1px solid #E1E1E1;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  
+  .generateButton {
+    background: #8A01DA;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+  }

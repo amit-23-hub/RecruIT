@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SignUp2.module.css";
-import RLeftPortion from "./../../Common/RLeftPortion"; // Import the reusable RLeftPortion component
+import RLeftPortion from "./../../Common/RLeftPortion"; 
 
 const SignupStep2 = ({ onNext, formData }) => {
   const [localFormData, setLocalFormData] = useState({
@@ -18,7 +18,7 @@ const SignupStep2 = ({ onNext, formData }) => {
     setCapsLockOn(isCapsLockOn);
   };
 
-  // Add event listener for Caps Lock detection
+  //  Caps Lock detection
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
     return () => {
@@ -53,7 +53,7 @@ const SignupStep2 = ({ onNext, formData }) => {
 
   return (
     <div className={styles.signupContainer}>
-      {/* Use the reusable RLeftPortion component */}
+    
       <RLeftPortion />
 
       <div className={styles.signupRight}>

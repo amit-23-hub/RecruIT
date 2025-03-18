@@ -16,11 +16,11 @@ const RecruiterLogin = () => {
 
           
           <div className={styles.formGroup}>
-            <label>Email*</label>
+            <label>Email</label>
             <input
               type="email"
               placeholder="amansingh@bluparrot.com"
-              defaultValue="amansingh@bluparrot.com"
+              defaultValue=""
             />
           </div>
 

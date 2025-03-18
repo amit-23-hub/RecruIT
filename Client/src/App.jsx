@@ -9,6 +9,7 @@ import CandidateLogin from './pages/Login/CandidateLogin';
 import CandidateSignUp from './pages/SignUp/Candidate/CandidateSignUp';
 import CandidateSignUpStep2 from './pages/SignUp/Candidate/CandidateSignUpStep2';
 import Home from './pages/HomePage/HomePage'; 
+import Dashboard from './components/DashBoard/Dashboard';
 
 const App = () => {
   const [step, setStep] = useState(1);
@@ -30,6 +31,8 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<RecruiterLogin />} />
         <Route path="/candidate-login" element={<CandidateLogin />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+
         <Route
           path="/candidate-signup"
           element={
@@ -51,6 +54,7 @@ const App = () => {
           }
         />
         <Route path="/" element={<Navigate to="/home" />} />
+       
       </Routes>
     </Router>
   );

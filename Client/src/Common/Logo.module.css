@@ -5,7 +5,7 @@
     align-items: center;   
     gap: 8px;
     position: relative;
-    top: -20px; /* ✅ Logo ko upar shift karega */
+    top: -20px; 
       
   }
   

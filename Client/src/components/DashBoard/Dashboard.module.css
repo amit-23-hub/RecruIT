@@ -1,0 +1,19 @@
+.dashboard {
+    display: flex;
+    background: linear-gradient(291.21deg, #FAF7FF 8.45%, #FFFFFF 90.27%);
+    height: 100vh;
+  }
+  
+  .mainContent {
+    flex: 1;
+    padding: 20px;
+    
+  }
+  .middle{
+    border: 1px solid;
+    border-image: linear-gradient(90deg, #8A01DA, #F2DDFF);
+    border-image-slice: 1;
+    border-radius: 8px;
+    padding-bottom: 80px;
+    padding-left:80px ;
+  }

@@ -1,4 +1,4 @@
-/* CandidateSignUp.module.css */
+
 
 .signupContainer {
   position: relative;
@@ -128,11 +128,11 @@
 }
 
 .countryCodeInput {
-  width: 30%; /* Adjust width for country code input */
+  width: 30%; 
 }
 
 .phoneNumberInput {
-  width: 70%; /* Adjust width for phone number input */
+  width: 70%;
 }
 
 .buttonContainer {
