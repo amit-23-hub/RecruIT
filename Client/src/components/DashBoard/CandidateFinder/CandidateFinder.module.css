@@ -1,0 +1,344 @@
+.candidateContainer {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* text-align: center; */
+  font-family: var(--font-poppins);
+}
+
+.heading {
+  color: #969696;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.candidateList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.candidateCard {
+  width: 820px;
+  height: auto; 
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.crossIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: #8a01da;
+}
+
+.candidateHeader {
+  
+  
+  align-items: flex-start;
+  width: 100%;
+}
+
+.candidateInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.candidateImage {
+  width: 100px;
+  height: 100px;
+  background: #ffffff;
+  border-radius: 16px;
+  background-size: cover;
+}
+
+.candidateDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.candidateName {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: #313131;
+}
+
+.candidateRole {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 28px;
+  color: #a0aec0;
+}
+
+.candidateStats {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #18191c;
+}
+
+.matchRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.matchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.matchCircle {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #eb3ff2 8.7%, #8a01da 44.63%, #5401a2 71.96%, #2f017b 91.3%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.matchInnerCircle {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background: #f6f6f6;
+  border-radius: 50%;
+  border: 4px solid #fedcff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.matchPercentage {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000;
+}
+
+.matchText {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #000;
+}
+
+.matchDetails {
+  flex: 1;
+  margin-left: 30px;
+}
+
+.matchDetails h4 {
+  font-size: 16px;
+  color: #008000;
+  margin-bottom: 10px;
+}
+
+.matchItems {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #18191c;
+  
+  
+}
+.edu , .loc , .skills {
+  background-color: #EFFFF0; /* Inner background */
+  padding: 2px 15px;
+}
+
+
+
+
+
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: #e2e8f0;
+  
+}
+
+.candidateDescription {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #313131;
+ 
+}
+
+.candidateFooter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+ 
+}
+
+.footerItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: #fffaf0;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+/* Pseudo-element for the 1px gradient border */
+.footerItem::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 8px; /* Ensure it matches the main element */
+  background: linear-gradient(90deg, #DA9900, #FFB800, #FFFAF0);
+  z-index: -1;
+}
+
+/* Extra layer to keep content inside the border */
+.footerItem::after {
+  content: "";
+  position: absolute;
+  top: .5px;
+  left: .5px;
+  right: .5px;
+  bottom: .5px;
+  border-radius: 7px; /* Slightly smaller to expose the border */
+  background-color: #fffaf0; /* Same as inner background */
+  z-index: -1;
+}
+
+.footerText {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #da9900;
+}
+
+
+.checkboxContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.downloadButton,
+.nextButton {
+  padding: 10px 130px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.downloadButton {
+  background-color: #8a01da;
+  color: white;
+}
+
+.downloadButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.nextButton {
+  background-color: #8A01DA;
+  color: #ffffff;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.popupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.popupHeader h3 {
+  color: #8a01da;
+  font-size: 20px;
+}
+
+.popupCrossIcon {
+  cursor: pointer;
+  color: #8a01da;
+}
+
+.popupContent p {
+  font-size: 16px;
+  color: #313131;
+}

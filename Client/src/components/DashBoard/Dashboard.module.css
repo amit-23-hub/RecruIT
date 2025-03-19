@@ -1,19 +1,40 @@
 .dashboard {
-    display: flex;
-    background: linear-gradient(291.21deg, #FAF7FF 8.45%, #FFFFFF 90.27%);
-    height: 100vh;
-  }
-  
-  .mainContent {
-    flex: 1;
-    padding: 20px;
-    
-  }
-  .middle{
-    border: 1px solid;
-    border-image: linear-gradient(90deg, #8A01DA, #F2DDFF);
-    border-image-slice: 1;
-    border-radius: 8px;
-    padding-bottom: 80px;
-    padding-left:80px ;
-  }
+  display: flex;
+  background: linear-gradient(291.21deg, #faf7ff 8.45%, #ffffff 90.27%);
+  height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, #8a01da, #f2ddff) border-box;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.candidateSection {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.left {
+  flex: 1;
+}
+
+.right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+

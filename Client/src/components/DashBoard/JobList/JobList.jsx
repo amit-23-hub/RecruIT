@@ -7,6 +7,8 @@ const JobList = () => {
     "AI/ML Expert, 2 years experience, Python",
     "AI/ML Expert, 2 years experience, Python, SQL, Deep learning",
     "Product Designer, 4 years experience, Figma, XD, Wireframing",
+    "Product Designer, 4 years experience, Figma, XD, Wireframing",
+    "Product Designer, 4 years experience, Figma, XD, Wireframing",
   ];
 
   return (

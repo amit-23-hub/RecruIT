@@ -1,0 +1,123 @@
+.WholeContainer {
+    position: absolute;
+    width: 400px;
+    height: 500px;
+    right: 20px;
+    top: 105px;
+    background: #FFFFFF;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-poppins);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.WholeContainer.fullScreen {
+    width: calc(100% - 70px);
+    height: 100vh;
+    top: 0;
+    right: 0;
+}
+
+.WholeContainer.moveLeft {
+    right: auto;
+    left: 30px; 
+    transition: all 0.5s ease-in-out;
+}
+
+.scroller {
+    flex-grow: 1;
+    overflow-y: auto;
+    border: 1px solid #F2DDFF;
+    box-shadow: 0px 2px 4px rgba(204, 204, 204, 0.35);
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+}
+
+.expandIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #8A01DA;
+    z-index: 1001;
+}
+
+.details {
+    margin-top: 20px;
+}
+
+.Common {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 14px;
+    color: #A0AEC0;
+}
+
+.keywords {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.keywords {
+    color: #8A01DA;
+    font-size: 24px;
+}
+
+.description {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.jobDetails {
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.candidate {
+    background-color: #8A01DA;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+}
+
+.regenerate {
+    background-color: #F2DDFF;
+    color: #8A01DA;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+}
