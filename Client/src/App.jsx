@@ -10,6 +10,11 @@ import CandidateSignUp from './pages/SignUp/Candidate/CandidateSignUp';
 import CandidateSignUpStep2 from './pages/SignUp/Candidate/CandidateSignUpStep2';
 import Home from './pages/HomePage/HomePage'; 
 import Dashboard from './components/DashBoard/Dashboard';
+import ProfileBasicDetails from './pages/CandidateProfile/ProfileBasicDetails';
+import ProfileResumeSkills from './pages/CandidateProfile/ProfileResumeSkills';
+import ProfileEducationCertification from './pages/CandidateProfile/ProfileEducationCertification';
+import ProfileIdentityVerification from './pages/CandidateProfile/ProfileIdentityVerification';
+import ProfileSocialLinks from './pages/CandidateProfile/ProfileSocialLinks';
 
 const App = () => {
   const [step, setStep] = useState(1);
@@ -23,6 +28,15 @@ const App = () => {
   const handleNextStep2 = (data) => {
     setFormData({ ...formData, ...data });
     setStep(3);
+  };
+
+  const handleNextProfileStep = (data) => {
+    setFormData({ ...formData, ...data });
+    setStep(step + 1);
+  };
+
+  const handlePreviousProfileStep = () => {
+    setStep(step - 1);
   };
 
   return (
@@ -53,8 +67,19 @@ const App = () => {
             </>
           }
         />
+        <Route
+          path="/profile"
+          element={
+            <>
+              {step === 1 && <ProfileBasicDetails onNext={handleNextProfileStep} formData={formData} />}
+              {step === 2 && <ProfileResumeSkills onNext={handleNextProfileStep} onPrevious={handlePreviousProfileStep} formData={formData} />}
+              {step === 3 && <ProfileEducationCertification onNext={handleNextProfileStep} onPrevious={handlePreviousProfileStep} formData={formData} />}
+              {step === 4 && <ProfileIdentityVerification onNext={handleNextProfileStep} onPrevious={handlePreviousProfileStep} formData={formData} />}
+              {step === 5 && <ProfileSocialLinks onPrevious={handlePreviousProfileStep} formData={formData} />}
+            </>
+          }
+        />
         <Route path="/" element={<Navigate to="/home" />} />
-       
       </Routes>
     </Router>
   );

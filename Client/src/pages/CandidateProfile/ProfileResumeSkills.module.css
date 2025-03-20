@@ -1,0 +1,197 @@
+.profileContainer {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .sideMenuContainer {
+    display: flex;
+    flex-direction: column;
+    width: 74px;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+  }
+  
+  .profileContent {
+    
+    flex: 1;
+    padding: 20px;
+    background-color: #fdfcff;
+  }
+  
+  .profileGrid {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .progressBarContainer {
+    width: 300px;
+  }
+  
+  .profileDetailsContainer {
+    flex: 1;
+    width: 50%;
+  }
+  
+  .profileHeader {
+    text-align: start;
+    margin-bottom: 20px;
+  }
+  
+  .headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .profileHeader h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #313131;
+  }
+  
+  .profileHeader p {
+    font-size: 16px;
+    color: #a0aec0;
+  }
+  
+  .editButton {
+    padding: 8px 16px;
+    background-color: #8a01da;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .editButton:hover {
+    background-color: #7a00c2;
+  }
+  
+  .profileDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .skillsSection h2,
+  .resumeSection h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #313131;
+    margin-bottom: 10px;
+  }
+  
+  .skillsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .skillItem {
+    padding: 8px 16px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #000000;
+  }
+  
+  .resumeUpload {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .resumeFile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .resumeName {
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  .resumeSize {
+    font-size: 12px;
+    color: #bfb8b8;
+  }
+  
+  .resumeInput {
+    margin-top: 10px;
+  }
+  
+  .actionButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .cancelButton {
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .saveButton {
+    padding: 10px 20px;
+    background-color: #8a01da;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .saveButton:hover {
+    background-color: #7a00c2;
+  }
+
+  .addSkillContainer {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .skillInput {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+  }
+  
+  .addSkillButton {
+    padding: 8px 16px;
+    background-color: #8a01da;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .addSkillButton:hover {
+    background-color: #7a00c2;
+  }
+  
+  .skillItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #000000;
+  }
+  
+  .removeSkill {
+    cursor: pointer;
+    color: #353333;
+    font-size: 14px;
+  }
+  
+  .removeSkill:hover {
+    opacity: 0.7;
+  }

@@ -1,0 +1,62 @@
+.progressBarContainer {
+    flex: 1;
+    padding: 20px;
+    margin-left: 20px;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .step {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    
+    color: #666;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .step.active {
+   
+    color: black;
+    font-weight: 500;
+  }
+  
+  .stepNumber {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-right: -20px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .step.active .stepNumber {
+    background-color: #fff;
+    color: #8a01da;
+  }
+  
+  .stepLabel {
+    flex: 1;
+  }
+  
+  .radioButton {
+    margin-right: 10px;
+  }
