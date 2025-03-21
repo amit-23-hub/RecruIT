@@ -15,6 +15,7 @@ import ProfileResumeSkills from './pages/CandidateProfile/ProfileResumeSkills';
 import ProfileEducationCertification from './pages/CandidateProfile/ProfileEducationCertification';
 import ProfileIdentityVerification from './pages/CandidateProfile/ProfileIdentityVerification';
 import ProfileSocialLinks from './pages/CandidateProfile/ProfileSocialLinks';
+import Profile from './pages/CandidateProfile/Profile';
 
 const App = () => {
   const [step, setStep] = useState(1);
@@ -68,7 +69,7 @@ const App = () => {
           }
         />
         <Route
-          path="/profile"
+          path="/profile-steps"
           element={
             <>
               {step === 1 && <ProfileBasicDetails onNext={handleNextProfileStep} formData={formData} />}
@@ -79,6 +80,7 @@ const App = () => {
             </>
           }
         />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Navigate to="/home" />} />
       </Routes>
     </Router>

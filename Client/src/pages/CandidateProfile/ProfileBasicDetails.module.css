@@ -161,14 +161,11 @@
 }
 
 .editButton {
-  padding: 8px 16px;
-  background-color: #8a01da;
+  padding: 7px 10px;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   cursor: pointer;
+  
 }
 
-.editButton:hover {
-  background-color: #7a00c2;
-}

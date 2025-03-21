@@ -7,11 +7,14 @@
     linear-gradient(90deg, #8a01da, #f2ddff) border-box;
   border-radius: 8px;
   font-family: var(--font-poppins);
-  width: 100%;
+  width: 96%;
+  transition: width 0.3s ease-in-out; 
 }
 
 .adjustedWidth {
-  width: calc(100% - 440px); /* Adjust based on the width of the scroller */
+  
+ 
+  padding:  30px 5px;
 }
 
 .title {
@@ -19,6 +22,7 @@
   font-weight: 600;
   color: #8a01da;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .inputContainer {
@@ -28,7 +32,8 @@
 }
 
 .inputField {
-  width: 624px;
+  width: 100%; /* Ensure responsiveness */
+  max-width: 624px;
   height: 22px;
   border: 1px solid #e1e1e1;
   border-radius: 8px;
@@ -49,6 +54,7 @@
   padding: 12px 24px;
   cursor: pointer;
   font-weight: 600;
+  transition: 0.3s;
 }
 
 .uploadButton {
@@ -58,4 +64,29 @@
   padding: 12px 24px;
   cursor: pointer;
   font-weight: 600;
+}
+
+
+@media (max-width: 1024px) {
+  .formContainer {
+    width: 80%;
+  }
+
+  .adjustedWidth {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    width: 90%; 
+  }
+
+  .adjustedWidth {
+    width: 85% !important;
+  }
+
+  .inputField {
+    width: 90%;
+  }
 }

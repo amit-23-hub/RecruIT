@@ -11,8 +11,8 @@ const Scroller = ({ jobDetails, keywords, onFindCandidates, onRegenerate }) => {
   };
 
   const handleFindCandidates = () => {
-    setIsMovedLeft(!isMovedLeft);
-    onFindCandidates(); // Call the onFindCandidates prop
+    setIsMovedLeft(true);
+    onFindCandidates();
   };
 
   if (!jobDetails) {

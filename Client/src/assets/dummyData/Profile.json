@@ -1,0 +1,20 @@
+{
+    "profile": {
+      "name": "Sameer Sharma",
+      "title": "Frontend Developer | HTML | CSS | React",
+      "completion": 79,
+      "experience": "5 years",
+      "location": "Noida, India",
+      "availability": "30 days",
+      "bio": "Connecticut engineering site. Eterni su turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilio accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Moscenas eget condimentum velit, sit amet feugiat lectus. Claes eptent taciti societatis nisi, quis nostrud exercitation ullamco laboris nisi. Donec at rhoncus ex. Suspendisse ac rhoncus nisl, eu imperdunt non. Curabitur vel liberendum lorem. Morbi convallis convallis diam sit amet lectifio. Aliquam in elementum tellus mera...",
+      "skills": ["CSS", "HTML", "Responsive Design", "JavaScript Frameworks", "Version Control", "Testing and Debugging", "Cross-Browser Development", "Search Engine Optimization (SEO)", "User Experience", "RESTful APIs"],
+      "jobPreferences": {
+        "salary": "20 Lakh/annum",
+        "locations": ["Delhi NCR", "Mumbai", "Pune"],
+        "jobModels": ["WFH", "Office", "Hybrid"],
+        "jobTypes": ["Contractual", "Full time"]
+      },
+      "matches": 4,
+      "pendingActions": []
+    }
+  }

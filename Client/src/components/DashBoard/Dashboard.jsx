@@ -7,12 +7,14 @@ import Scroller from "./Scroller/Scroller.jsx";
 import CandidateFinder from "./CandidateFinder/CandidateFinder.jsx";
 import styles from "./Dashboard.module.css";
 import Top from "./TopSec/Top.jsx";
-import img from '../../assets/HomeImg.png'
+import img from '../../assets/HomeImg.png';
+
 const Dashboard = () => {
   const [inputValue, setInputValue] = useState("");
   const [jobDetails, setJobDetails] = useState(null);
   const [showCandidates, setShowCandidates] = useState(false);
   const [topCandidates, setTopCandidates] = useState([]);
+  const [isScrollerVisible, setIsScrollerVisible] = useState(false);
 
   const handleInputChange = (value) => {
     setInputValue(value);
@@ -27,8 +29,10 @@ const Dashboard = () => {
         workplace: "On site",
         location: "Gurugram",
       });
+      setIsScrollerVisible(true); // Set scroller visibility to true
     } else {
       setJobDetails(null);
+      setIsScrollerVisible(false); // Set scroller visibility to false
     }
   };
 
@@ -106,16 +110,20 @@ const Dashboard = () => {
     console.log("Top Candidates Updated:", topCandidates); // Debugging
   }, [topCandidates]);
 
+
   return (
     <div className={styles.dashboard}>
       <SideMenu />
       <div className={styles.mainContent}>
         {!showCandidates && <DashBoardHeader />}
-        <div className={`${styles.middle} ${showCandidates ? "" : styles.hidden}`}>
+        <div className={`${styles.middle} ${isScrollerVisible ? styles.withScroller : ''}`}>
           {!showCandidates ? (
             <>
               <Top />
-              <JobDescriptionForm onInputChange={handleInputChange} />
+              <JobDescriptionForm 
+                onInputChange={handleInputChange} 
+                isScrollerVisible={isScrollerVisible}
+              />
               {!inputValue && <JobList />}
               {inputValue && (
                 <Scroller

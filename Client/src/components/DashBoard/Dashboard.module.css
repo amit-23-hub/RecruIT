@@ -17,17 +17,26 @@
   background: linear-gradient(white, white) padding-box,
     linear-gradient(90deg, #8a01da, #f2ddff) border-box;
   border-radius: 8px;
-  padding: 20px;
+  padding: 10px 50px;
+  transition: width 0.3s ease;
+}
+
+.middle.withScroller {
+  width: 60%;
+  align-items: center;
+  height: 80%;
 }
 
 .candidateSection {
   display: flex;
   flex-direction: row;
   gap: 30px;
+  width: 100%;
 }
 
 .left {
   flex: 1;
+  max-width: 400px; /* Adjust as needed */
 }
 
 .right {
@@ -37,4 +46,11 @@
   gap: 15px;
 }
 
-
+.noCandidates {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 18px;
+  color: #969696;
+}
