@@ -1,59 +1,93 @@
-import React, { useState } from "react";
-import styles from "./CandidateSignUpStep2.module.css";
-import RLeftPortion from "../../../Common/RLeftPortion"; // Import the reusable RLeftPortion component
+import React, { useState } from 'react';
+import styles from './CandidateSignUpStep2.module.css';
+import RLeftPortion from '../../../Common/RLeftPortion';
+import axios from 'axios';
 
-const CandidateSignUpStep2 = ({ onNext, formData }) => {
+const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
   const [localFormData, setLocalFormData] = useState({
-    email: formData.email || "",
-    password: "",
-    confirmPassword: "",
-    agreeToTerms: false,
+    email: formData.email || '',
+    password: '',
+    confirmPassword: '',
+    agreeToTerms: false
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLocalFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleSubmit = async () => {
+    if (!localFormData.email) {
+      setError('Please enter your email');
+      return;
+    }
+
+    if (!localFormData.password) {
+      setError('Please create a password');
+      return;
+    }
+
+    if (localFormData.password !== localFormData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (!localFormData.agreeToTerms) {
+      setError('You must agree to the terms and conditions');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      await axios.post(
+        'http://localhost:5001/api/auth/signup/step2',
+        {
+          email: localFormData.email,
+          password: localFormData.password,
+          userId: formData.userId
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      onNext({ email: localFormData.email });
+    } catch (error) {
+      console.error('Verification error:', error);
+      setError(
+        error.response?.data?.message ||
+        'Email verification failed. Please try again.'
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSubmit = () => {
-    if (
-      localFormData.email &&
-      localFormData.password &&
-      localFormData.confirmPassword &&
-      localFormData.agreeToTerms
-    ) {
-      if (localFormData.password === localFormData.confirmPassword) {
-        onNext(localFormData);
-      } else {
-        alert("Passwords do not match");
-      }
-    } else {
-      alert("Please fill in all fields and agree to the terms");
-    }
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setLocalFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
   };
 
   return (
     <div className={styles.signupContainer}>
-      {/* Use the reusable RLeftPortion component */}
       <RLeftPortion />
-
-      {/* Right Side */}
       <div className={styles.signupRight}>
         <div className={styles.signupForm}>
-          {/* Header Section */}
           <h2 className={styles.createAccount}>Create Account</h2>
           <p className={styles.subtitle}>
             We match you with companies looking for your exact skills.
           </p>
+
+          {error && <div className={styles.error}>{error}</div>}
+
           <div className={styles.progressBar}>
-            <div className={styles.progress}></div>
+            <div className={styles.progress} style={{ width: '100%' }}></div>
             <p className={styles.stepText}>Step 2 of 2</p>
           </div>
 
-          {/* Form Inputs */}
           <div className={styles.formInput}>
             <div className={styles.formGroup}>
               <label>Email*</label>
@@ -62,7 +96,7 @@ const CandidateSignUpStep2 = ({ onNext, formData }) => {
                 name="email"
                 value={localFormData.email}
                 onChange={handleChange}
-                placeholder="amana.singh@gmail.com"
+                placeholder="your.email@example.com"
                 required
               />
             </div>
@@ -77,7 +111,6 @@ const CandidateSignUpStep2 = ({ onNext, formData }) => {
                 placeholder="••••••••"
                 required
               />
-              <span className={styles.helperText}>Caps Lock is on</span>
             </div>
 
             <div className={styles.formGroup}>
@@ -97,29 +130,36 @@ const CandidateSignUpStep2 = ({ onNext, formData }) => {
                 type="checkbox"
                 name="agreeToTerms"
                 checked={localFormData.agreeToTerms}
-                onChange={(e) =>
-                  setLocalFormData({ ...localFormData, agreeToTerms: e.target.checked })
-                }
+                onChange={handleChange}
                 required
               />
               <label>
-                By creating an account, you agree to our{" "}
-                <a href="#">Terms and Conditions</a> and{" "}
-                <a href="#">Privacy Policy</a>.
+                By creating an account, you agree to our{' '}
+                <a href="/terms">Terms and Conditions</a> and{' '}
+                <a href="/privacy">Privacy Policy</a>.
               </label>
             </div>
           </div>
 
-          {/* Next Button */}
           <div className={styles.buttonContainer}>
-            <button className={styles.nextButton} onClick={handleSubmit}>
-              Verify Email
+            <button
+              className={styles.backButton}
+              onClick={onBack}
+              disabled={isLoading}
+            >
+              Back
+            </button>
+            <button
+              className={styles.nextButton}
+              onClick={handleSubmit}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Sending...' : 'Verify Email'}
             </button>
           </div>
 
-          {/* Login Prompt */}
           <p className={styles.loginLink}>
-            Already have an account? <a href="#">Log in</a>
+            Already have an account? <a href="/login">Log in</a>
           </p>
         </div>
       </div>

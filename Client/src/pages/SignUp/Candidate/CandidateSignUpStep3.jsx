@@ -7,7 +7,7 @@ import CLeftPortion from "../../../Common/CLeftPortion";
 const CandidateSignUpStep3 = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("aman.singh@gmail.com"); // Default fallback
+  const [email, setEmail] = useState(" "); // Default fallback
   const [isResending, setIsResending] = useState(false);
   const [countdown, setCountdown] = useState(30); // Resend cooldown
 

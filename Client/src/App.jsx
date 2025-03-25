@@ -20,15 +20,29 @@ import EmailVerified from './pages/EmailVarify';
 
 const App = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    userId: null, // Initialize userId
+    fullName: "",
+    countryCode: "+91",
+    phoneNumber: "",
+    email: "",
+    password: ""
+  });
 
   const handleNextStep1 = (data) => {
-    setFormData(data);
+    setFormData(prev => ({
+      ...prev,
+      ...data,
+      userId: data.userId // Ensure userId is preserved
+    }));
     setStep(2);
   };
 
   const handleNextStep2 = (data) => {
-    setFormData({ ...formData, ...data });
+    setFormData(prev => ({
+      ...prev,
+      ...data
+    }));
     setStep(3);
   };
 
@@ -40,21 +54,30 @@ const App = () => {
   const handlePreviousProfileStep = () => {
     setStep(step - 1);
   };
+  // ... other handlers ...
 
   return (
     <Router>
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<RecruiterLogin />} />
-        <Route path="/candidate-login" element={<CandidateLogin />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-
+        {/* ... other routes ... */}
         <Route
           path="/candidate-signup"
           element={
             <>
-              {step === 1 && <CandidateSignUp onNext={handleNextStep1} />}
-              {step === 2 && <CandidateSignUpStep2 onNext={handleNextStep2} formData={formData} />}
+              {step === 1 && (
+                <CandidateSignUp 
+                  onNext={handleNextStep1} 
+                  initialData={formData}
+                />
+              )}
+              {step === 2 && formData.userId ? (
+                <CandidateSignUpStep2 
+                  onNext={handleNextStep2} 
+                  formData={formData}
+                />
+              ) : (
+                <Navigate to="/candidate-signup" replace />
+              )}
               {step === 3 && <SignupStep3 />}
             </>
           }

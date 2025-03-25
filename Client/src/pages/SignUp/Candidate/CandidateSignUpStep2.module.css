@@ -1,4 +1,4 @@
-/* CandidateSignUpStep2.module.css */
+
 
 .signupContainer {
     position: relative;
@@ -53,9 +53,9 @@
   }
   
   .progress {
-    width: 100%; /* Full progress for Step 2 */
+    width: 100%; 
     height: 100%;
-    background: #84DA71; /* Green color for progress */
+    background: #84DA71; 
     border-radius: 78px;
   }
   
@@ -91,7 +91,7 @@
   
   .formGroup input {
     width: 100%;
-    height: 30px; /* Increased height */
+    height: 30px;
    
     border: 1px solid #e8ebec;
     border-radius: 8px;
@@ -124,7 +124,7 @@
   
   .nextButton {
     width: 100%;
-    height: 50px; /* Increased height */
+    height: 50px; 
     background: #2e007a;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;

@@ -1,49 +1,82 @@
-import React, { useState } from "react";
-import styles from "./CandidateSignUp.module.css";
-import CLeftPortion from "../../../Common/CLeftPortion"; 
+import React, { useState } from 'react';
+import styles from './CandidateSignUp.module.css';
+import CLeftPortion from '../../../Common/CLeftPortion';
+import axios from 'axios';
 
-const CandidateSignUp = ({ onNext }) => {
+const CandidateSignUp = ({ onNext, initialData }) => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    countryCode: "+91", 
-    phoneNumber: "",
+    fullName: initialData.fullName || '',
+    countryCode: initialData.countryCode || '+91',
+    phoneNumber: initialData.phoneNumber || ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleNext = async () => {
+    if (!formData.fullName.trim()) {
+      setError('Please enter your full name');
+      return;
+    }
+
+    if (!formData.phoneNumber) {
+      setError('Please enter your phone number');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5001/api/auth/signup/step1',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      onNext({
+        ...formData,
+        userId: response.data.userId
+      });
+    } catch (error) {
+      console.error('Signup error:', error);
+      setError(
+        error.response?.data?.message ||
+        'Registration failed. Please try again.'
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
     }));
-  };
-
-  const handleNext = () => {
-    if (formData.fullName && formData.countryCode && formData.phoneNumber) {
-      onNext(formData);
-    } else {
-      alert("Please fill in all fields");
-    }
   };
 
   return (
     <div className={styles.signupContainer}>
-   
       <CLeftPortion />
-
-      {/* Right Side */}
       <div className={styles.signupRight}>
         <div className={styles.signupForm}>
-          {/* Header Section */}
           <h2 className={styles.createAccount}>Create Account</h2>
           <p className={styles.subtitle}>
             We match you with companies looking for your exact skills.
           </p>
+
+          {error && <div className={styles.error}>{error}</div>}
+
           <div className={styles.progressBar}>
             <div className={styles.progress}></div>
             <p className={styles.stepText}>Step 1 of 2</p>
           </div>
 
-          {/* Form Inputs */}
           <div className={styles.formInput}>
             <div className={styles.formGroup}>
               <label>Full Name*</label>
@@ -57,7 +90,6 @@ const CandidateSignUp = ({ onNext }) => {
               />
             </div>
 
-            {/* Phone Number with Country Code */}
             <div className={styles.phoneInputGroup}>
               <div className={styles.countryCodeInput}>
                 <label>Country Code*</label>
@@ -84,16 +116,18 @@ const CandidateSignUp = ({ onNext }) => {
             </div>
           </div>
 
-          {/* Next Button */}
           <div className={styles.buttonContainer}>
-            <button className={styles.nextButton} onClick={handleNext}>
-              Next
+            <button
+              className={styles.nextButton}
+              onClick={handleNext}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Processing...' : 'Next'}
             </button>
           </div>
 
-          {/* Login Prompt */}
           <p className={styles.loginLink}>
-            Already have an account? <a href="#">Log in</a>
+            Already have an account? <a href="/login">Log in</a>
           </p>
         </div>
       </div>

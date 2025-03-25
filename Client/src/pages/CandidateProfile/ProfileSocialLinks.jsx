@@ -1,11 +1,12 @@
 // SocialLinks.jsx
 import React from 'react';
 import styles from './ProfileSocialLinks.module.css';
+import SideMenu from '../../components/SideMenu/SideMenu';
 
 const ProfileSocialLinks = () => {
   return (
     <div className={styles.container}>
-      {/* Side Menu */}
+      <SideMenu/>
       <div className={styles.sideMenu}>
         <div className={styles.profileSection}>
           <img

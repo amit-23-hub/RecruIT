@@ -134,14 +134,14 @@
 .employerRow,
 .candidateRow {
   display: flex;
-  align-items: center; /* Ensure vertical alignment */
+  align-items: center; 
   justify-content: space-between;
   gap: 10px;
 }
 
 .icons {
   display: flex;
-  align-items: center; /* Ensure vertical alignment */
+  align-items: center; 
 }
 .icons{
   align-items: center;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './StatsWrapper.module.css'; // Import module CSS
+import styles from './StatsWrapper.module.css'; 
 
 const StatsWrapper = () => {
   return (

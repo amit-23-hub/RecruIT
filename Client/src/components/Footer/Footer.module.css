@@ -20,7 +20,7 @@
   justify-content: space-between;
   align-items: center;
   width: 90%; /* Adjust width to fit within the screen */
-  max-width: 1200px; /* Limit maximum width for larger screens */
+  max-width: 1200px; 
   margin-bottom: 40px;
 }
 
@@ -71,7 +71,7 @@
   border: 0.2px solid #ffffff;
 }
 
-/* Copyright Text */
+
 .copyright {
   font-size: 16px;
   font-weight: 600;

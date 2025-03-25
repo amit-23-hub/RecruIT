@@ -8,48 +8,60 @@ import rateLimit from 'express-rate-limit';
 
 const router = express.Router();
 
-// Rate limiting for auth endpoints
+// Rate limiting
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per window
-  message: 'Too many requests from this IP, please try again later'
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: 'Too many requests from this IP'
 });
-
 router.use(authLimiter);
 
-// Step 1: Save name & phone
+// Helper: Validate phone number
+const isValidPhone = (phone) => /^[0-9]{10,15}$/.test(phone);
+
+// Step 1: Create temporary user record
 router.post('/signup/step1', async (req, res) => {
   try {
     const { fullName, countryCode, phoneNumber } = req.body;
 
     // Validation
-    if (!fullName || !countryCode || !phoneNumber) {
+    if (!fullName?.trim() || !countryCode || !phoneNumber) {
       return res.status(400).json({
         success: false,
         message: 'All fields are required'
       });
     }
 
-    // Check if phone number already exists
+    if (!isValidPhone(phoneNumber)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid phone number'
+      });
+    }
+
+    // Check duplicate phone
     const existingUser = await User.findOne({ phoneNumber });
     if (existingUser) {
       return res.status(409).json({
         success: false,
-        message: 'Phone number already in use'
+        message: 'Phone number already registered'
       });
     }
 
-    const user = await User.create({ 
-      fullName, 
-      countryCode, 
+    // Create temp user (email not required yet)
+    const user = await User.create({
+      fullName,
+      countryCode,
       phoneNumber,
-      role: 'candidate' // Default role
+      role: 'candidate',
+      signupStage: 1 // Track signup progress
     });
 
-    res.status(201).json({ 
+    res.status(201).json({
       success: true,
-      userId: user._id 
+      userId: user._id
     });
+
   } catch (error) {
     console.error('Signup Step 1 Error:', error);
     res.status(500).json({
@@ -59,19 +71,12 @@ router.post('/signup/step1', async (req, res) => {
   }
 });
 
-// Step 2: Save email & password
+// Step 2: Add email/password and send verification
 router.post('/signup/step2', async (req, res) => {
   try {
-    const { email, password, userId } = req.body;
+    const { email, password, confirmPassword, userId } = req.body;
 
     // Validation
-    if (!email || !password || !userId) {
-      return res.status(400).json({
-        success: false,
-        message: 'All fields are required'
-      });
-    }
-
     if (!validator.isEmail(email)) {
       return res.status(400).json({
         success: false,
@@ -79,43 +84,51 @@ router.post('/signup/step2', async (req, res) => {
       });
     }
 
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: 'Passwords do not match'
+      });
+    }
+
     if (password.length < 8) {
       return res.status(400).json({
         success: false,
-        message: 'Password must be at least 8 characters'
+        message: 'Password must be 8+ characters'
       });
     }
 
-    // Check if email already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    // Check duplicate email
+    const emailExists = await User.findOne({ email });
+    if (emailExists) {
       return res.status(409).json({
         success: false,
-        message: 'Email already in use'
+        message: 'Email already registered'
       });
     }
 
-    // Generate verification token
+    // Generate token
     const token = crypto.randomBytes(20).toString('hex');
-    const tokenExpires = Date.now() + 3600000; // 1 hour expiry
+    const tokenExpires = Date.now() + 3600000; // 1 hour
 
-    // Hash password before saving
+    // Update user
     const hashedPassword = await bcrypt.hash(password, 12);
-
-    await User.findByIdAndUpdate(userId, { 
-      email, 
+    await User.findByIdAndUpdate(userId, {
+      email,
       password: hashedPassword,
       verificationToken: token,
-      tokenExpires
+      tokenExpires,
+      signupStage: 2
     });
 
-    // Send verification email
+    // Send email
     await sendVerificationEmail(email, token);
 
-    res.json({ 
+    res.json({
       success: true,
-      message: 'Verification email sent' 
+      message: 'Verification email sent'
     });
+
   } catch (error) {
     console.error('Signup Step 2 Error:', error);
     res.status(500).json({
@@ -125,47 +138,43 @@ router.post('/signup/step2', async (req, res) => {
   }
 });
 
-// Step 3: Verify email
+// Email verification
 router.get('/verify-email', async (req, res) => {
   try {
     const { token } = req.query;
 
-    if (!token) {
-      return res.status(400).json({
-        success: false,
-        message: 'Verification token is required'
-      });
-    }
-
-    const user = await User.findOne({ 
+    // Find user with valid token
+    const user = await User.findOne({
       verificationToken: token,
-      tokenExpires: { $gt: Date.now() } 
+      tokenExpires: { $gt: Date.now() }
     });
 
     if (!user) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        message: 'Invalid or expired token' 
+        message: 'Invalid or expired token'
       });
     }
 
+    // Mark as verified
     user.isVerified = true;
     user.verificationToken = undefined;
     user.tokenExpires = undefined;
+    user.signupStage = 3; // Signup complete
     await user.save();
 
-    // For API response
-    if (req.accepts('json')) {
-      return res.json({ 
+    // Redirect or return JSON
+    if (req.accepts('html')) {
+      return res.redirect(process.env.FRONTEND_VERIFICATION_SUCCESS_URL);
+    } else {
+      return res.json({
         success: true,
-        message: 'Email verified successfully' 
+        message: 'Email verified successfully'
       });
     }
 
-    // For browser redirect
-    return res.redirect(process.env.FRONTEND_VERIFICATION_SUCCESS_URL || '/email-verified');
   } catch (error) {
-    console.error('Email Verification Error:', error);
+    console.error('Verification Error:', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error'
@@ -173,20 +182,10 @@ router.get('/verify-email', async (req, res) => {
   }
 });
 
-// Additional Endpoints
-
 // Check verification status
 router.get('/check-verification', async (req, res) => {
   try {
     const { email } = req.query;
-    
-    if (!email) {
-      return res.status(400).json({
-        success: false,
-        message: 'Email is required'
-      });
-    }
-
     const user = await User.findOne({ email });
     
     if (!user) {
@@ -196,10 +195,11 @@ router.get('/check-verification', async (req, res) => {
       });
     }
 
-    res.json({ 
+    res.json({
       success: true,
-      isVerified: user.isVerified 
+      isVerified: user.isVerified
     });
+
   } catch (error) {
     console.error('Verification Check Error:', error);
     res.status(500).json({
@@ -213,16 +213,8 @@ router.get('/check-verification', async (req, res) => {
 router.post('/resend-verification', async (req, res) => {
   try {
     const { email } = req.body;
-
-    if (!email) {
-      return res.status(400).json({
-        success: false,
-        message: 'Email is required'
-      });
-    }
-
     const user = await User.findOne({ email });
-    
+
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -233,24 +225,25 @@ router.post('/resend-verification', async (req, res) => {
     if (user.isVerified) {
       return res.status(400).json({
         success: false,
-        message: 'Email is already verified'
+        message: 'Email already verified'
       });
     }
 
     // Generate new token
     const token = crypto.randomBytes(20).toString('hex');
     user.verificationToken = token;
-    user.tokenExpires = Date.now() + 3600000; // 1 hour expiry
+    user.tokenExpires = Date.now() + 3600000;
     await user.save();
 
     await sendVerificationEmail(email, token);
 
-    res.json({ 
+    res.json({
       success: true,
-      message: 'Verification email resent' 
+      message: 'Verification email resent'
     });
+
   } catch (error) {
-    console.error('Resend Verification Error:', error);
+    console.error('Resend Error:', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error'
