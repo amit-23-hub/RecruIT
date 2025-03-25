@@ -16,6 +16,7 @@ import ProfileEducationCertification from './pages/CandidateProfile/ProfileEduca
 import ProfileIdentityVerification from './pages/CandidateProfile/ProfileIdentityVerification';
 import ProfileSocialLinks from './pages/CandidateProfile/ProfileSocialLinks';
 import Profile from './pages/CandidateProfile/Profile';
+import EmailVerified from './pages/EmailVarify';
 
 const App = () => {
   const [step, setStep] = useState(1);
@@ -82,6 +83,7 @@ const App = () => {
         />
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/email-verified" element={<EmailVerified />} />
       </Routes>
     </Router>
   );
