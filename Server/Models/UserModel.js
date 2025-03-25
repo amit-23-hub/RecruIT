@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     type: String, 
     unique: true,
     sparse: true, // Allows multiple nulls
-    default: null // Explicitly set null as default
+    default: null 
   },
   password: { type: String, select: false },
   isVerified: { type: Boolean, default: false },

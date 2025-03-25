@@ -20,29 +20,15 @@ import EmailVerified from './pages/EmailVarify';
 
 const App = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    userId: null, // Initialize userId
-    fullName: "",
-    countryCode: "+91",
-    phoneNumber: "",
-    email: "",
-    password: ""
-  });
+  const [formData, setFormData] = useState({});
 
   const handleNextStep1 = (data) => {
-    setFormData(prev => ({
-      ...prev,
-      ...data,
-      userId: data.userId // Ensure userId is preserved
-    }));
+    setFormData(data);
     setStep(2);
   };
 
   const handleNextStep2 = (data) => {
-    setFormData(prev => ({
-      ...prev,
-      ...data
-    }));
+    setFormData({ ...formData, ...data });
     setStep(3);
   };
 
@@ -54,30 +40,21 @@ const App = () => {
   const handlePreviousProfileStep = () => {
     setStep(step - 1);
   };
-  // ... other handlers ...
 
   return (
     <Router>
       <Routes>
-        {/* ... other routes ... */}
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<RecruiterLogin />} />
+        <Route path="/candidate-login" element={<CandidateLogin />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+
         <Route
           path="/candidate-signup"
           element={
             <>
-              {step === 1 && (
-                <CandidateSignUp 
-                  onNext={handleNextStep1} 
-                  initialData={formData}
-                />
-              )}
-              {step === 2 && formData.userId ? (
-                <CandidateSignUpStep2 
-                  onNext={handleNextStep2} 
-                  formData={formData}
-                />
-              ) : (
-                <Navigate to="/candidate-signup" replace />
-              )}
+              {step === 1 && <CandidateSignUp onNext={handleNextStep1} />}
+              {step === 2 && <CandidateSignUpStep2 onNext={handleNextStep2} formData={formData} />}
               {step === 3 && <SignupStep3 />}
             </>
           }
@@ -112,4 +89,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App;   
