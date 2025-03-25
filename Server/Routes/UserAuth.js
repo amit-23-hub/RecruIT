@@ -48,13 +48,13 @@ router.post('/signup/step1', async (req, res) => {
       });
     }
 
-    // Create temp user (email not required yet)
+    // Create temp user
     const user = await User.create({
       fullName,
       countryCode,
       phoneNumber,
       role: 'candidate',
-      signupStage: 1 // Track signup progress
+      signupStage: 1
     });
 
     res.status(201).json({
@@ -77,10 +77,24 @@ router.post('/signup/step2', async (req, res) => {
     const { email, password, confirmPassword, userId } = req.body;
 
     // Validation
+    if (!email || !password || !confirmPassword || !userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'All fields are required'
+      });
+    }
+
     if (!validator.isEmail(email)) {
       return res.status(400).json({
         success: false,
         message: 'Invalid email format'
+      });
+    }
+
+    if (password.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: 'Password must be at least 8 characters'
       });
     }
 
@@ -91,37 +105,27 @@ router.post('/signup/step2', async (req, res) => {
       });
     }
 
-    if (password.length < 8) {
-      return res.status(400).json({
+    // Find and update user
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
         success: false,
-        message: 'Password must be 8+ characters'
+        message: 'User not found'
       });
     }
 
-    // Check duplicate email
-    const emailExists = await User.findOne({ email });
-    if (emailExists) {
-      return res.status(409).json({
-        success: false,
-        message: 'Email already registered'
-      });
-    }
-
-    // Generate token
+    // Generate token and hash password
     const token = crypto.randomBytes(20).toString('hex');
-    const tokenExpires = Date.now() + 3600000; // 1 hour
-
-    // Update user
     const hashedPassword = await bcrypt.hash(password, 12);
-    await User.findByIdAndUpdate(userId, {
-      email,
-      password: hashedPassword,
-      verificationToken: token,
-      tokenExpires,
-      signupStage: 2
-    });
 
-    // Send email
+    user.email = email;
+    user.password = hashedPassword;
+    user.verificationToken = token;
+    user.tokenExpires = Date.now() + 3600000; // 1 hour
+    user.signupStage = 2;
+    await user.save();
+
+    // Send verification email
     await sendVerificationEmail(email, token);
 
     res.json({
@@ -138,12 +142,11 @@ router.post('/signup/step2', async (req, res) => {
   }
 });
 
-// Email verification
+// Email verification endpoint
 router.get('/verify-email', async (req, res) => {
   try {
     const { token } = req.query;
 
-    // Find user with valid token
     const user = await User.findOne({
       verificationToken: token,
       tokenExpires: { $gt: Date.now() }
@@ -160,18 +163,13 @@ router.get('/verify-email', async (req, res) => {
     user.isVerified = true;
     user.verificationToken = undefined;
     user.tokenExpires = undefined;
-    user.signupStage = 3; // Signup complete
+    user.signupStage = 3;
     await user.save();
 
-    // Redirect or return JSON
-    if (req.accepts('html')) {
-      return res.redirect(process.env.FRONTEND_VERIFICATION_SUCCESS_URL);
-    } else {
-      return res.json({
-        success: true,
-        message: 'Email verified successfully'
-      });
-    }
+    res.json({
+      success: true,
+      message: 'Email verified successfully'
+    });
 
   } catch (error) {
     console.error('Verification Error:', error);

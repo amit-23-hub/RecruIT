@@ -1,35 +1,99 @@
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
-  fullName: { type: String, required: true },
-  countryCode: { type: String, required: true },
-  phoneNumber: { type: String, required: true, unique: true },
+  fullName: { 
+    type: String, 
+    required: [true, 'Full name is required'],
+    trim: true,
+    maxlength: [100, 'Full name cannot exceed 100 characters']
+  },
+  countryCode: { 
+    type: String, 
+    required: [true, 'Country code is required'],
+    default: '+91'
+  },
+  phoneNumber: { 
+    type: String, 
+    required: [true, 'Phone number is required'],
+    unique: true,
+    validate: {
+      validator: function(v) {
+        return /^\d{10,15}$/.test(v);
+      },
+      message: props => `${props.value} is not a valid phone number!`
+    }
+  },
   email: { 
     type: String, 
     unique: true,
-    sparse: true, // Allows multiple nulls
-    default: null 
+    sparse: true,
+    trim: true,
+    lowercase: true,
+    validate: {
+      validator: function(v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      },
+      message: props => `${props.value} is not a valid email address!`
+    }
   },
-  password: { type: String, select: false },
-  isVerified: { type: Boolean, default: false },
+  password: { 
+    type: String, 
+    select: false,
+    minlength: [8, 'Password must be at least 8 characters long']
+  },
+  isVerified: { 
+    type: Boolean, 
+    default: false 
+  },
   verificationToken: String,
   tokenExpires: Date,
-  role: { type: String, enum: ['candidate', 'recruiter'], default: 'candidate' },
-  signupStage: { type: Number, default: 1 }
-}, { timestamps: true });
+  role: { 
+    type: String, 
+    enum: ['candidate', 'recruiter'], 
+    default: 'candidate' 
+  },
+  signupStage: { 
+    type: Number, 
+    default: 1,
+    min: 1,
+    max: 3
+  }
+}, { 
+  timestamps: true,
+  toJSON: {
+    transform: function(doc, ret) {
+      delete ret.password;
+      delete ret.verificationToken;
+      return ret;
+    }
+  }
+});
 
-// Create partial index for email (better than sparse)
+// Indexes
+userSchema.index({ phoneNumber: 1 }, { unique: true });
 userSchema.index({ email: 1 }, { 
   unique: true,
-  partialFilterExpression: { email: { $type: "string" } } 
+  partialFilterExpression: { email: { $exists: true } } 
 });
 
-// Hash password
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 12);
-  next();
+// Password hashing middleware
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  
+  try {
+    const salt = await bcrypt.genSalt(12);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
-export default mongoose.model("User", userSchema);
+// Method to compare passwords
+userSchema.methods.comparePassword = async function(candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+const User = mongoose.model('User', userSchema);
+export default User;

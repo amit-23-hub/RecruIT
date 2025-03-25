@@ -14,13 +14,26 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
   const [error, setError] = useState('');
 
   const handleSubmit = async () => {
-    if (!localFormData.email) {
-      setError('Please enter your email');
+    setError('');
+
+    // Enhanced validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(localFormData.email)) {
+      setError('Please enter a valid email address');
       return;
     }
 
-    if (!localFormData.password) {
-      setError('Please create a password');
+    if (localFormData.password.length < 8) {
+      setError('Password must be at least 8 characters');
+      return;
+    }
+
+    if (!/[A-Z]/.test(localFormData.password)) {
+      setError('Password must contain at least one uppercase letter');
+      return;
+    }
+
+    if (!/[0-9]/.test(localFormData.password)) {
+      setError('Password must contain at least one number');
       return;
     }
 
@@ -35,29 +48,49 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
     }
 
     setIsLoading(true);
-    setError('');
 
     try {
-      await axios.post(
+      const response = await axios.post(
         'http://localhost:5001/api/auth/signup/step2',
         {
-          email: localFormData.email,
+          email: localFormData.email,  
           password: localFormData.password,
-          userId: formData.userId
+          confirmPassword: localFormData.confirmPassword,
+          userId: formData.userId     // Only userId comes from formData
         },
         {
           headers: {
             'Content-Type': 'application/json'
-          }
+          },
+          withCredentials: true
         }
       );
-      onNext({ email: localFormData.email });
+
+      if (response.data.success) {
+        onNext({ 
+          email: localFormData.email,
+          ...response.data // Include any additional data from backend
+        });
+      } else {
+        setError(response.data.message || 'Registration completed but verification failed');
+      }
     } catch (error) {
-      console.error('Verification error:', error);
-      setError(
-        error.response?.data?.message ||
-        'Email verification failed. Please try again.'
-      );
+      let errorMessage = 'Registration failed. Please try again.';
+      
+      if (error.response) {
+        if (error.response.status === 400) {
+          errorMessage = error.response.data.message || 'Invalid data provided';
+        } else if (error.response.status === 409) {
+          errorMessage = 'Email already registered';
+        }
+      }
+
+      setError(errorMessage);
+      console.error('Registration error:', {
+        status: error.response?.status,
+        data: error.response?.data,
+        config: error.config
+      });
     } finally {
       setIsLoading(false);
     }
@@ -81,7 +114,11 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
             We match you with companies looking for your exact skills.
           </p>
 
-          {error && <div className={styles.error}>{error}</div>}
+          {error && (
+            <div className={styles.error}>
+              ⚠️ {error}
+            </div>
+          )}
 
           <div className={styles.progressBar}>
             <div className={styles.progress} style={{ width: '100%' }}></div>
@@ -98,11 +135,12 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
                 onChange={handleChange}
                 placeholder="your.email@example.com"
                 required
+                autoComplete="email"
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label>Create Password*</label>
+              <label>Create Password* (min 8 characters)</label>
               <input
                 type="password"
                 name="password"
@@ -110,6 +148,8 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
                 onChange={handleChange}
                 placeholder="••••••••"
                 required
+                minLength="8"
+                autoComplete="new-password"
               />
             </div>
 
@@ -122,27 +162,30 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
                 onChange={handleChange}
                 placeholder="••••••••"
                 required
+                autoComplete="new-password"
               />
             </div>
 
             <div className={styles.terms}>
               <input
                 type="checkbox"
+                id="agreeToTerms"
                 name="agreeToTerms"
                 checked={localFormData.agreeToTerms}
                 onChange={handleChange}
                 required
               />
-              <label>
+              <label htmlFor="agreeToTerms">
                 By creating an account, you agree to our{' '}
-                <a href="/terms">Terms and Conditions</a> and{' '}
-                <a href="/privacy">Privacy Policy</a>.
+                <a href="/terms" target="_blank" rel="noopener noreferrer">Terms and Conditions</a> and{' '}
+                <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
               </label>
             </div>
           </div>
 
           <div className={styles.buttonContainer}>
             <button
+              type="button"
               className={styles.backButton}
               onClick={onBack}
               disabled={isLoading}
@@ -150,11 +193,18 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
               Back
             </button>
             <button
+              type="button"
               className={styles.nextButton}
               onClick={handleSubmit}
               disabled={isLoading}
             >
-              {isLoading ? 'Sending...' : 'Verify Email'}
+              {isLoading ? (
+                <>
+                  <span className={styles.spinner}></span> Processing...
+                </>
+              ) : (
+                'Verify Email'
+              )}
             </button>
           </div>
 
