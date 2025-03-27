@@ -1,4 +1,10 @@
-/* Hero.module.css */
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --primary-color: #8A01DA;
+  --text-color-dark: #2E007A;
+  --text-color-light: #666;
+}
+
 .homeContainer {
   position: relative;
   width: 100%;
@@ -11,7 +17,7 @@
     rgba(138, 1, 218, 0.87) 100%
   );
   font-family: var(--font-poppins);
-  padding: 20px;
+  padding: 1rem;
   box-sizing: border-box;
 }
 
@@ -20,139 +26,261 @@
   z-index: 5;
   max-width: 100%;
   height: auto;
+  opacity: 0.7;
 }
 
 .leftVector {
-  top: 50px;
+  top: -1.25rem;
   left: 0;
-  width: 40%;
+  width: 15%;
 }
 
 .rightVector {
-  right: 0;
-  top: 50px;
+  right: -1.5rem;
+  top: 2rem;
   width: 20%;
+  z-index: -10;
 }
 
 .photo {
   position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 25rem;
   height: auto;
-  margin: 20px auto;
-  border-radius: 0 50% 0 0;
+  margin: 1rem auto;
+  border-radius: 10% 30% 0 0;
   overflow: hidden;
   z-index: 3;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.matchScore {
+  position: absolute;
+  bottom: 3.5rem;
+  left: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.1);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.scoreCircle {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scoreCircle span {
+  position: absolute;
+  z-index: 1;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+}
+
+.scoreRing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
 }
 
 .content {
   position: relative;
   width: 90%;
-  max-width: 727px;
-  margin: 20px auto;
-  padding: 20px;
+  max-width: 45rem;
+  margin: 1rem auto;
+  padding: 2rem 1rem;
   text-align: center;
   color: black;
-  z-index: 2;
+  z-index: 10;
+  margin-top: 3.5rem;
   background: white;
-  border-radius: 16px;
+  border-radius: 1rem;
   font-family: 'Lato', sans-serif;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .content h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  line-height: 1;
-  margin-bottom: 16px;
-  color: #2E007A;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-color-dark);
 }
 
 .content h2 {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  line-height: 1;
-  margin-bottom: 32px;
-  color: #8A01DA;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
 .sections {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin: 20px auto;
+  gap: .5rem;
+  margin: 1rem auto;
   width: 90%;
-  max-width: 760px;
+  max-width: 47.5rem;
+  position: relative;
+  z-index: 10;
 }
 
 .employerSection, .recruiterSection {
   width: 100%;
-  padding: 20px;
-  border-radius: 16px;
+  padding: 1.25rem;
+  border-radius: 1rem;
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.employerSection {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.recruiterSection {
+  background-color: white;
+  color: black;
 }
 
 .employerRow, .candidateRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 0.625rem;
+  margin-bottom: 0.625rem;
 }
 
 .employerRow h3, .candidateRow h3 {
   margin: 0;
-  margin-bottom: 10px;
   font-size: 1.5rem;
   font-weight: 500;
 }
 
-/* Media Queries */
-@media (min-width: 768px) {
-  .content {
-    text-align: left;
-    margin: 40px auto;
-  }
-  
+.sections p {
+  color: var(--text-color-light);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.icons {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* Tablet and Desktop Views */
+@media (min-width: 768px) and (max-width: 1366px) {
   .sections {
     flex-direction: row;
-    margin-top: 40px;
+    gap: 1.25rem;
   }
-  
+
   .employerSection, .recruiterSection {
     width: 48%;
   }
-  
-  .content h1 {
-    font-size: 3rem;
+
+  .photo {
+    position: absolute;
+    top: 10%;
+    right: 1.875rem;
+    width: 25rem;
+    height: 30rem;
+  }
+
+  .content {
+    position: absolute;
+    top: 22%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    width: 30rem;
+    z-index: 0;
+  }
+
+  .sections {
+    position: absolute;
+    margin-top: 30rem;
+    margin-left: .75rem;
+    width: 47.5rem;
+  }
+  .employerSection , .recruiterSection {
+    width: 14rem;
   }
   
-  .content h2 {
-    font-size: 2.2rem;
+.employerRow h3, .candidateRow h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+}
+
+/* Large Desktop View */
+@media (min-width: 1367px) {
+  .sections {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+
+  .employerSection, .recruiterSection {
+    width: 48%;
+  }
+
+  .photo {
+    position: absolute;
+    top: 18%;
+    right: 1.875rem;
+    width: 28rem;
+    height: 32rem;
+  }
+
+  .content {
+    position: absolute;
+    top: 37%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    width: 45rem;
+    z-index: 0;
+  }
+
+  .sections {
+    position: absolute;
+    margin-top: 32rem;
+    margin-left: 13.75rem;
+    width: 47.5rem;
   }
 }
 
-@media (min-width: 1024px) {
-  .photo {
-    position: absolute;
-    top: 200px;
-    right: 30px;
-    width: 450px;
-    height: 480px;
+/* Small Screen Optimization */
+@media (max-width: 768px) {
+  .homeContainer {
+    padding: 0.5rem;
   }
-  
-  .content {
-    position: absolute;
-    top: 41%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: left;
-    width: 727px;
+
+  .content, .sections {
+    width: 95%;
   }
-  
-  .sections {
-    position: absolute;
-    margin-top: 480px;
-    margin-left: 220px;
-    width: 760px;
+
+  .leftVector, .rightVector {
+    opacity: 0.4;
   }
 }

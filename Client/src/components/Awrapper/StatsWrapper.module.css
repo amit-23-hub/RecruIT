@@ -25,10 +25,10 @@
 .statValue {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 2.5rem;
-  line-height: 1.5;
+  font-size: 2.2rem;
+  line-height: 1.4;
   color: #313131;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .statDescription {
@@ -39,32 +39,50 @@
   color: #313131;
 }
 
-.verticalLine {
-  display: none;
+/* Media Queries */
+@media (min-width: 576px) {
+  .statValue {
+    font-size: 2.5rem;
+  }
 }
 
-/* Media Queries */
 @media (min-width: 768px) {
   .statContainer {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: wrap;
   }
-  
+
   .statItem {
-    width: auto;
+    width: 45%;
   }
-  
+
   .verticalLine {
     display: block;
     height: 80px;
     border: 1px solid #6F6F6F;
   }
-  
+
   .statValue {
     font-size: 3rem;
   }
-  
+
   .statDescription {
     font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .statContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .statItem {
+    width: auto;
+  }
+
+  .statValue {
+    font-size: 3.2rem;
   }
 }
