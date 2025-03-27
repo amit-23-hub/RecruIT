@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './CandidateSignUpStep2.module.css';
-import RLeftPortion from '../../../Common/RLeftPortion';
+import RLeftPortion from '../../../Common/CLeftPortion';
 import axios from 'axios';
 
 const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
@@ -184,14 +184,14 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
           </div>
 
           <div className={styles.buttonContainer}>
-            <button
+            {/* <button
               type="button"
               className={styles.backButton}
               onClick={onBack}
               disabled={isLoading}
             >
               Back
-            </button>
+            </button> */}
             <button
               type="button"
               className={styles.nextButton}

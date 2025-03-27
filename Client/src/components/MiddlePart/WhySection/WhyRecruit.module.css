@@ -1,213 +1,161 @@
+/* WhyRecruit.module.css */
 .pageContainer {
-  background-color: #f6f6f6 !important;
+  background-color: #f6f6f6;
+  padding: 40px 20px;
+  overflow: hidden;
 }
 
 .frame {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  gap: 60px;
-  position: absolute;
-  width: 1230px;
-  height: 543px;
-  left: 73px;
-  top: 1872px;
-  font-family: var(--font-poppins);
+  width: 100%;
+  max-width: 1230px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 60px;
-  font-family: var(--font-poppins);
+  flex-direction: column;
+  gap: 40px;
 }
 
 .leftSection {
-  box-sizing: border-box;
-  width: 658px;
-  height: 543px;
+  width: 100%;
+  height: 400px;
   background: #ffffff;
   border-radius: 8px;
 }
 
 .rightSection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 36px;
-  width: 512px;
-  height: 543px;
+  width: 100%;
 }
 
 .header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-  width: 512px;
-  height: 75px;
+  margin-bottom: 30px;
 }
 
 .subTitle {
-  width: 101px;
-  height: 19px;
   font-family: 'Lato';
-  font-style: normal;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 1rem;
   color: #8a01da;
 }
 
 .mainTitle {
-  width: 512px;
-  height: 48px;
   font-family: 'Poppins';
-  font-style: normal;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 48px;
+  font-size: 1.8rem;
   color: #363636;
-  white-space: nowrap;
 }
 
 .features {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 28px;
-  width: 437px;
-  height: 432px;
-  font-family: var(--font-poppins);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .feature {
   display: flex;
-  flex-direction: row;
+  gap: 20px;
   align-items: center;
-  padding: 0px;
-  gap: 28px;
-  width: 437px;
-  height: 64px;
 }
 
 .icon {
-  width: 64px;
-  height: 64px;
+  min-width: 50px;
+  height: 50px;
   background: #eddcf7;
-  border-radius: 85px;
-  position: relative;
-}
-
-.featureText {
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-  width: 345px;
-  height: 53px;
+  align-items: center;
+  justify-content: center;
 }
 
 .featureText h3 {
-  width: 100%;
-  height: 24px;
   font-family: 'Lato';
-  font-style: normal;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 1.2rem;
   color: #363636;
-  margin: 0;
+  margin: 0 0 8px 0;
 }
 
 .featureText p {
-  width: 100%;
-  height: 21px;
   font-family: 'Poppins';
-  font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
+  font-size: 0.9rem;
   color: #363636;
   margin: 0;
 }
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px; 
-  height: 50px; 
-  border-radius: 50%;
- 
-}
-
-.icon svg {
-  display: block;
-}
-
 
 .ctaSection {
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto 0;
+  padding: 40px 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  margin-top: 1700px;
-  
+  text-align: center;
 }
 
 .ctaSection h2 {
   font-family: 'Poppins';
-  font-style: normal;
   font-weight: 600;
-  font-size: 32px;
-  line-height: 48px;
+  font-size: 1.8rem;
   color: #363636;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
 .ctaButton {
-  margin-top: 10px;
   padding: 12px 32px;
   background-color: #2E007A;
   color: #ffffff;
   font-family: 'Poppins';
-  font-style: normal;
   font-weight: 600;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  width: 219px;
-  height: 54px;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
-.arrow-forward {
-  width: 24px;
-  height: 24px;
-  transform: rotate(-90deg);
-  transition: transform 0.3s ease-in-out;
+/* Media Queries */
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+  
+  .leftSection {
+    width: 60%;
+  }
+  
+  .rightSection {
+    width: 40%;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+  }
+  
+  .ctaSection h2 {
+    font-size: 2rem;
+  }
 }
 
-.ctaButton:hover {
-  background-color: #4B00B2; 
-}
-.ctaButton:hover .arrow-forward {
-  transform: rotate(0deg);
+@media (min-width: 1024px) {
+  .mainTitle {
+    font-size: 2.2rem;
+  }
+  
+  .featureText h3 {
+    font-size: 1.3rem;
+  }
+  
+  .featureText p {
+    font-size: 1rem;
+  }
+  
+  .ctaSection {
+    padding: 60px 1px;
+  }
 }

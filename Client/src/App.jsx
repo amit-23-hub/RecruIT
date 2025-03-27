@@ -86,7 +86,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/email-verified" element={<EmailVerified />} />
+        <Route path="/verify-email" element={<EmailVerified />} />
 
         {/* Candidate Signup Flow */}
         <Route

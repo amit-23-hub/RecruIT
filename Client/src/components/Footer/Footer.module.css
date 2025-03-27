@@ -1,27 +1,26 @@
-/* Footer Container */
+/* Footer.module.css */
 .footerContainer {
-  position: absolute;
-  width: 99.9%;
-  height: 150px;
-
-  top: 2774px;
+  width: 100%;
   background: #190042;
   color: #ffffff;
   font-family: "Mulish", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0;
+  padding: 40px 0px;
+  margin-top: 60px; /* Added margin to separate from content above */
+  overflow: hidden;
 }
 
 /* Top Row (Logo and Social Media) */
 .topRow {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  width: 90%; /* Adjust width to fit within the screen */
-  max-width: 1200px; 
-  margin-bottom: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 30px;
+  gap: 30px;
 }
 
 /* Brand Logo and Name */
@@ -32,52 +31,87 @@
 }
 
 .logo {
-  margin-top: 20px;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
 }
 
 .brandName {
   font-family: "DM Sans", sans-serif;
-  font-size: 22.6587px;
+  font-size: 1.4rem;
   font-weight: 700;
-  line-height: 24px;
   color: #929292;
 }
 
 .socialMedia {
   display: flex;
-  gap: 24px;
+  gap: 20px;
+  justify-content: center;
 }
 
 .socialIcon {
   width: 37px;
   height: 37px;
   background: rgba(219, 219, 219, 0.56);
-  border-radius: 18.5px;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.3s ease;
 }
 
-.socialIcon img {
+.socialIcon:hover {
+  background: rgba(219, 219, 219, 0.8);
+}
+
+.socialIcon svg {
   width: 21px;
   height: 21px;
 }
 
 /* Divider Line */
 .divider {
-  width: 100%;
-
-  height: 0px;
-  border: 0.2px solid #ffffff;
+  width: 90%;
+  max-width: 1200px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
 }
 
-
+/* Copyright Text */
 .copyright {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 20px;
-  margin: auto;
   text-align: center;
   color: #ffffff;
   font-family: var(--font-poppins);
+  margin-top: 20px;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .topRow {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+
+  .socialMedia {
+    gap: 24px;
+  }
+
+  .divider {
+    margin: 30px 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footerContainer {
+    /* padding: 50px 40px; */
+  }
+  
+  .brandName {
+    font-size: 1.5rem;
+  }
 }
