@@ -1,27 +1,33 @@
 
   
+.logo {
+  display: flex;
+  align-items: center;   
+  gap: 0.5rem;
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.logoImg {
+  width: 1.625rem;
+  height: 1.625rem;
+  object-fit: contain;
+}
+
+.logoText {
+  font-size: 1.25rem;
+  align-items: center;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
   .logo {
-    display: flex;
-    align-items: center;   
-    gap: 8px;
-    position: relative;
-    top: -20px; 
-      
+    margin-bottom: 1rem;
   }
   
- 
   .logoImg {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
+    width: 1.5rem;
+    height: 1.5rem;
   }
-  
-  
-  .logoText {
-    font-family: var(--font-DM);
-    font-size: 23px;
-    line-height: 24px;
-    font-weight: 700;
-    color: #929292;
-  }
+}
   

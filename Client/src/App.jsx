@@ -17,6 +17,8 @@ import ProfileIdentityVerification from './pages/CandidateProfile/ProfileIdentit
 import ProfileSocialLinks from './pages/CandidateProfile/ProfileSocialLinks';
 import Profile from './pages/CandidateProfile/Profile';
 import EmailVerified from './pages/EmailVarify';
+import FindCandidate from './components/DashBoard/FindCandidate/FindCandidate';
+import SignUp3 from './pages/SignUp/SignUp3';
 
 const App = () => {
   // State for signup flow
@@ -84,10 +86,26 @@ const App = () => {
         <Route path="/login" element={<RecruiterLogin />} />
         <Route path="/candidate-login" element={<CandidateLogin />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/findcandidate" element={<FindCandidate />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/verify-email" element={<EmailVerified />} />
-
+        {/* Update the SignupStep2 route */}
+        <Route 
+          path="/signup2" 
+          element={
+            <SignupStep2 
+              onNext={(data) => {
+                handleNextStep2(data);
+                navigate('/signup3');
+              }} 
+              formData={signupData}
+            />
+          } 
+        />
+        <Route path="/signup3" element={<SignUp3 />} />
+        
+        
         {/* Candidate Signup Flow */}
         <Route
           path="/candidate-signup"

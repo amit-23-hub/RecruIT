@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./CandidateFinder.module.css";
 import { FaTimes } from "react-icons/fa"; // Import only the cross icon
+// Remove this line
+import Scroller from "../Scroller/Scroller";
 
 const CandidateFinder = ({ candidates }) => {
   const [selectedCandidates, setSelectedCandidates] = useState([]);
@@ -33,6 +35,8 @@ const CandidateFinder = ({ candidates }) => {
   const displayedCandidates = candidates.slice(currentIndex, currentIndex + 3);
 
   return (
+    <>
+   
     <div className={styles.candidateContainer}>
       <h2 className={styles.heading}>The Best 3 Candidates</h2>
       <div className={styles.candidateList}>
@@ -165,6 +169,7 @@ const CandidateFinder = ({ candidates }) => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -1,172 +1,252 @@
-
-
 .signupContainer {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #ffffff;
-    font-family: var(--font-poppins);
-    overflow: hidden;
-  }
-  
-  .signupRight {
-    position: absolute;
-    right: 0;
-    width: 719px;
-    height: 768px;
-    background: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .signupForm {
-    display: flex;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  background: #ffffff;
+  font-family: var(--font-poppins);
+  overflow-x: hidden;
+}
+
+.signupLeft {
+  position: relative;
+  width: 45%;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(235, 63, 242, 0.1) 14.26%, rgba(46, 0, 122, 0.15) 85.74%);
+  display: flex;
+  padding-top: 3.125rem;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.signupRight {
+  position: relative;
+  width: 55%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.signupForm {
+  width: 100%;
+  max-width: 29.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.createAccount {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #363636;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #969696;
+  margin: 0;
+}
+
+.error {
+  color: #d32f2f;
+  background-color: #fde8e8;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1.25rem;
+  border-left: 0.25rem solid #d32f2f;
+  font-size: 0.875rem;
+}
+
+.progressContainer {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.progressBar {
+  width: 100%;
+  height: 0.5rem;
+  background: #ededed;
+  border-radius: 4.875rem;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  background: #84DA71;
+  border-radius: 4.875rem;
+  transition: width 0.3s ease;
+}
+
+.stepText {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  color: #000000;
+  text-align: right;
+  margin-top: 0.5rem;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #363636;
+}
+
+.formGroup input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid #e8ebec;
+  border-radius: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  color: #969696;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #2e007a;
+}
+
+.terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  color: #757575;
+  line-height: 1.5;
+}
+
+.terms input[type="checkbox"] {
+  margin-top: 0.25rem;
+  min-width: 1rem;
+}
+
+.terms a {
+  color: #2d86ba;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.buttonContainer {
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+.nextButton {
+  width: 100%;
+  height: 3.125rem;
+  background: #2e007a;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nextButton:hover {
+  background: #3a0098;
+}
+
+.nextButton:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.loginLink {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  color: #969696;
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.loginLink a {
+  color: #2d86ba;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.spinner {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 0.125rem solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+  .signupContainer {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    width: 466px;
+  }
+  
+  .signupLeft, .signupRight {
+    width: 100%;
+    height: auto;
+    min-height: 50vh;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .signupForm {
+    padding: 1rem;
+    max-width: 100%;
   }
   
   .createAccount {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 20px;
-    color: #363636;
+    font-size: 1.125rem;
   }
   
   .subtitle {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    color: #969696;
+    font-size: 0.875rem;
   }
-  
-  .progressBar {
-    width: 100%;
-    height: 8px;
-    background: #ededed;
-    border-radius: 78px;
-    position: relative;
-  }
-  
-  .progress {
-    width: 100%; 
-    height: 100%;
-    background: #84DA71; 
-    border-radius: 78px;
-  }
-  
-  .stepText {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    color: #000000;
-    text-align: right;
-    position: absolute;
-    top: 10px;
-    right: 0;
-  }
-  
-  .formInput {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  .formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .formGroup label {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #363636;
-  }
-  
+}
+
+@media screen and (max-width: 480px) {
   .formGroup input {
-    width: 100%;
-    height: 30px;
-   
-    border: 1px solid #e8ebec;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: #969696;
-  }
-  
-  .helperText {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    color: #a0a8ac;
-  }
-  
-  .terms {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    color: #757575;
-  }
-  
-  .terms a {
-    color: #2d86ba;
-    text-decoration: none;
-  }
-  
-  .buttonContainer {
-    margin-top: 20px;
-    width: 100%;
+    height: 2.5rem;
   }
   
   .nextButton {
-    width: 100%;
-    height: 50px; 
-    background: #2e007a;
-    color: #ffffff;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    height: 2.75rem;
+    font-size: 0.875rem;
   }
   
-  .loginLink {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: #969696;
-    text-align: center;
-    width: 100%;
+  .terms {
+    font-size: 0.6875rem;
   }
-  
-  .loginLink a {
-    color: #2d86ba;
-    text-decoration: none;
-  }
-  .error {
-    color: #d32f2f;
-    background-color: #fde8e8;
-    padding: 12px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    border-left: 4px solid #d32f2f;
-  }
-  
-  .spinner {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 8px;
-  }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
+}

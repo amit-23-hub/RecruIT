@@ -5,9 +5,9 @@ import axios from 'axios';
 
 const CandidateSignUp = ({ onNext, initialData }) => {
   const [formData, setFormData] = useState({
-    fullName: initialData.fullName || '',
-    countryCode: initialData.countryCode || '+91',
-    phoneNumber: initialData.phoneNumber || ''
+    fullName: initialData?.fullName || '',
+    countryCode: initialData?.countryCode || '+91',
+    phoneNumber: initialData?.phoneNumber || ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -72,8 +72,10 @@ const CandidateSignUp = ({ onNext, initialData }) => {
 
           {error && <div className={styles.error}>{error}</div>}
 
-          <div className={styles.progressBar}>
-            <div className={styles.progress}></div>
+          <div className={styles.progressContainer}>
+            <div className={styles.progressBar}>
+              <div className={styles.progress} style={{width: '33%'}}></div>
+            </div>
             <p className={styles.stepText}>Step 1 of 2</p>
           </div>
 

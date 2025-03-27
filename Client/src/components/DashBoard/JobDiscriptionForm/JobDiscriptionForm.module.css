@@ -7,14 +7,25 @@
     linear-gradient(90deg, #8a01da, #f2ddff) border-box;
   border-radius: 8px;
   font-family: var(--font-poppins);
-  width: 96%;
-  transition: width 0.3s ease-in-out; 
+  width: 100%;
+  transition: all 0.3s ease-in-out;
 }
 
 .adjustedWidth {
-  
- 
-  padding:  30px 5px;
+  width: 100%;
+  padding: 20px;
+}
+
+@media (max-width: 992px) {
+  .formContainer {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .formContainer {
+    padding: 15px;
+  }
 }
 
 .title {

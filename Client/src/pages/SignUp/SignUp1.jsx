@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./SignUp1.module.css";
-import RLeftPortion from "../../Common/RLeftPortion"; 
+import RLeftPortion from "../../Common/RLeftPortion";
 
 const SignupStep1 = ({ onNext }) => {
   const [formData, setFormData] = useState({
@@ -26,12 +26,9 @@ const SignupStep1 = ({ onNext }) => {
 
   return (
     <div className={styles.signupContainer}>
-    
       <RLeftPortion />
-
       <div className={styles.signupRight}>
         <div className={styles.signupForm}>
-          {/* Header Section */}
           <h2 className={styles.createAccount}>Create Account</h2>
           <p className={styles.subtitle}>
             Get Instant Access to Pre-Verified, Job-Ready Candidates.
@@ -41,7 +38,6 @@ const SignupStep1 = ({ onNext }) => {
             <p className={styles.stepText}>Step 1 of 2</p>
           </div>
 
-          {/* Form Inputs */}
           <div className={styles.formInput}>
             <div className={styles.formGroup}>
               <label>Full Name*</label>
@@ -68,7 +64,6 @@ const SignupStep1 = ({ onNext }) => {
             </div>
           </div>
 
-          {/* Next Button with Proper Gap */}
           <div className={styles.buttonContainer}>
             <button className={styles.nextButton} onClick={handleNext}>
               Next
@@ -76,7 +71,7 @@ const SignupStep1 = ({ onNext }) => {
           </div>
 
           <p className={styles.loginLink}>
-            Already have an account? <a href="#">Log in</a>
+            Already have an account? <a href="/login">Log in</a>
           </p>
         </div>
       </div>

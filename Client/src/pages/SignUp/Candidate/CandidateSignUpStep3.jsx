@@ -7,37 +7,40 @@ import CLeftPortion from "../../../Common/CLeftPortion";
 const CandidateSignUpStep3 = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [email, setEmail] = useState(" "); // Default fallback
+  const [email, setEmail] = useState("");
   const [isResending, setIsResending] = useState(false);
-  const [countdown, setCountdown] = useState(30); // Resend cooldown
+  const [countdown, setCountdown] = useState(30);
 
-  // Get email from previous step or location state
   useEffect(() => {
     if (location.state?.email) {
       setEmail(location.state.email);
+    } else {
+      // Fallback to navigate back if no email is provided
+      navigate("/signup");
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
-  // Check verification status every 5 seconds
   useEffect(() => {
     const interval = setInterval(async () => {
+      if (!email) return;
+      
       try {
         const response = await axios.get(
-          `/api/auth/check-verification?email=${encodeURIComponent(email)}`
+          `/api/auth/check-verification?email=${encodeURIComponent(email)}`,
+          { withCredentials: true }
         );
         if (response.data.isVerified) {
           clearInterval(interval);
-          navigate("/dashboard"); // Redirect to dashboard when verified
+          navigate("/dashboard");
         }
       } catch (error) {
         console.error("Verification check failed:", error);
       }
-    }, 5000); // Poll every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [email, navigate]);
 
-  // Resend email countdown timer
   useEffect(() => {
     if (countdown > 0) {
       const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
@@ -46,13 +49,18 @@ const CandidateSignUpStep3 = () => {
   }, [countdown]);
 
   const handleResendEmail = async () => {
-    if (countdown > 0) return;
+    if (countdown > 0 || !email) return;
 
     setIsResending(true);
     try {
-      await axios.post("/api/auth/resend-verification", { email });
-      setCountdown(30); // Reset cooldown
+      await axios.post(
+        "/api/auth/resend-verification", 
+        { email },
+        { withCredentials: true }
+      );
+      setCountdown(30);
     } catch (error) {
+      console.error("Resend error:", error);
       alert(error.response?.data?.message || "Failed to resend email");
     } finally {
       setIsResending(false);
@@ -65,11 +73,8 @@ const CandidateSignUpStep3 = () => {
 
       <div className={styles.signupRight}>
         <div className={styles.signupForm}>
-          {/* Email Icon */}
           <div className={styles.emailIcon}>
             <svg
-              width="48"
-              height="48"
               viewBox="0 0 48 48"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +90,6 @@ const CandidateSignUpStep3 = () => {
             </svg>
           </div>
 
-          {/* Verification Message */}
           <h2 className={styles.verifyText}>Verify your email to proceed</h2>
 
           <p className={styles.emailMessage}>
@@ -93,7 +97,6 @@ const CandidateSignUpStep3 = () => {
             verification link in the email to confirm your address and proceed.
           </p>
 
-          {/* Resend Email Button */}
           <button
             onClick={handleResendEmail}
             disabled={countdown > 0 || isResending}
@@ -108,7 +111,6 @@ const CandidateSignUpStep3 = () => {
               : "Resend Verification Email"}
           </button>
 
-          {/* Login Link */}
           <p className={styles.loginLink}>
             Already have an account? <a href="/login">Log in</a>
           </p>

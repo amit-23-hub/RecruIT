@@ -6,25 +6,114 @@
 
 .mainContent {
   flex: 1;
-  padding: 20px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 
 .middle {
   display: flex;
+  flex-direction: row; /* Changed to row for side-by-side layout */
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.formAndList {
+  flex: 1;
+  display: flex;
   flex-direction: column;
-  border: 1px solid transparent;
-  background: linear-gradient(white, white) padding-box,
-    linear-gradient(90deg, #8a01da, #f2ddff) border-box;
-  border-radius: 8px;
-  padding: 10px 50px;
-  transition: width 0.3s ease;
+}
+
+.scrollerContainer {
+  width: 25rem;
+  margin-left: 1.25rem;
+}
+
+@media (max-width: 75rem) {
+  .scrollerContainer {
+    width: 18.75rem;
+  }
+}
+
+@media (max-width: 62rem) {
+  .middle {
+    flex-direction: column;
+  }
+  
+  .scrollerContainer {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 .middle.withScroller {
-  width: 60%;
-  align-items: center;
-  height: 80%;
+  width: calc(100% - 420px);
+  margin-right: 420px;
+}
+
+@media (max-width: 1200px) {
+  .middle.withScroller {
+    width: calc(100% - 320px);
+    margin-right: 320px;
+  }
+}
+
+@media (max-width: 992px) {
+  .middle.withScroller {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 420px;
+  }
+}
+
+.candidateSection {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.left {
+  width: 30%;
+  min-width: 300px;
+}
+
+.right {
+  flex: 1;
+}
+
+@media (max-width: 1200px) {
+  .middle.withScroller {
+    width: calc(100% - 360px);
+  }
+}
+
+@media (max-width: 992px) {
+  .middle.withScroller {
+    width: 100%;
+    margin-bottom: 60px;
+  }
+
+  .candidateSection {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 10px;
+  }
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .candidateSection {

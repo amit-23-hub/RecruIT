@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SignUp2.module.css";
-import RLeftPortion from "./../../Common/RLeftPortion"; 
+import RLeftPortion from "./../../Common/RLeftPortion";
+import { useNavigate } from "react-router-dom";
 
-const SignupStep2 = ({ onNext, formData }) => {
+const SignupStep2 = ({ onNext, formData = {} }) => {  // Add default empty object
+  const navigate = useNavigate();
+  
   const [localFormData, setLocalFormData] = useState({
-    companyEmail: formData.companyEmail || "",
+    companyEmail: formData?.companyEmail || "",  // Add optional chaining
     password: "",
     confirmPassword: "",
     agreeToTerms: false,
   });
 
-  const [capsLockOn, setCapsLockOn] = useState(false); // State to track Caps Lock
+  // Add check for direct access
+  useEffect(() => {
+    if (!formData || Object.keys(formData).length === 0) {
+      navigate('/signup');  // Redirect to step 1 if accessed directly
+    }
+  }, [formData, navigate]);
+
+  const [capsLockOn, setCapsLockOn] = useState(false);
 
   // Function to detect Caps Lock
   const handleKeyPress = (e) => {
@@ -18,7 +28,6 @@ const SignupStep2 = ({ onNext, formData }) => {
     setCapsLockOn(isCapsLockOn);
   };
 
-  //  Caps Lock detection
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
     return () => {
@@ -27,10 +36,10 @@ const SignupStep2 = ({ onNext, formData }) => {
   }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setLocalFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -42,7 +51,7 @@ const SignupStep2 = ({ onNext, formData }) => {
       localFormData.agreeToTerms
     ) {
       if (localFormData.password === localFormData.confirmPassword) {
-        onNext(localFormData);
+        onNext?.(localFormData);  // Add optional chaining
       } else {
         alert("Passwords do not match");
       }
@@ -53,22 +62,20 @@ const SignupStep2 = ({ onNext, formData }) => {
 
   return (
     <div className={styles.signupContainer}>
-    
       <RLeftPortion />
-
+      
       <div className={styles.signupRight}>
         <div className={styles.signupForm}>
-          {/* Header Section */}
           <h2 className={styles.createAccount}>Create Account</h2>
           <p className={styles.subtitle}>
             Get Instant Access to Pre-Verified, Job-Ready Candidates.
           </p>
+          
           <div className={styles.progressBar}>
-            <div className={styles.progress}></div>
+            <div className={styles.progress} style={{width: '100%'}}></div>
             <p className={styles.stepText}>Step 2 of 2</p>
           </div>
 
-          {/* Form Inputs */}
           <div className={styles.formInput}>
             <div className={styles.formGroup}>
               <label>Company Email*</label>
@@ -94,7 +101,7 @@ const SignupStep2 = ({ onNext, formData }) => {
                 name="password"
                 value={localFormData.password}
                 onChange={handleChange}
-                onKeyDown={handleKeyPress} // Detect Caps Lock on key press
+                onKeyDown={handleKeyPress}
                 placeholder="••••••••"
                 required
               />
@@ -112,24 +119,22 @@ const SignupStep2 = ({ onNext, formData }) => {
               />
             </div>
 
-            <div className={styles.terms}>
+            <div className={styles.termsContainer}>
               <input
                 type="checkbox"
+                id="agreeToTerms"
                 name="agreeToTerms"
                 checked={localFormData.agreeToTerms}
-                onChange={(e) =>
-                  setLocalFormData({ ...localFormData, agreeToTerms: e.target.checked })
-                }
+                onChange={handleChange}
                 required
               />
-              <label>
+              <label htmlFor="agreeToTerms">
                 By creating an account, you agree to our Terms and Conditions and
                 Privacy Policy.
               </label>
             </div>
           </div>
 
-          {/* Next Button */}
           <div className={styles.buttonContainer}>
             <button className={styles.nextButton} onClick={handleSubmit}>
               Verify Email
@@ -137,7 +142,7 @@ const SignupStep2 = ({ onNext, formData }) => {
           </div>
 
           <p className={styles.loginLink}>
-            Already have an account? <a href="#">Log in</a>
+            Already have an account? <a href="/login">Log in</a>
           </p>
         </div>
       </div>

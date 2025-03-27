@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
   const [localFormData, setLocalFormData] = useState({
-    email: formData.email || '',
+    email: formData?.email || '',
     password: '',
     confirmPassword: '',
     agreeToTerms: false
@@ -120,8 +120,10 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
             </div>
           )}
 
-          <div className={styles.progressBar}>
-            <div className={styles.progress} style={{ width: '100%' }}></div>
+          <div className={styles.progressContainer}>
+            <div className={styles.progressBar}>
+              <div className={styles.progress} style={{ width: '100%' }}></div>
+            </div>
             <p className={styles.stepText}>Step 2 of 2</p>
           </div>
 
@@ -184,14 +186,6 @@ const CandidateSignUpStep2 = ({ onNext, formData, onBack }) => {
           </div>
 
           <div className={styles.buttonContainer}>
-            {/* <button
-              type="button"
-              className={styles.backButton}
-              onClick={onBack}
-              disabled={isLoading}
-            >
-              Back
-            </button> */}
             <button
               type="button"
               className={styles.nextButton}

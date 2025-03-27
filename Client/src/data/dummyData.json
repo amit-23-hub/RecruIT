@@ -1,0 +1,64 @@
+{
+  "candidates": [
+    {
+      "id": 1,
+      "name": "John Smith",
+      "role": "Frontend Developer",
+      "experience": "5+ years",
+      "location": "New York",
+      "noticePeriod": "2 Months",
+      "matchPercentage": 95,
+      "education": "BSc Computer Science",
+      "matches": 25,
+      "interviewing": 3,
+      "description": "Experienced Frontend Developer specializing in React, Next.js, and modern JavaScript. Strong background in building responsive web applications and optimizing performance.",
+      "skills": ["React", "TypeScript", "Next.js", "Redux", "Tailwind CSS"]
+    },
+    {
+      "id": 2,
+      "name": "Sarah Johnson",
+      "role": "Frontend Developer",
+      "experience": "4 years",
+      "location": "San Francisco",
+      "noticePeriod": "Immediate",
+      "matchPercentage": 88,
+      "education": "MSc Web Technologies",
+      "matches": 18,
+      "interviewing": 4,
+      "description": "Frontend specialist with expertise in building scalable web applications. Proficient in modern frontend frameworks and state management.",
+      "skills": ["React", "Vue.js", "JavaScript", "SASS", "Webpack"]
+    },
+    {
+      "id": 3,
+      "name": "Michael Chen",
+      "role": "Frontend Developer",
+      "experience": "6 years",
+      "location": "Boston",
+      "noticePeriod": "1 Month",
+      "matchPercentage": 92,
+      "education": "BSc Software Engineering",
+      "matches": 22,
+      "interviewing": 2,
+      "description": "Senior Frontend Developer with strong focus on UI/UX and performance optimization. Experienced in leading development teams and mentoring junior developers.",
+      "skills": ["React", "Angular", "TypeScript", "GraphQL", "Jest"]
+    }
+  ],
+  "jobDescriptions": [
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "description": "We are seeking a seasoned Frontend Developer with a strong grasp of React and TypeScript. The ideal candidate will have experience in building responsive web applications and working with modern JavaScript frameworks.",
+      "type": "Full time",
+      "workplace": "On site",
+      "location": "Gurugram"
+    },
+    {
+      "id": 2,
+      "title": "Senior Frontend Developer",
+      "description": "Looking for a Senior Frontend Developer to lead our web development team. Must have extensive experience with modern JavaScript frameworks and state management solutions.",
+      "type": "Full time",
+      "workplace": "Hybrid",
+      "location": "Bangalore"
+    }
+  ]
+}

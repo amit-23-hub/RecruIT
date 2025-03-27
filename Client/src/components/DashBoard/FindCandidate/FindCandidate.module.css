@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background: linear-gradient(291.21deg, #faf7ff 8.45%, #ffffff 90.27%);
+}
+
+.scrollerSection {
+  width: 30%;
+  min-width: 18.75rem;
+  padding: 1rem;
+}
+
+.candidatesSection {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+.mainContent {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    /* flex-direction: column; */
+    position: relative;
+  
+}
+
+@media (max-width: 62rem) {
+  .container {
+    flex-direction: column;
+  }
+
+  .scrollerSection {
+    width: 100%;
+  }
+}

@@ -5,48 +5,38 @@ import CLeftPortion from "../../Common/CLeftPortion";
 const RecruiterLogin = () => {
   return (
     <div className={styles.loginContainer}>
-   
       <CLeftPortion />
-
       
       <div className={styles.loginRight}>
         <div className={styles.loginForm}>
-        
           <h2 className={styles.loginHeader}>Log in</h2>
 
-          
           <div className={styles.formGroup}>
-            <label>Email*</label>
+            <label>Email</label>
             <input
               type="email"
               placeholder="amansingh@bluparrot.com"
-              defaultValue="amansingh@bluparrot.com"
+              defaultValue=""
             />
           </div>
 
-        
           <div className={styles.formGroup}>
             <label>Password*</label>
             <input type="password" placeholder="••••••••" />
             <span className={styles.helperText}>Caps Lock is on</span>
           </div>
 
-      
           <a href="#" className={styles.forgotPassword}>
             Forgot password?
           </a>
 
-          
           <button className={styles.loginButton}>Login</button>
 
-         
           <div className={styles.divider}>
             <span>Or</span>
           </div>
 
-        
           <div className={styles.socialLogin}>
-          
             <button className={styles.microsoftButton}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +51,6 @@ const RecruiterLogin = () => {
               </svg>
             </button>
 
-           
             <button className={styles.googleButton}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -90,9 +79,8 @@ const RecruiterLogin = () => {
             </button>
           </div>
 
-        
           <p className={styles.signupPrompt}>
-            Don’t have an account? <a href="#">Sign up</a>
+            Don't have an account? <a href="#">Sign up</a>
           </p>
         </div>
       </div>

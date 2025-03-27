@@ -1,123 +1,174 @@
 .WholeContainer {
-    position: absolute;
-    width: 400px;
-    height: 500px;
-    right: 20px;
-    top: 105px;
+    width: 25rem;
+    height: calc(100vh - 8.75rem);
     background: #FFFFFF;
-    padding: 20px;
+    padding: 1.25rem;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-family: var(--font-poppins);
     transition: all 0.3s ease;
+    z-index: 1;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+}
+
+.fullScreen {
+    position: fixed;
+    width: 95%;
+    height: 95vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1000;
+    background: white;
 }
 
-.WholeContainer.fullScreen {
-    width: calc(100% - 70px);
-    height: 100vh;
+.overlay {
+    display: none;
+    position: fixed;
     top: 0;
+    left: 0;
     right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 999;
 }
 
-.WholeContainer.moveLeft {
-    right: auto;
-    left: 30px; 
-    transition: all 0.5s ease-in-out;
+.showOverlay {
+    display: block;
 }
 
+/* Style for dashboard view */
+.dashboardView {
+    display: flex;
+    position: relative;
+    margin-left: 1.25rem;
+}
+
+/* Style for find candidate page */
+.findCandidateView {
+    position: static;
+    width: 30%;
+    min-width: 18.75rem;
+    height: calc(100vh - 2rem);
+    margin: 1rem;
+}
+
+.candidatePageContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    height: 100vh;
+}
+
+.candidateListSection {
+    flex: 1;
+    padding: 1.25rem;
+    overflow-y: auto;
+}
+
+@media (max-width: 75rem) { /* 1200px */
+    .WholeContainer {
+        width: 18.75rem;
+    }
+    
+    .findCandidateView {
+        width: 40%;
+    }
+}
+
+@media (max-width: 62rem) { /* 992px */
+    .candidatePageContainer {
+        flex-direction: column;
+    }
+
+    .findCandidateView {
+        width: 100%;
+        height: auto;
+        min-height: 25rem;
+    }
+
+    .candidateListSection {
+        width: 100%;
+    }
+}
+
+/* Rest of your styles converted to rem */
 .scroller {
     flex-grow: 1;
     overflow-y: auto;
-    border: 1px solid #F2DDFF;
-    box-shadow: 0px 2px 4px rgba(204, 204, 204, 0.35);
-    border-radius: 8px;
-    padding: 10px;
+    border: 0.0625rem solid #F2DDFF;
+    box-shadow: 0 0.125rem 0.25rem rgba(204, 204, 204, 0.35);
+    border-radius: 0.5rem;
+    padding: 0.625rem;
     position: relative;
 }
 
 .expandIcon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.625rem;
+    right: 0.625rem;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #8A01DA;
     z-index: 1001;
 }
 
 .details {
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 .Common {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
 }
 
 .tagline {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #A0AEC0;
 }
 
 .keywords {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #8A01DA;
+    margin-bottom: 0.625rem;
 }
 
 .title {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
 }
 
-.keywords {
-    color: #8A01DA;
-    font-size: 24px;
-}
-
 .description {
-    font-size: 14px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.jobDetails {
-    display: flex;
-    gap: 5px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
+    font-size: 0.875rem;
+    margin: 0.625rem 0;
 }
 
 .buttonContainer {
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 0.625rem;
+    margin-top: 0.625rem;
+}
+
+.candidate, .regenerate {
+    padding: 0.625rem 0.9375rem;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    width: 100%;
+    border: none;
+    cursor: pointer;
 }
 
 .candidate {
     background-color: #8A01DA;
     color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    text-align: center;
-    width: 100%;
 }
 
 .regenerate {
     background-color: #F2DDFF;
     color: #8A01DA;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    text-align: center;
-    width: 100%;
 }
