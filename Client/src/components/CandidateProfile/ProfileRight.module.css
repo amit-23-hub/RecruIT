@@ -1,0 +1,101 @@
+.rightSection {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 300px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.headerRow h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+.todayButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.matchStatsRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.statBox {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.statBox:first-child {
+  background: #FFF5E9;
+}
+
+.statBox:last-child {
+  background: #F0FFE9;
+}
+
+.statBox span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.statBox p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.resumeSection {
+  background: #7B3FE4;
+  padding: 1.2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.resumeSection p {
+  color: white;
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+.powerResumeBtn {
+  background: white;
+  color: #7B3FE4;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pendingActions {
+  margin-top: 1rem;
+}
+
+.pendingActions h4 {
+  margin: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+  

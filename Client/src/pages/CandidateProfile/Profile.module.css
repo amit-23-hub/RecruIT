@@ -1,144 +1,68 @@
 .profileContainer {
-    display: flex; /* Add flex to align side menu and main content */
-    background: #F3ECFF ;
-    
-    font-family: 'Poppins', sans-serif;
-    gap: 20px; /* Add gap between side menu and main content */
-  }
-  
-  .sideMenu {
-    width: 180px; 
-    background: #FFFFFF;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+}
+
+.header {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.header h4 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+}
+
+.bioSection, .skillsSection, .jobPreferences {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.skill {
+  background: #F6F6F6;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.jobPreferences > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.jobPreferences span {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .profileContainer {
+    flex-direction: column;
   }
 
-  
   .mainContent {
-    flex: 1; /* Allow main content to take up remaining space */
+    margin-left: 0;
+    margin-top: 1rem;
+    padding: 1rem;
   }
-  
-  .header {
-    font-size: 28px;
-    font-weight: 600;
-    color: #313131;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .profileSection {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    
-  }
-  
-  .leftPanel {
-    width: 65%;
-
-  }
-  
-  .rightPanel {
-    width: 30%;
-  }
-  
-  .profileCard {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    justify-content: space-between;
-  }
-  .profileImage{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-  }
-  
-  .profileImage img {
-    width: 80px;
-    height: 80px;
-    
-    border-radius: 50%;
-  }
-  
-  .profileInfo {
-    margin-top: 10px;
-    font-size: 20px;
-   
-    color: #313131;
-  }
-  .profileInfo h2 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #313131;
-  }
-  
-  .profileCompletion {
-    margin-top: 10px;
-  }
-  
-  .completionBar {
-    width: 50%;
-    height: 10px;
-    background: #E6E6E6;
-    border-radius: 16px;
-    margin: 10px 0;
-  }
-  
-  .completionBar div {
-    height: 100%;
-    background: linear-gradient(90deg, #8A01DA 3.7%, #EB3FF2 100%);
-    border-radius: 16px;
-  }
-  
-  .profileDetails {
-    display: flex;
-    
-   flex-direction: column;
-    margin-top: 50px;
-    
-    gap: 30px;
-  }
-  
-  .skillsList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .bioSection{
-    width: 65%;
-  }
-  
-  .skillsSection{
-    width: 65%;
-  }
-  .skill {
-    background: #F3F3F3;
-    padding: 8px 16px;
-    border-radius: 8px;
-    
-  }
-  
-  .stats {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .statBox {
-    flex: 1;
-    background: #FAFAFA;
-    padding: 10px;
-    height: 80px;
-    text-align: center;
-    border-radius: 10px;
-  }
-  
-  .pendingActions {
-    padding: 10px;
-    background: #F9F9F9;
-    text-align: center;
-    border-radius: 10px;
-    height: 200px;
-  }
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './ProfileResumeSkills.module.css';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import ProgressBar from './ProgressBar/ProgressBar';
+import { FiEdit2 } from 'react-icons/fi';
 
 const ProfileResumeSkills = ({ onNext }) => {
   const currentStep = 2; // Current step for the progress bar
@@ -89,8 +90,8 @@ const ProfileResumeSkills = ({ onNext }) => {
               <div className={styles.headerRow}>
                 <h1>Resume & Skills</h1>
                 {!isEditMode && (
-                  <button className={styles.editButton} onClick={handleEditClick}>
-                    Edit
+                  <button className={styles.editIcon} onClick={handleEditClick}>
+                    <FiEdit2 />
                   </button>
                 )}
               </div>

@@ -13,24 +13,27 @@
 
 .profileContent {
   flex: 1;
-  padding: 20px;
+  padding: 1.25rem; /* 20px to rem */
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .profileGrid {
   display: flex;
-  gap: 20px;
+  gap: 1.25rem; /* 20px to rem */
+  width: 100%;
 }
 
 .progressBarContainer {
-  width: 300px;
+  width: 18.75rem; /* 300px to rem */
 }
 
 .profileDetailsContainer {
   flex: 1;
-  margin-left: 80px;
+  margin-left: 5rem; /* 80px to rem */
+  max-width: 50rem; /* Added max-width for better responsiveness */
 }
 
 .profileHeader {
@@ -80,23 +83,23 @@
 }
 
 .detailSection input {
-  width: 50%;
-  padding: 10px;
+  width: 100%; /* Changed from 50% to 100% */
+  padding: 0.625rem; /* 10px to rem */
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 0.25rem; /* 4px to rem */
+  font-size: 0.875rem; /* 14px to rem */
 }
 
 .detailSection select {
-  width: 110%;
-  padding: 10px;
+  width: 100%; /* Changed from 110% to 100% */
+  padding: 0.625rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
 }
 
 .phoneInput {
-  width: 52%;
+  width: 100%; /* Changed from 52% to 100% */
   display: flex;
   align-items: center;
 }
@@ -115,57 +118,89 @@
 
 .actionButtons {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  justify-content: center; /* Changed from flex-end to center */
+  gap: 0.625rem; /* 10px to rem */
+  margin-top: 1.25rem; /* 20px to rem */
+  width: 100%;
 }
 
 .cancelButton {
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   background-color: #f1f1f1;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
+  min-width: 6.25rem; /* Added min-width */
 }
 
 .saveButton {
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   background-color: #8a01da;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
-}
-
-.saveButton:hover {
-  background-color: #7a00c2;
+  min-width: 6.25rem; /* Added min-width */
 }
 
 .row {
   display: flex;
-  gap: 30px; /* 30px gap between fields */
+  gap: 1.875rem; /* 30px to rem */
   width: 100%;
 }
 
 .row .detailSection {
-  flex: 0 0 calc(25% - 15px); 
+  flex: 1; /* Changed from flex: 0 0 calc(25% - 15px) to flex: 1 */
 }
+
 .detailSection .pin {
-  width: 220px; 
+  width: 100%; /* Changed from 220px to 100% */
+}
+
+/* Add media queries for better responsiveness */
+@media screen and (max-width: 1024px) {
+  .profileGrid {
+    flex-direction: column;
+  }
+
+  .profileDetailsContainer {
+    margin-left: 0;
+  }
+
+  .progressBarContainer {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .detailSection input,
+  .detailSection select,
+  .phoneInput {
+    width: 100%;
+  }
 }
 
 .headerRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .editButton {
-  padding: 7px 10px;
-  color: white;
+  background: none;
   border: none;
-  border-radius: 50%;
   cursor: pointer;
-  
+  padding: 5px;
+}
+
+.editButton:hover {
+  background-color: #f5f5f5;
+  border-radius: 50%;
 }
 

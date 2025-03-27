@@ -1,157 +1,92 @@
 /* SocialLinks.module.css */
 .container {
-    display: flex;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-  }
-  
-  .sideMenu {
-    width: 250px;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-right: 1px solid #e0e0e0;
-  }
-  
-  .profileSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
-  }
-  
-  .profileImage {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-  }
-  
-  .progressContainer {
-    position: relative;
-    width: 60px;
-    height: 60px;
-  }
-  
-  .progressCircle {
-    width: 100%;
-    height: 100%;
-    background: conic-gradient(#6b48ff 0% 75%, #e0e0e0 75% 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .progressCircle::before {
-    content: '';
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-    border-radius: 50%;
-  }
-  
-  .progressText {
-    position: relative;
-    font-size: 14px;
-    font-weight: bold;
-    color: #6b48ff;
-  }
-  
-  .menuList {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .menuItem,
-  .menuItemActive {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #666;
-    cursor: pointer;
-  }
-  
-  .menuItemActive {
-    background-color: #e6e0ff;
-    color: #6b48ff;
-    border-radius: 8px;
-  }
-  
-  .menuIcon {
-    margin-right: 10px;
-  }
-  
-  .mainContent {
-    flex: 1;
-    padding: 40px;
-    background-color: #fff;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .subtitle {
-    font-size: 14px;
-    color: #999;
-    margin-bottom: 30px;
-  }
-  
-  .form {
-    max-width: 500px;
-  }
-  
-  .formGroup {
-    margin-bottom: 20px;
-  }
-  
-  .label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #333;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    outline: none;
-  }
-  
-  .input::placeholder {
-    color: #ccc;
-  }
-  
-  .buttonGroup {
-    display: flex;
-    gap: 10px;
-    margin-top: 30px;
-  }
-  
-  .cancelButton,
-  .verifyButton {
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .cancelButton {
-    background-color: #f5e6ff;
-    color: #6b48ff;
-  }
-  
-  .verifyButton {
-    background-color: #6b48ff;
-    color: #fff;
-  }
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.profileGrid {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  position: relative;
+}
+
+.progressBarContainer {
+  width: 300px;
+  padding-right: 20px;
+  border-right: 1px solid #e2ecf9;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 40px;
+  background-color: #fff;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 30px;
+}
+
+.form {
+  max-width: 500px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #ccc;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.cancelButton,
+.verifyButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  background-color: #f5e6ff;
+  color: #6b48ff;
+}
+
+.verifyButton {
+  background-color: #6b48ff;
+  color: #fff;
+}
+

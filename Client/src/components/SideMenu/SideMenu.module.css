@@ -1,51 +1,66 @@
 .sideMenu {
-  width: 74px;
+  width: 70px;
   height: 100vh;
-  background: #ffffff;
-  box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+  background: #FFFFFF;
+  transition: width 0.3s;
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  padding-top: 20px;
-  transition: width 0.3s ease;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.sideMenu.expanded {
-  width: 200px; /* Expanded width */
+.expanded {
+  width: 250px;
 }
 
 .menuItem {
-  margin-bottom: 20px;
-  margin-left: 10px;
   display: flex;
-  color: #A0AEC0;
   align-items: center;
-  gap: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.menuItem:hover {
+  background-color: #F7FAFC;
 }
 
 .icon {
-  font-size: 24px;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconText {
+  margin-left: 15px;
+  color: #718096;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.logo {
+  margin-bottom: 20px;
 }
 
 .MainIcon {
   font-size: 24px;
-  color: #ffffff;
-  background-color: #8a01da;
-  padding: 10px 16px;
-  border-radius: 8px;
-}
-
-.iconText {
-  display: none; /* Hide text by default */
-}
-
-.sideMenu.expanded .iconText {
-  display: inline; /* Show text when expanded */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #7C3AED;
+  border-radius: 6px;
 }
 
 .bottomIcons {
-  margin-top: 90px; /* Gap of 40px */
+  margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Space between bottom icons */
+  gap: 10px;
 }
