@@ -1,0 +1,73 @@
+.skillsSection, .jobPreferences {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.skillsSection h2, .jobPreferences h2 {
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.skill {
+  background: #F6F6F6;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.jobPreferences > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.jobPreferences span {
+  color: #666;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jobPreferences span::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.jobPreferences span:nth-child(1)::before {
+  background-color: #FF9B05;
+}
+
+.jobPreferences span:nth-child(2)::before {
+  background-color: #4CAF50;
+}
+
+.jobPreferences span:nth-child(3)::before {
+  background-color: #2196F3;
+}
+
+.jobPreferences span:nth-child(4)::before {
+  background-color: #9C27B0;
+}
+
+@media (max-width: 576px) {
+  .jobPreferences > div {
+    grid-template-columns: 1fr;
+  }
+}

@@ -19,6 +19,7 @@ import Profile from './pages/CandidateProfile/Profile';
 import EmailVerified from './pages/EmailVarify';
 import FindCandidate from './components/DashBoard/FindCandidate/FindCandidate';
 import SignUp3 from './pages/SignUp/SignUp3';
+import ProfileManager from './pages/CandidateProfile/ProfileManager';
 
 const App = () => {
   // State for signup flow
@@ -89,6 +90,7 @@ const App = () => {
         <Route path="/findcandidate" element={<FindCandidate />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/phone-Profile" element={<ProfileManager />} />
         <Route path="/verify-email" element={<EmailVerified />} />
         {/* Update the SignupStep2 route */}
         <Route 

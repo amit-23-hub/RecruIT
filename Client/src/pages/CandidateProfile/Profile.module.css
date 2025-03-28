@@ -2,21 +2,20 @@
   display: flex;
   width: 100%;
   gap: 20px;
-  background-color: violet;
+  background: linear-gradient(135deg, #FAF6FF 0%, #F3ECFF 100%);
+  min-height: 100vh;
+  /* padding: 1rem; */
+  position: relative;
 }
 
 .mainContent {
   flex: 1;
-  padding: 20px;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-  margin-left: 20px;
 }
 
 .header {
-  text-align: left;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .header h4 {
@@ -25,82 +24,81 @@
   margin: 0;
 }
 
-.bioSection, .skillsSection, .jobPreferences {
+.hamburgerMenu {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
   background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.skillsList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-top: 1rem;
+.hamburgerMenu span {
+  width: 24px;
+  height: 2px;
+  background-color: #333;
+  transition: all 0.3s ease;
 }
 
-.skill {
-  background: #F6F6F6;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  color: #333;
+.mobileProfileRight {
+  display: none;
 }
 
-.jobPreferences > div {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.jobPreferences span {
-  color: #666;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.jobPreferences span::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.jobPreferences span:nth-child(1)::before {
-  background-color: #FF9B05;
-}
-
-.jobPreferences span:nth-child(2)::before {
-  background-color: #4CAF50;
-}
-
-.jobPreferences span:nth-child(3)::before {
-  background-color: #2196F3;
-}
-
-.jobPreferences span:nth-child(4)::before {
-  background-color: #9C27B0;
-}
-
-@media (max-width: 576px) {
-  .jobPreferences > div {
-    grid-template-columns: 1fr;
-  }
+.sideMenuWrapper {
+  transition: transform 0.3s ease;
 }
 
 @media (max-width: 768px) {
   .profileContainer {
     flex-direction: column;
+    padding: 0.5rem;
   }
 
   .mainContent {
-    margin-left: 0;
-    margin-top: 1rem;
+    margin: 0;
     padding: 1rem;
+    margin-top: 60px;
+    background-color: transparent;
+  }
+
+  .header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .header h4 {
+    font-size: 1.25rem;
+  }
+
+  .hamburgerMenu {
+    display: flex;
+  }
+
+  .sideMenuWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    transform: translateX(-100%);
+  }
+
+  .showSideMenu {
+    transform: translateX(0);
+  }
+
+  .desktopProfileRight {
+    display: none;
+  }
+
+  .mobileProfileRight {
+    display: block;
+    margin-top: 1rem;
   }
 }

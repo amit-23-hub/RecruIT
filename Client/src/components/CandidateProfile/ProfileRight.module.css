@@ -1,8 +1,10 @@
 .rightSection {
   background: white;
   border-radius: 16px;
-  padding: 1.5rem;
-  width: 300px;
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  
+  width: 98%;
+  box-sizing: border-box;
 }
 
 .headerRow {
@@ -13,7 +15,7 @@
 }
 
 .headerRow h3 {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
   color: #333;
   margin: 0;
 }
@@ -21,13 +23,13 @@
 .todayButton {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
+  gap: 0.3rem;
+  padding: 0.5rem 0.8rem;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   background: white;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
 }
 
 .matchStatsRow {
@@ -41,6 +43,7 @@
   padding: 1rem;
   border-radius: 12px;
   text-align: center;
+  min-width: 0; /* Allows flex items to shrink properly */
 }
 
 .statBox:first-child {
@@ -52,7 +55,7 @@
 }
 
 .statBox span {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
   font-weight: bold;
   color: #333;
   display: block;
@@ -61,8 +64,11 @@
 
 .statBox p {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 3vw, 0.85rem);
   color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .resumeSection {
@@ -76,26 +82,67 @@
 .resumeSection p {
   color: white;
   margin: 0 0 1rem 0;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 3.5vw, 0.9rem);
 }
 
 .powerResumeBtn {
   background: white;
   color: #7B3FE4;
   border: none;
-  padding: 8px 16px;
+  padding: 0.6rem 1rem;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  font-size: clamp(0.8rem, 3.5vw, 0.9rem);
 }
 
 .pendingActions {
-  margin-top: 1rem;
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .pendingActions h4 {
   margin: 0;
   color: #333;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
+  margin-bottom: 1rem;
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rightSection {
+    padding: 1rem;
+  }
   
+  .matchStatsRow {
+    gap: 0.75rem;
+  }
+
+  .statBox {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rightSection {
+    padding: 0.8rem;
+  }
+
+  .headerRow {
+    margin-bottom: 1rem;
+  }
+
+  .matchStatsRow, .resumeSection {
+    margin-bottom: 1rem;
+  }
+
+  .pendingActions {
+    padding: 1rem;
+  }
+}

@@ -64,3 +64,23 @@
   flex-direction: column;
   gap: 10px;
 }
+
+@media (max-width: 768px) {
+  .sideMenu {
+    width: 250px;
+    position: relative;
+    height: 100vh;
+  }
+
+  .expanded {
+    width: 250px;
+  }
+
+  .menuItem {
+    padding: 15px;
+  }
+
+  .iconText {
+    display: block !important;
+  }
+}
