@@ -1,19 +1,33 @@
 // SocialLinks.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './ProfileSocialLinks.module.css';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import ProgressBar from './ProgressBar/ProgressBar';
 
 const ProfileSocialLinks = () => {
-  const currentStep = 5; // Social Links is the 5th step
+  const currentStep = 5;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className={styles.container}>
-      <SideMenu />
+      {!isMobile && <SideMenu />}
       <div className={styles.profileGrid}>
-        <div className={styles.progressBarContainer}>
-          <ProgressBar currentStep={currentStep} />
-        </div>
+        {!isMobile && (
+          <div className={styles.progressBarContainer}>
+            <ProgressBar currentStep={currentStep} />
+          </div>
+        )}
 
         {/* Main Content */}
         <div className={styles.mainContent}>

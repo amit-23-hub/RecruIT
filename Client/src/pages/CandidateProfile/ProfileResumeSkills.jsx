@@ -5,7 +5,8 @@ import ProgressBar from './ProgressBar/ProgressBar';
 import { FiEdit2 } from 'react-icons/fi';
 
 const ProfileResumeSkills = ({ onNext }) => {
-  const currentStep = 2; // Current step for the progress bar
+  const currentStep = 2;
+  const [isMobile, setIsMobile] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false); // State for edit mode
   const [skills, setSkills] = useState([]); // State for skills
   const [newSkill, setNewSkill] = useState(''); // State for new skill input
@@ -73,12 +74,22 @@ const ProfileResumeSkills = ({ onNext }) => {
     setSkills(updatedSkills);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className={styles.profileContainer}>
-      <div className={styles.sideMenuContainer}>
-        <SideMenu />
-      </div>
-
+      {!isMobile && (
+        <div className={styles.sideMenuContainer}>
+          <SideMenu />
+        </div>
+      )}
       <div className={styles.profileContent}>
         <div className={styles.profileGrid}>
           <div className={styles.progressBarContainer}>

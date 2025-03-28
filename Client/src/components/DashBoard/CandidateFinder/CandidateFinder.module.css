@@ -20,8 +20,9 @@
 }
 
 .candidateCard {
-  width: 820px;
-  height: auto; 
+  width: 100%; /* Change from fixed width to 100% */
+  max-width: 820px; /* Maximum width for larger screens */
+  height: auto;
   background: #ffffff;
   border-radius: 16px;
   padding: 20px;
@@ -30,6 +31,34 @@
   flex-direction: column;
   gap: 20px;
   position: relative;
+  margin: 0 auto; /* Center the cards */
+}
+
+@media (max-width: 62rem) {
+  .candidateCard {
+    padding: 15px;
+  }
+
+  .candidateInfo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .matchRow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+  }
+
+  .downloadButton,
+  .nextButton {
+    padding: 10px;
+    width: 100%;
+  }
 }
 
 .crossIcon {

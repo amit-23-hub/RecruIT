@@ -21,7 +21,7 @@
 .mainContent {
   flex: 1;
   padding: 40px;
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 .title {
@@ -92,43 +92,39 @@
 
 
 @media screen and (max-width: 768px) {
-  .profileContainer {
-    padding: 1rem;
+  .container {
+    background-color: transparent;
+    min-height: auto;
+    height: fit-content;
   }
 
-  .sideMenuContainer {
-    display: none;
+  .mainContent {
+    background-color: transparent;
+    padding: 20px;
+    min-height: auto;
   }
 
-  .profileContent {
-    padding: 0;
+  .form {
+    margin-bottom: 80px; /* Space for fixed buttons */
   }
-
-  .profileGrid {
-    flex-direction: column;
-  }
-
+  /* Hide sidemenu and progress bar */
   .progressBarContainer {
     display: none;
   }
 
-  .profileDetailsContainer {
-    margin-left: 0;
+  /* Adjust layout for mobile */
+  .profileGrid {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Fix form width on mobile */
+  .form {
     max-width: 100%;
   }
 
-  .row {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .detailSection input,
-  .detailSection select,
-  .phoneInput {
-    width: 100%;
-  }
-
-  .actionButtons {
+  /* Adjust button group for mobile */
+  .buttonGroup {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -137,5 +133,11 @@
     padding: 1rem;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     margin: 0;
+    justify-content: center;
+  }
+
+  .cancelButton,
+  .verifyButton {
+    min-width: 120px;
   }
 }

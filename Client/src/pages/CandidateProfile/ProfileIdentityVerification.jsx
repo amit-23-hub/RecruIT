@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './ProfileIdentityVerification.module.css';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import ProgressBar from './ProgressBar/ProgressBar';
 
 const ProfileIdentityVerification = ({ onNext }) => {
   const currentStep = 4;
+  const [isMobile, setIsMobile] = useState(false);
   const [proofType, setProofType] = useState('');
   const [proofFile, setProofFile] = useState(null);
   const [fullAddress, setFullAddress] = useState('');
@@ -37,17 +38,32 @@ const ProfileIdentityVerification = ({ onNext }) => {
     setIsVerified(false);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className={styles.profileContainer}>
-      <div className={styles.sideMenuContainer}>
-        <SideMenu />
-      </div>
+      {!isMobile && (
+        <div className={styles.sideMenuContainer}>
+          <SideMenu />
+        </div>
+      )}
 
       <div className={styles.profileContent}>
         <div className={styles.profileGrid}>
-          <div className={styles.progressBarContainer}>
-            <ProgressBar currentStep={currentStep} />
-          </div>
+          {!isMobile && (
+            <div className={styles.progressBarContainer}>
+              <ProgressBar currentStep={currentStep} />
+            </div>
+          )}
 
           <div className={styles.profileDetailsContainer}>
             <div className={styles.profileHeader}>

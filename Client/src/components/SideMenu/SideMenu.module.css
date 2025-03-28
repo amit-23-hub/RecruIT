@@ -67,20 +67,68 @@
 
 @media (max-width: 768px) {
   .sideMenu {
-    width: 250px;
-    position: relative;
-    height: 100vh;
+    width: 100%;
+    position: fixed;
+    height: 60px;
+    padding: 0 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .hamburger {
+    display: flex;
+    cursor: pointer;
+    padding: 5px;
+    order: 1;
+  }
+
+  .logo {
+    margin: 0;
+    order: 2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .profileImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    order: 3;
+    cursor: pointer;
+  }
+
+  .menuItem:not(.hamburger):not(.profileItem) {
+    display: none;
+  }
+
+  .bottomIcons {
+    display: none;
   }
 
   .expanded {
     width: 250px;
+    height: calc(100vh - 60px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 10px;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    background: #FFFFFF;
   }
 
-  .menuItem {
-    padding: 15px;
+  .expanded .menuItem:not(.hamburger) {
+    display: flex;
   }
 
-  .iconText {
-    display: block !important;
+  .expanded .bottomIcons {
+    display: flex;
+    margin-top: auto;
   }
 }

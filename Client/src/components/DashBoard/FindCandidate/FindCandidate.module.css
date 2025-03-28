@@ -16,13 +16,12 @@
   padding: 1rem;
   overflow-y: auto;
 }
+
 .mainContent {
-    flex: 1;
-    padding: 1rem;
-    display: flex;
-    /* flex-direction: column; */
-    position: relative;
-  
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  position: relative;
 }
 
 @media (max-width: 62rem) {
@@ -31,6 +30,15 @@
   }
 
   .scrollerSection {
+    display: none; /* Hide scroller on mobile */
+  }
+
+  .mainContent {
+    flex-direction: column;
+  }
+
+  .candidatesSection {
     width: 100%;
+    padding: 0.5rem;
   }
 }
