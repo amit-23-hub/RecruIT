@@ -1,20 +1,21 @@
 .dashboard {
   display: flex;
   background: linear-gradient(291.21deg, #faf7ff 8.45%, #ffffff 90.27%);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .mainContent {
   flex: 1;
-  padding: 1.25rem;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow-x: hidden;
 }
 
 .middle {
   display: flex;
-  flex-direction: row; /* Changed to row for side-by-side layout */
+  flex-direction: row;
   gap: 1.25rem;
   width: 100%;
 }
@@ -23,6 +24,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 1.25rem;
 }
 
 .scrollerContainer {
@@ -30,13 +32,14 @@
   margin-left: 1.25rem;
 }
 
-@media (max-width: 75rem) {
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
   .scrollerContainer {
-    width: 18.75rem;
+    width: 20rem;
   }
 }
 
-@media (max-width: 62rem) {
+@media (max-width: 992px) {
   .middle {
     flex-direction: column;
   }
@@ -44,102 +47,43 @@
   .scrollerContainer {
     width: 100%;
     margin-left: 0;
+    margin-top: 1.25rem;
   }
 }
 
-.middle.withScroller {
-  width: calc(100% - 420px);
-  margin-right: 420px;
+.mobileTop {
+  display: none;
 }
 
-@media (max-width: 1200px) {
-  .middle.withScroller {
-    width: calc(100% - 320px);
-    margin-right: 320px;
-  }
-}
-
-@media (max-width: 992px) {
-  .middle.withScroller {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 420px;
-  }
-}
-
-.candidateSection {
-  display: flex;
-  gap: 20px;
-  width: 100%;
-}
-
-.left {
-  width: 30%;
-  min-width: 300px;
-}
-
-.right {
-  flex: 1;
-}
-
-@media (max-width: 1200px) {
-  .middle.withScroller {
-    width: calc(100% - 360px);
-  }
-}
-
-@media (max-width: 992px) {
-  .middle.withScroller {
-    width: 100%;
-    margin-bottom: 60px;
-  }
-
-  .candidateSection {
-    flex-direction: column;
-  }
-
-  .left {
-    width: 100%;
-  }
+.desktopTop {
+  display: block;
 }
 
 @media (max-width: 768px) {
+  .mobileTop {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .desktopTop {
+    display: none;
+  }
+
   .mainContent {
-    padding: 10px;
+    padding: 20px 10px 10px 10px;
+  }
+  
+  .formAndList {
+    gap: 1rem;
+  }
+  
+  .middle {
+    gap: 1rem;
   }
 }
 
-.mainContent {
-  flex: 1;
-  padding: 20px;
-  position: relative;
-  overflow-x: hidden;
-}
-
-.candidateSection {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  width: 100%;
-}
-
-.left {
-  flex: 1;
-  max-width: 400px; /* Adjust as needed */
-}
-
-.right {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.noCandidates {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 18px;
-  color: #969696;
+@media (max-width: 576px) {
+  .mainContent {
+    padding: 40px 8px 8px 8px;
+  }
 }

@@ -48,10 +48,15 @@ const Dashboard = () => {
     <div className={styles.dashboard}>
       <SideMenu />
       <div className={styles.mainContent}>
+        <div className={styles.mobileTop}>
+          <Top />
+        </div>
         <DashBoardHeader />
         <div className={styles.middle}>
           <div className={styles.formAndList}>
-            <Top />
+            <div className={styles.desktopTop}>
+              <Top />
+            </div>
             <JobDescriptionForm 
               onInputChange={handleInputChange} 
               onGenerateJD={handleGenerateJD}

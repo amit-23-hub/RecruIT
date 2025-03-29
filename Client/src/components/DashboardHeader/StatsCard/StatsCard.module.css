@@ -1,27 +1,91 @@
 .statsCard {
-    width: 240px;
-    height: 63px;
-    background: #FFFFFF;
-    border: 0.6px solid #E9C3FF;
-    box-shadow: 0px 2px 4px rgba(214, 214, 214, 0.25);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    padding: 10px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-width: 200px;
+  flex: 1;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.title {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.icon svg {
+  width: 57px;
+  height: 56px;
+}
+
+@media (max-width: 1199px) {
+  .statsCard {
+    min-width: 180px;
+    gap: 12px;
   }
-  
-  .icon {
-    font-size: 24px;
-    margin-right: 10px;
+  .icon svg {
+    width: 50px;
+    height: 49px;
   }
-  
-  .title {
-    font-size: 12px;
-    color: #A0AEC0;
+  .value {
+    font-size: 22px;
   }
-  
+}
+
+@media (max-width: 992px) {
+  .statsCard {
+    min-width: 160px;
+    padding: 12px;
+    gap: 10px;
+  }
+  .icon svg {
+    width: 45px;
+    height: 44px;
+  }
   .value {
     font-size: 20px;
-    font-weight: 600;
-    color: #2D3748;
   }
+  .title {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsCard {
+    min-width: 140px;
+    padding: 10px;
+    gap: 8px;
+  }
+  .icon svg {
+    width: 40px;
+    height: 39px;
+  }
+  .value {
+    font-size: 18px;
+  }
+  .title {
+    font-size: 12px;
+  }
+}
+
