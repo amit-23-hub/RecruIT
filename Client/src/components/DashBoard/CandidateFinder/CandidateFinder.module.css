@@ -40,14 +40,64 @@
   }
 
   .candidateInfo {
-    flex-direction: column;
+    flex-direction: row;  /* Changed from column to row */
     align-items: center;
-    text-align: center;
+    gap: 10px;  /* Reduced gap */
+  }
+
+  .candidateImage {
+    width: 60px;  /* Smaller image size for mobile */
+    height: 60px;
+  }
+
+  .candidateDetails {
+    gap: 5px;  /* Reduced gap */
+  }
+
+  .candidateName {
+    font-size: 16px;  /* Smaller font size */
+    line-height: 24px;
+  }
+
+  .candidateRole {
+    font-size: 12px;
+    line-height: 20px;
   }
 
   .matchRow {
-    flex-direction: column;
+    flex-direction: row;  /* Changed from column to row */
     align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  .matchCircle {
+    width: 40px;  /* Smaller circle size */
+    height: 40px;
+  }
+
+  .matchInnerCircle {
+    width: 34px;  /* Adjusted inner circle size */
+    height: 34px;
+    border-width: 3px;
+  }
+
+  .matchPercentage {
+    font-size: 12px;
+  }
+
+  .matchText {
+    font-size: 8px;
+  }
+
+  .matchItems {
+    flex-wrap: wrap;  /* Allow items to wrap on small screens */
+    gap: 10px;
+  }
+
+  .edu, .loc, .skills {
+    padding: 2px 10px;
+    font-size: 12px;
   }
 
   .buttonContainer {
@@ -83,11 +133,21 @@
 }
 
 .candidateImage {
-  width: 100px;
-  height: 100px;
+  width: 100px;  /* Changed from max-width to width */
+  height: 100px; /* Changed from max-width to height */
   background: #ffffff;
   border-radius: 16px;
   background-size: cover;
+  background-position: center;
+  object-fit: cover;
+}
+
+@media (max-width: 62rem) {
+  .candidateImage {
+   
+    min-width: 80px;
+    min-height: 50px;
+  }
 }
 
 .candidateDetails {
@@ -180,36 +240,46 @@
 .matchDetails {
   flex: 1;
   margin-left: 30px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .matchDetails h4 {
   font-size: 16px;
   color: #008000;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .matchItems {
   display: flex;
   align-items: center;
-  gap: 28px;
+  flex-wrap: wrap;
+  gap: 15px;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
   color: #18191c;
-  
-  
-}
-.edu , .loc , .skills {
-  background-color: #EFFFF0; /* Inner background */
-  padding: 2px 15px;
+  width: 100%;
+  /* padding: 10px 0; */
 }
 
+.edu, .loc, .skills {
+  background-color: #EFFFF0;
 
+  border-radius: 20px;
+  width: auto;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 
-
-
+.edu:hover, .loc:hover, .skills:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
 .divider {
   border: 0;
@@ -371,3 +441,93 @@
   font-size: 16px;
   color: #313131;
 }
+
+@media (max-width: 768px) {
+  .matchRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  
+
+  .matchCircle {
+    width: 100%;
+    height: auto;
+    background: linear-gradient(90deg, #eb3ff2 8.7%, #8a01da 44.63%, #5401a2 71.96%, #2f017b 91.3%);
+    border-radius: 10px;
+    padding: 8px 60px;
+  }
+
+  .matchInnerCircle {
+    position: static;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border: none;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .matchPercentage {
+    color: white;
+    font-size: 16px;
+  }
+
+  .matchText {
+    color: white;
+    font-size: 14px;
+  }
+
+  .matchDetails {
+    margin-left: 0;
+  }
+
+  .matchItems {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .edu, .loc, .skills {
+    padding: 4px 4px;
+    font-size: 12px;
+  }
+
+  .cardButtonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  .cardDownloadButton,
+  .cardAssessButton {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .cardDownloadButton {
+    background-color: #8a01da;
+    color: white;
+  }
+
+  .cardAssessButton {
+    background-color: #8A01DA;
+    color: #ffffff;
+  }
+
+  .checkboxContainer {
+    display: none; /* Hide checkbox on mobile */
+  }
+}.popupContent p {
+  font-size: 16px;
+  color: #313131; }

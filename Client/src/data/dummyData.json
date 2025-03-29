@@ -3,6 +3,7 @@
     {
       "id": 1,
       "name": "John Smith",
+      "image": "http://cdn.shopify.com/s/files/1/0583/4820/8201/files/Picture4_480x480.png?v=1723119015",
       "role": "Frontend Developer",
       "experience": "5+ years",
       "location": "New York",
@@ -17,6 +18,7 @@
     {
       "id": 2,
       "name": "Sarah Johnson",
+      "image": "https://cdn.shopify.com/s/files/1/0583/4820/8201/files/Picture4_480x480.png?v=1723119015",
       "role": "Frontend Developer",
       "experience": "4 years",
       "location": "San Francisco",
@@ -31,6 +33,7 @@
     {
       "id": 3,
       "name": "Michael Chen",
+      "image": "https://cdn.shopify.com/s/files/1/0583/4820/8201/files/Picture4_480x480.png?v=1723119015",
       "role": "Frontend Developer",
       "experience": "6 years",
       "location": "Boston",
