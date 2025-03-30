@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import styles from "./SignUp1.module.css";
-import RLeftPortion from "../../Common/RLeftPortion";
+import RLeftPortion from "../../../Common/RLeftPortion";
 
 const SignupStep1 = ({ onNext }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     companyName: "",
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -14,13 +16,37 @@ const SignupStep1 = ({ onNext }) => {
       ...prevData,
       [name]: value,
     }));
+    setError(''); // Clear error when user types
   };
 
-  const handleNext = () => {
-    if (formData.fullName && formData.companyName) {
-      onNext(formData);
-    } else {
-      alert("Please fill in all fields");
+  const handleNext = async () => {
+    try {
+      if (!formData.fullName || !formData.companyName) {
+        setError('Please fill in all fields');
+        return;
+      }
+
+      const response = await axios.post('http://localhost:5001/api/recruiter/signup/step1', {
+        fullName: formData.fullName,
+        companyName: formData.companyName
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        timeout: 5000 // 5 second timeout
+      });
+
+      onNext({
+        ...formData,
+        userId: response.data.recruiterId
+      });
+    } catch (error) {
+      console.error('Signup error:', error);
+      if (error.code === 'ERR_NETWORK') {
+        setError('Unable to connect to server. Please check your connection or try again later.');
+      } else {
+        setError(error.response?.data?.message || 'An error occurred during signup');
+      }
     }
   };
 
@@ -33,11 +59,7 @@ const SignupStep1 = ({ onNext }) => {
           <p className={styles.subtitle}>
             Get Instant Access to Pre-Verified, Job-Ready Candidates.
           </p>
-          <div className={styles.progressBar}>
-            <div className={styles.progress}></div>
-            <p className={styles.stepText}>Step 1 of 2</p>
-          </div>
-
+          {error && <p className={styles.errorMessage}>{error}</p>}
           <div className={styles.formInput}>
             <div className={styles.formGroup}>
               <label>Full Name*</label>

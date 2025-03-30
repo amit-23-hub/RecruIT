@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../pages/SignUp/SignUp1.module.css";
+import styles from "../pages/SignUp/Recruiter/SignUp1.module.css";
 import Logo from "./logo";
 
 const RLeftPortion = () => {

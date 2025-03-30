@@ -381,3 +381,13 @@
     height: 3rem;
   }
 }
+
+.errorMessage {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: rgba(220, 53, 69, 0.1);
+  border-radius: 0.25rem;
+  text-align: center;
+}

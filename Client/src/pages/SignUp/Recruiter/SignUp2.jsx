@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SignUp2.module.css";
-import RLeftPortion from "./../../Common/RLeftPortion";
+import RLeftPortion from "../../../Common/RLeftPortion";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
-const SignupStep2 = ({ onNext, formData = {} }) => {  // Add default empty object
+const SignupStep2 = ({ onNext, formData, onBack }) => {
   const navigate = useNavigate();
   
   const [localFormData, setLocalFormData] = useState({
@@ -43,20 +44,37 @@ const SignupStep2 = ({ onNext, formData = {} }) => {  // Add default empty objec
     }));
   };
 
-  const handleSubmit = () => {
-    if (
-      localFormData.companyEmail &&
-      localFormData.password &&
-      localFormData.confirmPassword &&
-      localFormData.agreeToTerms
-    ) {
-      if (localFormData.password === localFormData.confirmPassword) {
-        onNext?.(localFormData);  // Add optional chaining
+  const handleSubmit = async () => {
+    try {
+      if (
+        localFormData.companyEmail &&
+        localFormData.password &&
+        localFormData.confirmPassword &&
+        localFormData.agreeToTerms
+      ) {
+        if (localFormData.password === localFormData.confirmPassword) {
+          const response = await axios.post('http://localhost:5001/api/recruiter/signup/step2', {
+            recruiterId: formData.userId,
+            companyEmail: localFormData.companyEmail,
+            password: localFormData.password
+          });
+
+          if (response.data) {
+            onNext({
+              ...formData,
+              ...localFormData,
+              email: localFormData.companyEmail
+            });
+          }
+        } else {
+          alert("Passwords do not match");
+        }
       } else {
-        alert("Passwords do not match");
+        alert("Please fill in all fields and agree to the terms");
       }
-    } else {
-      alert("Please fill in all fields and agree to the terms");
+    } catch (error) {
+      console.error('Signup error:', error);
+      alert(error.response?.data?.message || 'An error occurred during signup');
     }
   };
 

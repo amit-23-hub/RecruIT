@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import './App.css';
-import SignupStep1 from './pages/SignUp/SignUp1';
-import SignupStep2 from './pages/SignUp/SignUp2';
-import SignupStep3 from './pages/SignUp/SignUp3';
+import RecruiterSignupStep1 from './pages/SignUp/Recruiter/SignUp1';
+import RecruiterSignupStep2 from './pages/SignUp/Recruiter/SignUp2';
+import RecruiterSignupStep3 from './pages/SignUp/Recruiter/SignUp3';
 import RecruiterLogin from './pages/Login/RecruiterLogin';
 import CandidateLogin from './pages/Login/CandidateLogin';
 import CandidateSignUp from './pages/SignUp/Candidate/CandidateSignUp';
@@ -18,13 +18,15 @@ import ProfileSocialLinks from './pages/CandidateProfile/ProfileSocialLinks';
 import Profile from './pages/CandidateProfile/Profile';
 import EmailVerified from './pages/EmailVarify';
 import FindCandidate from './components/DashBoard/FindCandidate/FindCandidate';
-import SignUp3 from './pages/SignUp/SignUp3';
+// import SignUp3 from './pages/SignUp/SignUp3';
 import ProfileManager from './pages/CandidateProfile/ProfileManager';
 
 const App = () => {
-  // State for signup flow
-  const [signupStep, setSignupStep] = useState(1);
-  const [signupData, setSignupData] = useState({
+  // Separate states for candidate and recruiter
+  const [candidateSignupStep, setCandidateSignupStep] = useState(1);
+  const [recruiterSignupStep, setRecruiterSignupStep] = useState(1);
+  
+  const [candidateData, setCandidateData] = useState({
     userId: null,
     fullName: '',
     countryCode: '+91',
@@ -33,38 +35,63 @@ const App = () => {
     password: ''
   });
 
-  // State for profile steps
+  const [recruiterData, setRecruiterData] = useState({
+    userId: null,
+    fullName: '',
+    companyName: '',
+    companyEmail: '',
+    password: ''
+  });
+
+  // Profile states remain same
   const [profileStep, setProfileStep] = useState(1);
   const [profileData, setProfileData] = useState({});
 
-  // Signup handlers
-  const handleNextStep1 = (data) => {
-    setSignupData(prev => ({
+  // Separate handlers for recruiter
+  const handleRecruiterStep1 = (data) => {
+    setRecruiterData(prev => ({
       ...prev,
       ...data,
-      userId: data.userId // Ensure userId is preserved
+      userId: data.userId
     }));
-    setSignupStep(2);
+    setRecruiterSignupStep(2);
   };
 
-  const handleNextStep2 = (data) => {
-    setSignupData(prev => ({
+  const handleRecruiterStep2 = (data) => {
+    setRecruiterData(prev => ({
       ...prev,
       ...data
     }));
-    setSignupStep(3);
+    setRecruiterSignupStep(3);
   };
 
-  const resetSignupFlow = () => {
-    setSignupStep(1);
-    setSignupData({
+  const resetRecruiterFlow = () => {
+    setRecruiterSignupStep(1);
+    setRecruiterData({
       userId: null,
       fullName: '',
-      countryCode: '+91',
-      phoneNumber: '',
-      email: '',
+      companyName: '',
+      companyEmail: '',
       password: ''
     });
+  };
+
+  // Handlers for candidate
+  const handleCandidateStep1 = (data) => {
+    setCandidateData(prev => ({
+      ...prev,
+      ...data,
+      userId: data.userId
+    }));
+    setCandidateSignupStep(2);
+  };
+
+  const handleCandidateStep2 = (data) => {
+    setCandidateData(prev => ({
+      ...prev,
+      ...data
+    }));
+    setCandidateSignupStep(3);
   };
 
   // Profile handlers
@@ -92,45 +119,31 @@ const App = () => {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/phone-Profile" element={<ProfileManager />} />
         <Route path="/verify-email" element={<EmailVerified />} />
-        {/* Update the SignupStep2 route */}
-        <Route 
-          path="/signup2" 
-          element={
-            <SignupStep2 
-              onNext={(data) => {
-                handleNextStep2(data);
-                navigate('/signup3');
-              }} 
-              formData={signupData}
-            />
-          } 
-        />
-        <Route path="/signup3" element={<SignUp3 />} />
-        
+        {/* Remove the standalone signup2 route */}
         
         {/* Candidate Signup Flow */}
         <Route
           path="/candidate-signup"
           element={
             <div className="signup-flow-container">
-              {signupStep === 1 && (
+              {candidateSignupStep === 1 && (
                 <CandidateSignUp 
-                  onNext={handleNextStep1}
-                  initialData={signupData}
+                  onNext={handleCandidateStep1}
+                  initialData={candidateData}
                 />
               )}
-              {signupStep === 2 && signupData.userId ? (
+              {candidateSignupStep === 2 && candidateData.userId ? (
                 <CandidateSignUpStep2
-                  onNext={handleNextStep2}
-                  formData={signupData}
-                  onBack={() => setSignupStep(1)}
+                  onNext={handleCandidateStep2}
+                  formData={candidateData}
+                  onBack={() => setCandidateSignupStep(1)}
                 />
-              ) : signupStep === 2 ? (
+              ) : candidateSignupStep === 2 ? (
                 <Navigate to="/candidate-signup" replace />
               ) : null}
-              {signupStep === 3 && (
+              {candidateSignupStep === 3 && (
                 <SignupStep3 
-                  email={signupData.email}
+                  email={candidateData.email}
                   onComplete={resetSignupFlow}
                 />
               )}
@@ -143,24 +156,25 @@ const App = () => {
           path="/signup"
           element={
             <div className="signup-flow-container">
-              {signupStep === 1 && (
-                <SignupStep1 
-                  onNext={handleNextStep1}
+              {recruiterSignupStep === 1 && (
+                <RecruiterSignupStep1 
+                  onNext={handleRecruiterStep1}
+                  initialData={recruiterData}
                 />
               )}
-              {signupStep === 2 && signupData.userId ? (
-                <SignupStep2
-                  onNext={handleNextStep2}
-                  formData={signupData}
-                  onBack={() => setSignupStep(1)}
+              {recruiterSignupStep === 2 && recruiterData.userId ? (
+                <RecruiterSignupStep2
+                  onNext={handleRecruiterStep2}
+                  formData={recruiterData}
+                  onBack={() => setRecruiterSignupStep(1)}
                 />
-              ) : signupStep === 2 ? (
+              ) : recruiterSignupStep === 2 ? (
                 <Navigate to="/signup" replace />
               ) : null}
-              {signupStep === 3 && (
-                <SignupStep3 
-                  email={signupData.email}
-                  onComplete={resetSignupFlow}
+              {recruiterSignupStep === 3 && (
+                <RecruiterSignupStep3
+                  email={recruiterData.companyEmail}
+                  onComplete={resetRecruiterFlow}
                 />
               )}
             </div>
