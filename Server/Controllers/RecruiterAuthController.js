@@ -78,6 +78,8 @@ export const recruiterSignupStep2 = async (req, res) => {
 export const verifyRecruiterEmail = async (req, res) => {
   try {
     const { token } = req.params;
+
+    console.log('verify email ');
     
     if (!token) {
       return res.status(400).json({ message: 'Verification token is required' });
@@ -118,6 +120,14 @@ export const verifyRecruiterEmail = async (req, res) => {
 
 export const resendVerification = async (req, res) => {
   try {
+
+   console.log('Resend verification request received');
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { email } = req.body;
     const recruiter = await Recruiter.findOne({ companyEmail: email });
 

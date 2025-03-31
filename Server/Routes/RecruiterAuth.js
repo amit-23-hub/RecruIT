@@ -26,7 +26,11 @@ router.post('/signup/step2', [
 router.post('/login', recruiterLogin);
 
 // Email verification routes
-router.get('/verify-email/:token', verifyRecruiterEmail);
+router.get('/verify-email/recruiter/:token', verifyRecruiterEmail);
+
+// router.get('/verify-email/recruiter/:token', (req, res)=>{
+//   res.send("Email verifieddddd") ;
+// });
 
 // Add a route to resend verification email
 router.post('/resend-verification', [

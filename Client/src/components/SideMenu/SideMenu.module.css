@@ -65,12 +65,20 @@
   gap: 10px;
 }
 
+/* Add these styles at the appropriate location in your CSS file */
+
+.hamburger {
+  display: none; /* Hidden by default on desktop */
+}
+
 @media (max-width: 768px) {
   .sideMenu {
     width: 100%;
-    position: fixed;
     height: 60px;
     padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 1000;
     display: flex;
     flex-direction: row;
@@ -83,32 +91,12 @@
   .hamburger {
     display: flex;
     cursor: pointer;
-    padding: 5px;
     order: 1;
   }
 
   .logo {
     margin: 0;
     order: 2;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .profileImage {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    order: 3;
-    cursor: pointer;
-  }
-
-  .menuItem:not(.hamburger):not(.profileItem) {
-    display: none;
-  }
-
-  .bottomIcons {
-    display: none;
   }
 
   .expanded {
@@ -123,8 +111,16 @@
     background: #FFFFFF;
   }
 
+  .menuItem:not(.hamburger) {
+    display: none;
+  }
+
   .expanded .menuItem:not(.hamburger) {
     display: flex;
+  }
+
+  .bottomIcons {
+    display: none;
   }
 
   .expanded .bottomIcons {

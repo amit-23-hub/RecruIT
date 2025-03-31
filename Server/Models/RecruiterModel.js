@@ -14,14 +14,14 @@ const recruiterSchema = new mongoose.Schema({
   },
   companyEmail: { 
     type: String, 
-    required: false, // Changed to false for step 1
+    required: false, 
     unique: true,
-    sparse: true, // Allows multiple null values
+    sparse: true, 
     trim: true,
     lowercase: true,
     validate: {
       validator: function(v) {
-        // Only validate if email is provided
+       
         return !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
       },
       message: props => `${props.value} is not a valid email address!`
@@ -29,7 +29,7 @@ const recruiterSchema = new mongoose.Schema({
   },
   password: { 
     type: String, 
-    required: false, // Changed to false for step 1
+    required: false, 
     select: false
   },
   isVerified: { 

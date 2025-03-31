@@ -117,12 +117,13 @@ const App = () => {
           <Route path="/login" element={<RecruiterLogin />} />
           <Route path="/candidate-login" element={<CandidateLogin />} />
           <Route path="/verify-email" element={<EmailVerified />} />
+          <Route path="/JDdashboard" element={<Dashboard />} />
           <Route path="/" element={<Navigate to="/home" />} />
 
           {/* Protected routes */}
-          <Route path="/dashboard" element={
+          <Route path="/profile" element={
             <ProtectedRoute>
-              <Dashboard />
+              <Profile />
             </ProtectedRoute>
           } />
           <Route path="/findcandidate" element={<FindCandidate />} />
@@ -161,7 +162,7 @@ const App = () => {
 
           {/* Recruiter Signup Flow */}
           <Route
-            path="/signup"
+            path="/recruiter-signup"
             element={
               <div className="signup-flow-container">
                 {recruiterSignupStep === 1 && (

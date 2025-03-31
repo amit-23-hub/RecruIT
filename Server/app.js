@@ -25,6 +25,10 @@ mongoose.connect(process.env.MONGODB_URI)
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/recruiter', recruiterAuthRoutes);
+// app.get('/api/recruiter', (req, res)=>{
+//   res.send("Email verified") ;
+// });
+
 
 // Add candidate profile routes
 app.use('/api/candidate', candidateProfileRoutes);

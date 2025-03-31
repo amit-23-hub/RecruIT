@@ -34,8 +34,8 @@ const Header = () => {
                             </button>
                             {dropdownOpen && (
                                 <div className="dropdown_menu mobile">
-                                    <Link to="/signup/candidate">As Candidate</Link>
-                                    <Link to="/signup/recruiter">As Recruiter</Link>
+                                    <Link to="/candidate-signup">As Candidate</Link>
+                                    <Link to="/recruiter-signup">As Recruiter</Link>
                                 </div>
                             )}
                         </div>
@@ -48,8 +48,8 @@ const Header = () => {
                     </button>
                     {dropdownOpen && (
                         <div className="dropdown_menu">
-                            <Link to="/signup/candidate">As Candidate</Link>
-                            <Link to="/signup/recruiter">As Recruiter</Link>
+                            <Link to="/candidate-signup">As Candidate</Link>
+                            <Link to="/recruiter-signup">As Recruiter</Link>
                         </div>
                     )}
                 </div>

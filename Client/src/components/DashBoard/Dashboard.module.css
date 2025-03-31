@@ -87,3 +87,72 @@
     padding: 40px 8px 8px 8px;
   }
 }
+
+
+.jobInfo {
+  margin: 15px auto;  /* Changed from '15px 0' to '15px auto' */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Added this */
+  max-width: 600px;    /* Added this */
+}
+
+.salaryInfo, .workSystemInfo {
+  margin: 8px 0;
+  padding: 8px 16px;
+  color: #666;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;  /* Added this */
+}
+
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+  .jobInfo {
+    max-width: 100%;
+    padding: 8px;
+  }
+}
+.jobInfo{
+border-radius: 20px;
+  width: fit-content;
+}
+
+.salaryInfo {
+  border: 1px solid #FFA500;
+  color: #FF8C00;
+  border-radius: 8px;
+}
+
+.workSystemInfo {
+  border: 1px solid #4CAF50;
+  color: #2E7D32;
+  border-radius: 8px;
+}
+
+.salaryInfo span, .workSystemInfo span {
+  font-size: 16px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .jobInfo {
+    max-width: 100%;
+    padding: 8px;
+  }
+
+  .salaryInfo, .workSystemInfo {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .salaryInfo, .workSystemInfo {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}

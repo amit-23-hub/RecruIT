@@ -37,6 +37,8 @@ export const sendVerificationEmail = async (email, token, userType) => {
     `,
   };
 
+  console.log('Sending email...', verificationUrl);
+
   try {
     await transporter.sendMail(mailOptions);
     console.log(`Verification email sent to ${email}`);

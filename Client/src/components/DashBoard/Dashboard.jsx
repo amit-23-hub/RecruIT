@@ -8,7 +8,7 @@ import Scroller from "./Scroller/Scroller.jsx";
 import CandidateFinder from "./CandidateFinder/CandidateFinder.jsx";
 import styles from "./Dashboard.module.css";
 import Top from "./TopSec/Top.jsx";
-import img from '../../assets/HomeImg.png';
+import img from '../../assets/HomeImg.png';  // Make sure this image exists
 import dummyData from '../../data/dummyData.json';
 
 const Dashboard = () => {
@@ -18,6 +18,7 @@ const Dashboard = () => {
   const [showCandidates, setShowCandidates] = useState(false);
   const [topCandidates, setTopCandidates] = useState([]);
   const [isScrollerVisible, setIsScrollerVisible] = useState(false);
+  const [showJobInfo, setShowJobInfo] = useState(false);  // Add this state
 
   const handleInputChange = (value) => {
     setInputValue(value);
@@ -28,10 +29,13 @@ const Dashboard = () => {
     if (inputValue.trim()) {
       setJobDetails(dummyData.jobDescriptions[0]);
       setIsScrollerVisible(true);
+      setShowJobInfo(true);  // Add this line
     }
   };
 
-  const handleFindCandidates = () => {
+  const handleFindCandidates = () => {  // Make sure this function is defined
+    if (!jobDetails) return;  // Add safety check
+    
     setShowCandidates(true);
     const fetchedCandidates = dummyData.candidates;
     setTopCandidates(fetchedCandidates);
@@ -62,6 +66,16 @@ const Dashboard = () => {
               onGenerateJD={handleGenerateJD}
               isScrollerVisible={isScrollerVisible}
             />
+            {showJobInfo && (
+              <div className={styles.jobInfo}>
+                <p className={styles.salaryInfo}>
+                  <span role="img" aria-label="money">💰</span> 25-35LPA: Market salary range of 5 years experience
+                </p>
+                <p className={styles.workSystemInfo}>
+                  <span role="img" aria-label="building">🏢</span> 70% companies are offering hybrid system for this role
+                </p>
+              </div>
+            )}
             {!isScrollerVisible && <JobList />}
           </div>
           {isScrollerVisible && jobDetails && (
