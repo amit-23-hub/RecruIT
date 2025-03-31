@@ -1,14 +1,60 @@
 import React from "react";
 import styles from "./WhyRecruit.module.css";
+import { ArrowRight, Feather } from 'lucide-react';
+import card from "/src/assets/card.png";
+import "./blog.css";
 
 const WhyRecruit = () => {
+  const [articles, setArticles] = React.useState([
+    {
+      Heading: "Revolutionizing Patient Care: The Role of AI-Powered Transcription Tools"
+    },
+    {
+      Heading: "How HIPAA Compliance Ensures Security in Digital Healthcare Solutions"
+    },
+    {
+      Heading: "Top 5 Benefits of Integrating AI into Medical Practices."
+    }
+  ]);
+
+  const [isLoading, setIsLoading] = React.useState(false);
+  const blogGridRef = React.useRef(null);
+
+  const loadMoreArticles = () => {
+    setIsLoading(true);
+    // Simulate API call delay
+    setTimeout(() => {
+      setArticles(prev => [...prev, ...articles]);
+      setIsLoading(false);
+    }, 500);
+  };
+
+  const handleScroll = () => {
+    if (isLoading || !blogGridRef.current) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = blogGridRef.current;
+    const scrollEnd = scrollWidth - scrollLeft - clientWidth;
+
+    if (scrollEnd < 100) {
+      loadMoreArticles();
+    }
+  };
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.frame}>
         <div className={styles.container}>
+          <div className={styles.mobileHeaderContainer}>
+            <div className={styles.mobileHeaderContent}>
+              <span className={styles.mobileSubTitle}>Why Recruit?</span>
+              <h1 className={styles.mobileMainTitle}>
+                Smarter Hiring, Stronger Teams
+              </h1>
+            </div>
+          </div>
           <div className={styles.leftSection}></div>
           <div className={styles.rightSection}>
-            <div className={styles.header}>
+            <div className={styles.desktopHeader}>
               <span className={styles.subTitle}>Why Recruit?</span>
               <h1 className={styles.mainTitle}>
                 Smarter Hiring, Stronger Teams
@@ -108,43 +154,6 @@ const WhyRecruit = () => {
                   </svg>
                 </div>
                 <div className={styles.featureText}>
-                  <h3>AI-powered smart matching</h3>
-                  <p>Instant recommendations with a profile match score.</p>
-                </div>
-              </div>
-              <div className={styles.feature}>
-                <div className={styles.icon}>
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M21.5693 24.608C21.9693 24.8 22.4667 25.2973 22.708 25.6986C22.788 26.2586 23.188 24.0946 25.1453 22.812M28.6667 24.0013C28.6667 25.4158 28.1048 26.7723 27.1046 27.7725C26.1044 28.7727 24.7478 29.3346 23.3333 29.3346C21.9188 29.3346 20.5623 28.7727 19.5621 27.7725C18.5619 26.7723 18 25.4158 18 24.0013C18 22.5868 18.5619 21.2303 19.5621 20.2301C20.5623 19.2299 21.9188 18.668 23.3333 18.668C24.7478 18.668 26.1044 19.2299 27.1046 20.2301C28.1048 21.2303 28.6667 22.5868 28.6667 24.0013Z"
-                      stroke="#8A01DA"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M14.6773 18.6681C16.1501 18.6681 17.344 17.4741 17.344 16.0014C17.344 14.5286 16.1501 13.3347 14.6773 13.3347C13.2046 13.3347 12.0107 14.5286 12.0107 16.0014C12.0107 17.4741 13.2046 18.6681 14.6773 18.6681Z"
-                      stroke="#8A01DA"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M10.0107 24.0014C11.2773 22.8014 12.344 22.1347 14.7107 22.0014M26.0107 15.3347C26.0107 14.2681 26.044 11.0014 25.8773 9.66806C25.7773 8.56806 25.4773 7.06806 24.1107 6.2014C23.2773 5.76806 22.4773 5.36806 18.644 5.33473M10.6107 5.33473C7.744 5.33473 5.51067 5.56806 4.41067 6.93473C3.47734 8.21073 3.53201 9.66806 3.44401 10.1347C3.24401 12.6347 3.37734 21.3681 3.37734 22.8347C3.37734 24.3681 3.27734 27.4841 5.37734 28.5347C7.17734 29.4347 9.044 29.3014 15.3773 29.3347M14.4773 2.66806C13.6773 2.66806 13.0107 2.66806 12.344 3.36806C11.7773 3.9014 11.864 4.37206 11.644 5.2014C11.332 6.36806 11.1773 6.98406 11.6107 7.46806C12.008 7.98806 12.676 7.99073 13.2667 7.99206H13.2773C13.844 8.03206 15.748 8.0134 16.3107 7.99206C16.9133 7.96806 17.4 7.93473 17.8107 7.4014C18.1773 6.9254 17.96 6.13206 17.744 5.3014C17.5307 4.48273 17.6107 4.06806 17.044 3.36806C16.244 2.56806 15.2773 2.66806 14.4773 2.66806Z"
-                      stroke="#8A01DA"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div className={styles.featureText}>
                   <h3>End-to-end interview assistance</h3>
                   <p>We handle screening & tech interviews for you.</p>
                 </div>
@@ -176,8 +185,28 @@ const WhyRecruit = () => {
           </div>
         </div>
       </div>
-      {/* New Section */}
-      <div className={styles.ctaSection}>
+      <section className="blog-section">
+        <h2>Stay Updated with the Latest in Healthcare Technology</h2>
+        <div 
+          className="blog-grid"
+          ref={blogGridRef}
+          onScroll={handleScroll}
+        >
+          {articles.map((item, index) => (
+            <div key={`${item.Heading}-${index}`} className="blog-card">
+              <div className="blog-content">
+                <img src={card} alt="Blog" />
+                <h3 className="blog-title">{item.Heading}</h3>
+                <a href="#" className="read-more">
+                  Read Full Article
+                  <ArrowRight size={20} />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+       <div className={styles.ctaSection}>
         <h2>Ready to Experience </h2>
         <h2>the Fastest Hiring & Job Matching?</h2>
         <button className={styles.ctaButton}>

@@ -5,7 +5,7 @@ import {
   recruiterSignupStep2,
   recruiterLogin,
   verifyRecruiterEmail,
-  resendVerification  // Add this import
+  resendVerification
 } from '../Controllers/RecruiterAuthController.js';
 
 const router = express.Router();
@@ -27,6 +27,10 @@ router.post('/login', recruiterLogin);
 
 // Email verification routes
 router.get('/verify-email/:token', verifyRecruiterEmail);
-router.post('/resend-verification', resendVerification);
+
+// Add a route to resend verification email
+router.post('/resend-verification', [
+  body('email').isEmail().withMessage('Valid email is required')
+], resendVerification);
 
 export default router;

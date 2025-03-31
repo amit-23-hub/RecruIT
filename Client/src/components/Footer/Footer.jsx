@@ -1,23 +1,28 @@
 import React from "react";
 import styles from "./Footer.module.css";
-
 import Logo from "../../Common/logo.jsx";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className={styles.footerContainer}>
-     
       <div className={styles.topRow}>
-       
         <div className={styles.brand}>
           <div className={styles.logo}>
             <Logo />
           </div>
         </div>
 
-    
+        <div className={styles.navigationLinks}>
+          <Link className={styles.navigationLinks} to="/about">About</Link>
+          <Link className={styles.navigationLinks} to="/blogs">Blogs</Link>
+          <Link className={styles.navigationLinks} to="/for-recruiters">For Recruiters</Link>
+          <Link className={styles.navigationLinks} to="/for-candidates">For Candidates</Link>
+        </div>
+
         <div className={styles.socialMedia}>
-          <div className={styles.socialIcon}>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+            {/* LinkedIn SVG - keeping existing SVG */}
             <svg
               width="21"
               height="22"
@@ -44,8 +49,9 @@ const Footer = () => {
                 </clipPath>
               </defs>
             </svg>
-          </div>
-          <div className={styles.socialIcon}>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+            {/* Instagram SVG - keeping existing SVG */}
             <svg
               width="21"
               height="22"
@@ -82,8 +88,9 @@ const Footer = () => {
                 </clipPath>
               </defs>
             </svg>
-          </div>
-          <div className={styles.socialIcon}>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+            {/* Facebook SVG - keeping existing SVG */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="21"
@@ -110,17 +117,21 @@ const Footer = () => {
                 </clipPath>
               </defs>
             </svg>
-          </div>
+          </a>
         </div>
       </div>
 
-      {/* Divider Line */}
       <div className={styles.divider}></div>
-
-      {/* Copyright Text */}
       <div className={styles.copyright}>© Copyright 2024 - RecruIT</div>
     </div>
   );
 };
 
 export default Footer;
+
+
+
+
+
+
+

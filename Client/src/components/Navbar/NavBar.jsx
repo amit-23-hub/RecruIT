@@ -1,71 +1,61 @@
-import React, { useState } from 'react';
-import styles from './Navbar.module.css';
-import Logo from '../../Common/logo';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import "./Navbar.css";
+import Logo from '../../assets/logo.png';
+import { Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
-const Navbar = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
+const Header = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+ 
+    return (
+        <div className="header">
+            <nav className="navbar">
+                <div className="companylogo">
+                    <Link to="/"><img src={Logo} alt="Logo" /></Link>
+                </div>
 
-  const handleSignup = (userType) => {
-    if (userType === 'candidate') {
-      navigate('/signup/candidate');
-    } else if (userType === 'recruiter') {
-      navigate('/signup/recruiter');
-    }
-    setShowDropdown(false);
-    setMobileMenuOpen(false); // Close mobile menu after selection
-  };
+                {/* Hamburger Icon */}
+                <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+                    {menuOpen ? <FaTimes /> : <FaBars />}
+                </div>
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-    setShowDropdown(false); // Close dropdown when mobile menu toggles
-  };
-
-  return (
-    <nav className={styles.navbar}>
-      <div className={styles.navbarContainer}>
-        <div className={styles.navContent}>
-          <div className={styles.logo}>
-            <Logo />
-          </div>
-          
-          <div className={`${styles.menu} ${mobileMenuOpen ? styles.mobileMenuActive : ''}`}>
-            <a href="/solutions" onClick={() => setMobileMenuOpen(false)}>Solutions</a>
-            <a href="/pricing" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
-            <a href="/faqs" onClick={() => setMobileMenuOpen(false)}>FAQs</a>
-          </div>
+                {/* Responsive Menu */}
+                <div className={`menu ${menuOpen ? "active" : ""}`}>
+                    <ul>
+                        <li><Link to="/about">For Recruiters</Link></li>
+                        <li><Link to="/product">For Candidates</Link></li>
+                        <li><Link to="/blog">Blogs</Link></li>
+                      
+                        <div className="mobile_signup_container">
+                            <button className="mobile_button" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                                Sign Up <FaChevronDown className={`dropdown_icon ${dropdownOpen ? 'open' : ''}`} />
+                            </button>
+                            {dropdownOpen && (
+                                <div className="dropdown_menu mobile">
+                                    <Link to="/signup/candidate">As Candidate</Link>
+                                    <Link to="/signup/recruiter">As Recruiter</Link>
+                                </div>
+                            )}
+                        </div>
+                    </ul>
+                </div>
+              
+                <div className="desktop_signup_container">
+                    <button className="desktop_button" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                        Sign Up <FaChevronDown className={`dropdown_icon ${dropdownOpen ? 'open' : ''}`} />
+                    </button>
+                    {dropdownOpen && (
+                        <div className="dropdown_menu">
+                            <Link to="/signup/candidate">As Candidate</Link>
+                            <Link to="/signup/recruiter">As Recruiter</Link>
+                        </div>
+                    )}
+                </div>
+            </nav>
         </div>
-        
-        <div className={`${styles.signupContainer} ${mobileMenuOpen ? styles.mobileMenuActive : ''}`}>
-          <button 
-            className={styles.signupButton}
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
-            Sign Up
-          </button>
-          
-          {showDropdown && (
-            <div className={styles.dropdown}>
-              <button onClick={() => handleSignup('candidate')}>As Candidate</button>
-              <button onClick={() => handleSignup('recruiter')}>As Recruiter</button>
-            </div>
-          )}
-        </div>
-        
-        <button 
-          className={`${styles.mobileMenuButton} ${mobileMenuOpen ? styles.open : ''}`}
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </nav>
-  );
+    );
 };
 
-export default Navbar;
+export default Header;

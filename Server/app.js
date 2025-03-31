@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoutes from './Routes/UserAuth.js';
 import recruiterAuthRoutes from './Routes/RecruiterAuth.js';
+import candidateProfileRoutes from './Routes/CandidateProfileRoutes.js';
 
 dotenv.config();
 
@@ -24,6 +25,9 @@ mongoose.connect(process.env.MONGODB_URI)
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/recruiter', recruiterAuthRoutes);
+
+// Add candidate profile routes
+app.use('/api/candidate', candidateProfileRoutes);
 
 // Error handling middleware with more detailed errors
 app.use((err, req, res, next) => {

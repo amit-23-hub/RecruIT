@@ -1,17 +1,18 @@
-/* StatsWrapper.module.css */
 .statsWrapper {
-  width: 90%;
-  max-width: 1191px;
-  margin: 40px auto;
-  padding: 20px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 70px 0;
+  justify-content: center;
 }
 
 .statContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  width: 100%;
+  width: 90%;
+  height: 100%;
 }
 
 .statItem {
@@ -19,70 +20,69 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 100%;
+  width: 23%;
 }
 
 .statValue {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 2.2rem;
-  line-height: 1.4;
+  font-size: 48.7px;
+  line-height: 73px;
   color: #313131;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .statDescription {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 27px;
   color: #313131;
 }
 
-/* Media Queries */
-@media (min-width: 576px) {
-  .statValue {
-    font-size: 2.5rem;
-  }
+.verticalLine {
+  width: 0px;
+  height: 99.5px;
+  border: 2px solid #6F6F6F;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
+  .statsWrapper {
+    /* padding: 40px 24px; */
+    justify-content: center;
+  }
+
   .statContainer {
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 
   .statItem {
-    width: 45%;
-  }
-
-  .verticalLine {
-    display: block;
-    height: 80px;
-    border: 1px solid #6F6F6F;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
   }
 
   .statValue {
-    font-size: 3rem;
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    text-align: center;
   }
 
   .statDescription {
-    font-size: 1.1rem;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    width: 100%;
   }
 }
 
-@media (min-width: 1024px) {
-  .statContainer {
-    flex-direction: row;
-    justify-content: space-between;
+  .verticalLine {
+    display: none;
   }
-
-  .statItem {
-    width: auto;
-  }
-
-  .statValue {
-    font-size: 3.2rem;
-  }
-}

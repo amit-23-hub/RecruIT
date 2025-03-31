@@ -1,0 +1,311 @@
+.mobileContainer {
+  padding: 24px 16px;
+  background: linear-gradient(135deg, #F7EAFF 0%, #F0E6FF 100%);
+}
+
+.contentSection {
+  margin-bottom: 24px;
+}
+
+.headerContent {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.headerBox {
+  background: white;
+  padding: 20px;
+  border-radius: 0 24px 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.imageSection {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  margin-top: 0;
+}
+
+.profileImage {
+  width: 100%;
+  height: auto;
+  border-radius: 0 0 0 24px;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.headerContent {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.mobileContainer {
+  position: relative;
+  padding: 0;
+  background: linear-gradient(135deg, #F7EAFF 0%, #F0E6FF 100%);
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.leftBackground {
+  position: absolute;
+  left: -35%;
+  top: -40%;
+  width: 100%;
+  height: 120%;
+  z-index: 0;
+  opacity: 3.15;
+}
+
+.leftBackground img {
+  width: 100%;
+  height: 100%;
+  transform: rotate(94deg);
+  object-fit: cover;
+  object-position: left center;
+}
+
+.contentSection {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.contentSection {
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+
+.headerBox {
+  background: white;
+  padding: 16px;
+  margin-top: 5rem;
+  border-radius: 20px 90px 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.headerBox h1 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.headerBox h2 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.actionSection {
+  padding: 0 16px;
+  margin-top: 20px;
+}
+
+.employerCard, .candidateCard {
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 16px;
+}
+
+.cardHeader h3 {
+  font-size: 16px;
+}
+
+.cardHeader p {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.matchScore {
+  padding: 6px 12px;
+}
+
+.matchScore span:first-child {
+  font-size: 18px;
+}
+
+.backgroundPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%238A01DA' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: -999;
+}
+
+.contentSection {
+  position: relative;
+  z-index: 1;
+}
+
+.contentSection {
+  margin-bottom: 24px;
+}
+
+.headerContent {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.imageSection {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  margin-top: 0;
+}
+
+.profileImage {
+  width: 100%;
+  height: auto;
+  border-radius: 0 0 20px 90px;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cornerDecoration {
+  position: absolute;
+  top: 6rem;
+  right: -10px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.cornerDecoration svg {
+  width: 60px;
+  height: 60px;
+}
+
+.imageCorner {
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.imageCorner svg {
+  width: 60px;
+  height: 60px;
+}
+
+.matchScore {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: white;
+  border-radius: 20px;
+  padding: 8px 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.matchScore span:first-child {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2E007A;
+  display: block;
+}
+
+.matchScore span:last-child {
+  font-size: 10px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-top: 2px;
+}
+
+.actionSection {
+  padding: 0 16px;
+  margin-top: 24px;
+}
+
+.employerCard {
+  background: #8A01DA;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.employerCard h3, .employerCard p {
+  color: white;
+}
+
+.employerCard .arrowIcon {
+  color: white;
+}
+
+.candidateCard {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.cardHeader h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #2E007A;
+  margin: 0;
+}
+
+.arrowIcon {
+  width: 24px;
+  height: 24px;
+  color: #2E007A;
+}
+
+.employerCard p, .candidateCard p {
+  font-size: 14px;
+  line-height: 20px;
+  color: #666;
+  margin: 0;
+}
+
+@media screen and (min-width: 769px) {
+  .mobileContainer {
+    display: none;
+  }
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  height: 32px;
+  width: auto;
+}
+
+.userIcon {
+  width: 32px;
+  height: 32px;
+  background: #F7EAFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}

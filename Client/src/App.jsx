@@ -20,6 +20,7 @@ import EmailVerified from './pages/EmailVarify';
 import FindCandidate from './components/DashBoard/FindCandidate/FindCandidate';
 // import SignUp3 from './pages/SignUp/SignUp3';
 import ProfileManager from './pages/CandidateProfile/ProfileManager';
+import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
   // Separate states for candidate and recruiter
@@ -108,123 +109,149 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<RecruiterLogin />} />
-        <Route path="/candidate-login" element={<CandidateLogin />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/findcandidate" element={<FindCandidate />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/phone-Profile" element={<ProfileManager />} />
-        <Route path="/verify-email" element={<EmailVerified />} />
-        {/* Remove the standalone signup2 route */}
-        
-        {/* Candidate Signup Flow */}
-        <Route
-          path="/candidate-signup"
-          element={
-            <div className="signup-flow-container">
-              {candidateSignupStep === 1 && (
-                <CandidateSignUp 
-                  onNext={handleCandidateStep1}
-                  initialData={candidateData}
-                />
-              )}
-              {candidateSignupStep === 2 && candidateData.userId ? (
-                <CandidateSignUpStep2
-                  onNext={handleCandidateStep2}
-                  formData={candidateData}
-                  onBack={() => setCandidateSignupStep(1)}
-                />
-              ) : candidateSignupStep === 2 ? (
-                <Navigate to="/candidate-signup" replace />
-              ) : null}
-              {candidateSignupStep === 3 && (
-                <SignupStep3 
-                  email={candidateData.email}
-                  onComplete={resetSignupFlow}
-                />
-              )}
-            </div>
-          }
-        />
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<RecruiterLogin />} />
+          <Route path="/candidate-login" element={<CandidateLogin />} />
+          <Route path="/verify-email" element={<EmailVerified />} />
+          <Route path="/" element={<Navigate to="/home" />} />
 
-        {/* Recruiter Signup Flow */}
-        <Route
-          path="/signup"
-          element={
-            <div className="signup-flow-container">
-              {recruiterSignupStep === 1 && (
-                <RecruiterSignupStep1 
-                  onNext={handleRecruiterStep1}
-                  initialData={recruiterData}
-                />
-              )}
-              {recruiterSignupStep === 2 && recruiterData.userId ? (
-                <RecruiterSignupStep2
-                  onNext={handleRecruiterStep2}
-                  formData={recruiterData}
-                  onBack={() => setRecruiterSignupStep(1)}
-                />
-              ) : recruiterSignupStep === 2 ? (
-                <Navigate to="/signup" replace />
-              ) : null}
-              {recruiterSignupStep === 3 && (
-                <RecruiterSignupStep3
-                  email={recruiterData.companyEmail}
-                  onComplete={resetRecruiterFlow}
-                />
-              )}
-            </div>
-          }
-        />
+          {/* Protected routes */}
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/findcandidate" element={<FindCandidate />} />
+          <Route path="/profile" element={<Profile />} />
+          {/* Remove the standalone signup2 route */}
+          
+          {/* Candidate Signup Flow */}
+          <Route
+            path="/candidate-signup"
+            element={
+              <div className="signup-flow-container">
+                {candidateSignupStep === 1 && (
+                  <CandidateSignUp 
+                    onNext={handleCandidateStep1}
+                    initialData={candidateData}
+                  />
+                )}
+                {candidateSignupStep === 2 && candidateData.userId ? (
+                  <CandidateSignUpStep2
+                    onNext={handleCandidateStep2}
+                    formData={candidateData}
+                    onBack={() => setCandidateSignupStep(1)}
+                  />
+                ) : candidateSignupStep === 2 ? (
+                  <Navigate to="/candidate-signup" replace />
+                ) : null}
+                {candidateSignupStep === 3 && (
+                  <SignupStep3 
+                    email={candidateData.email}
+                    onComplete={resetSignupFlow}
+                  />
+                )}
+              </div>
+            }
+          />
 
-        {/* Profile Completion Flow */}
-        <Route
-          path="/profile-steps"
-          element={
-            <div className="profile-steps-container">
-              {profileStep === 1 && (
-                <ProfileBasicDetails 
-                  onNext={handleNextProfileStep} 
-                  formData={profileData} 
-                />
-              )}
-              {profileStep === 2 && (
-                <ProfileResumeSkills 
-                  onNext={handleNextProfileStep}
-                  onPrevious={handlePreviousProfileStep}
-                  formData={profileData}
-                />
-              )}
-              {profileStep === 3 && (
-                <ProfileEducationCertification
-                  onNext={handleNextProfileStep}
-                  onPrevious={handlePreviousProfileStep}
-                  formData={profileData}
-                />
-              )}
-              {profileStep === 4 && (
-                <ProfileIdentityVerification
-                  onNext={handleNextProfileStep}
-                  onPrevious={handlePreviousProfileStep}
-                  formData={profileData}
-                />
-              )}
-              {profileStep === 5 && (
-                <ProfileSocialLinks
-                  onPrevious={handlePreviousProfileStep}
-                  formData={profileData}
-                />
-              )}
-            </div>
-          }
-        />
-      </Routes>
-    </Router>
+          {/* Recruiter Signup Flow */}
+          <Route
+            path="/signup"
+            element={
+              <div className="signup-flow-container">
+                {recruiterSignupStep === 1 && (
+                  <RecruiterSignupStep1 
+                    onNext={handleRecruiterStep1}
+                    initialData={recruiterData}
+                  />
+                )}
+                {recruiterSignupStep === 2 && recruiterData.userId ? (
+                  <RecruiterSignupStep2
+                    onNext={handleRecruiterStep2}
+                    formData={recruiterData}
+                    onBack={() => setRecruiterSignupStep(1)}
+                  />
+                ) : recruiterSignupStep === 2 ? (
+                  <Navigate to="/signup" replace />
+                ) : null}
+                {recruiterSignupStep === 3 && (
+                  <RecruiterSignupStep3
+                    email={recruiterData.companyEmail}
+                    onComplete={resetRecruiterFlow}
+                  />
+                )}
+              </div>
+            }
+          />
+
+          {/* Profile Completion Flow */}
+          <Route
+            path="/profile-steps"
+            element={
+              <div className="profile-steps-container">
+                {profileStep === 1 && (
+                  <ProfileBasicDetails 
+                    onNext={handleNextProfileStep} 
+                    formData={profileData} 
+                  />
+                )}
+                {profileStep === 2 && (
+                  <ProfileResumeSkills 
+                    onNext={handleNextProfileStep}
+                    onPrevious={handlePreviousProfileStep}
+                    formData={profileData}
+                  />
+                )}
+                {profileStep === 3 && (
+                  <ProfileEducationCertification
+                    onNext={handleNextProfileStep}
+                    onPrevious={handlePreviousProfileStep}
+                    formData={profileData}
+                  />
+                )}
+                {profileStep === 4 && (
+                  <ProfileIdentityVerification
+                    onNext={handleNextProfileStep}
+                    onPrevious={handlePreviousProfileStep}
+                    formData={profileData}
+                  />
+                )}
+                {profileStep === 5 && (
+                  <ProfileSocialLinks
+                    onPrevious={handlePreviousProfileStep}
+                    formData={profileData}
+                  />
+                )}
+              </div>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
+};
+
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  const { user, isLoading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && !user) {
+      navigate('/login');
+    }
+  }, [user, isLoading, navigate]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return user ? children : null;
 };
 
 export default App;

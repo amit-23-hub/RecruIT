@@ -4,19 +4,19 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // Use 'gmail' service for automatic configuration
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
   },
-  // For local development only (remove in production)
   tls: {
     rejectUnauthorized: false
   }
 });
 
-export const sendVerificationEmail = async (email, token) => {
-  const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${token}`;
+export const sendVerificationEmail = async (email, token, userType) => {
+  // Include userType in the verification URL
+  const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${userType}/${token}`;
   
   const mailOptions = {
     from: `"${process.env.EMAIL_SENDER_NAME}" <${process.env.EMAIL_USER}>`,
@@ -32,6 +32,7 @@ export const sendVerificationEmail = async (email, token) => {
           Verify Email
         </a>
         <p>If you didn't request this, please ignore this email.</p>
+        <p>This link will expire in 24 hours.</p>
       </div>
     `,
   };
