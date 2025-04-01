@@ -3,18 +3,23 @@ import mongoose from 'mongoose';
 const candidateProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',  // References your existing UserModel
+    ref: 'User',
     required: true,
     unique: true
   },
-  // Basic Information
+  // Step 1: Basic Information
   basicInfo: {
-    title: String,
+    title: { type: String, required: true },
     bio: {
       type: String,
       maxlength: 500
     },
-    currentLocation: String,
+    currentLocation: {
+      country: String,
+      state: String,
+      city: String,
+      pinCode: String
+    },
     availability: {
       type: String,
       enum: ['Immediate', '15 Days', '30 Days', '60 Days', 'Not Available']
@@ -24,7 +29,13 @@ const candidateProfileSchema = new mongoose.Schema({
       months: Number
     }
   },
-  // Skills & Expertise
+  // Step 2: Resume & Skills
+  resume: {
+    url: String,
+    name: String,
+    size: String,
+    lastUpdated: Date
+  },
   skills: [{
     name: {
       type: String,
@@ -32,100 +43,68 @@ const candidateProfileSchema = new mongoose.Schema({
     },
     level: {
       type: String,
-      enum: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-      required: true
-    },
-    yearsOfExperience: Number
+      enum: ['Beginner', 'Intermediate', 'Advanced', 'Expert']
+    }
   }],
-  // Education
+  // Step 3: Education
   education: [{
-    institution: {
+    schoolName: {
       type: String,
       required: true
     },
-    degree: {
+    degreeType: {
       type: String,
       required: true
     },
-    field: String,
     startDate: Date,
     endDate: Date,
     current: {
-      type: Boolean,
-      default: false
-    },
-    grade: String,
-    activities: [String]
-  }],
-  // Work Experience
-  workExperience: [{
-    company: {
-      type: String,
-      required: true
-    },
-    position: {
-      type: String,
-      required: true
-    },
-    location: String,
-    startDate: Date,
-    endDate: Date,
-    current: {
-      type: Boolean,
-      default: false
-    },
-    description: String,
-    achievements: [String],
-    technologies: [String]
-  }],
-  // Job Preferences
-  preferences: {
-    expectedSalary: {
-      min: Number,
-      max: Number,
-      currency: {
-        type: String,
-        default: 'INR'
-      }
-    },
-    preferredLocations: [String],
-    jobTypes: [{
-      type: String,
-      enum: ['Full-time', 'Part-time', 'Contract', 'Remote', 'Hybrid']
-    }],
-    industries: [String],
-    willingToRelocate: {
       type: Boolean,
       default: false
     }
+  }],
+  // Step 4: Identity Verification
+  identityVerification: {
+    proofType: {
+      type: String,
+      enum: ['Aadhar Card', 'Passport', "Driver's License"]
+    },
+    proofDocument: {
+      url: String,
+      verified: {
+        type: Boolean,
+        default: false
+      }
+    },
+    fullAddress: String,
+    verificationConsent: {
+      type: Boolean,
+      default: false
+    },
+    verificationStatus: {
+      type: String,
+      enum: ['Pending', 'Verified', 'Rejected'],
+      default: 'Pending'
+    }
   },
-  // Social & Portfolio
+  // Step 5: Social Links
   socialLinks: {
     linkedin: String,
     github: String,
     portfolio: String,
-    twitter: String
-  },
-  // Resume
-  resume: {
-    url: String,
-    lastUpdated: Date
+    personalWebsite: String
   },
   // Profile Completion Tracking
   completionStatus: {
     basicInfo: { type: Boolean, default: false },
-    skills: { type: Boolean, default: false },
+    resumeSkills: { type: Boolean, default: false },
     education: { type: Boolean, default: false },
-    workExperience: { type: Boolean, default: false },
-    preferences: { type: Boolean, default: false }
+    identityVerification: { type: Boolean, default: false },
+    socialLinks: { type: Boolean, default: false }
   },
   completionPercentage: {
     type: Number,
     default: 0
-  },
-  isProfilePublic: {
-    type: Boolean,
-    default: true
   }
 }, {
   timestamps: true
@@ -133,7 +112,7 @@ const candidateProfileSchema = new mongoose.Schema({
 
 // Calculate completion percentage
 candidateProfileSchema.methods.calculateCompletionPercentage = function() {
-  const steps = ['basicInfo', 'skills', 'education', 'workExperience', 'preferences'];
+  const steps = ['basicInfo', 'resumeSkills', 'education', 'identityVerification', 'socialLinks'];
   const completedSteps = steps.filter(step => this.completionStatus[step]).length;
   this.completionPercentage = (completedSteps / steps.length) * 100;
   return this.completionPercentage;
@@ -141,20 +120,35 @@ candidateProfileSchema.methods.calculateCompletionPercentage = function() {
 
 // Pre-save middleware to update completion status
 candidateProfileSchema.pre('save', function(next) {
-  // Update basicInfo completion
-  this.completionStatus.basicInfo = !!(this.basicInfo && this.basicInfo.title && this.basicInfo.bio);
+  // Basic Info completion
+  this.completionStatus.basicInfo = !!(
+    this.basicInfo && 
+    this.basicInfo.title && 
+    this.basicInfo.currentLocation
+  );
   
-  // Update skills completion
-  this.completionStatus.skills = this.skills.length > 0;
+  // Resume & Skills completion
+  this.completionStatus.resumeSkills = !!(
+    this.skills.length > 0
+  );
   
-  // Update education completion
-  this.completionStatus.education = this.education.length > 0;
+  // Education completion
+  this.completionStatus.education = !!(
+    this.education.length > 0
+  );
   
-  // Update workExperience completion
-  this.completionStatus.workExperience = this.workExperience.length > 0;
+  // Identity verification completion
+  this.completionStatus.identityVerification = !!(
+    this.identityVerification &&
+    this.identityVerification.proofDocument &&
+    this.identityVerification.verificationStatus === 'Verified'
+  );
   
-  // Update preferences completion
-  this.completionStatus.preferences = !!(this.preferences && this.preferences.expectedSalary);
+  // Social links completion
+  this.completionStatus.socialLinks = !!(
+    this.socialLinks &&
+    (this.socialLinks.linkedin || this.socialLinks.github || this.socialLinks.portfolio)
+  );
   
   // Calculate overall completion percentage
   this.calculateCompletionPercentage();

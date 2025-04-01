@@ -36,10 +36,13 @@ const RecruiterLogin = () => {
       setError(error.response?.data?.message || "Login failed");
     }
   };
+  
 
   return (
     <div className={styles.loginContainer}>
-      <RLeftPortion />
+      <div className={styles.leftPortionWrapper}>
+        <RLeftPortion />
+      </div>
       
       <div className={styles.loginRight}>
         <div className={styles.loginForm}>
@@ -75,7 +78,9 @@ const RecruiterLogin = () => {
               Forgot password?
             </a>
 
-            <button type="submit" className={styles.loginButton}>Login</button>
+            <button type="submit" className={styles.loginButton}>
+              Login
+            </button>
           </form>
 
           <div className={styles.divider}>
@@ -83,7 +88,7 @@ const RecruiterLogin = () => {
           </div>
 
           <div className={styles.socialLogin}>
-            {/* Social login buttons remain the same */}
+            {/* Social login buttons */}
           </div>
 
           <p className={styles.signupPrompt}>

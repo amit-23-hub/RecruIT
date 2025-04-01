@@ -1,36 +1,32 @@
 .loginContainer {
   position: relative;
   width: 100%;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #ffffff;
-    font-family: var(--font-poppins);
-    overflow: hidden; 
-  }
-  
-  .loginRight {
-    position: absolute;
-    right: 30px;
-    width: 719px;
-    height: 768px;
-    background: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .loginForm {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    width: 466px;
-  }
-  
+  min-height: 100vh;
+  display: flex;
+  background: #ffffff;
+  font-family: var(--font-poppins);
+  overflow-x: hidden;
+}
+
+.loginRight {
+  position: relative;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.loginForm {
+  width: 100%;
+  max-width: 30rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
   .loginHeader {
     font-family: 'Poppins', sans-serif;
     font-size: 24px;
@@ -168,29 +164,49 @@
 
 /* Responsive Adjustments */
 @media screen and (max-width: 1024px) {
-  .loginContainer {
-    flex-direction: column;
+  .loginRight {
+    width: 50%;
   }
   
-  .loginLeft, .loginRight {
-    width: 100%;
-    height: auto;
-    min-height: 50vh;
+  .loginForm {
+    padding: 1.5rem;
+  }
+  
+  .loginHeader {
+    font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .loginContainer {
+    flex-direction: column;
+  }
+  
+  .loginRight {
+    width: 100%;
+    height: 65vh;
+    padding: 1rem;
+    align-items: center;
+  }
+  
   .loginForm {
     padding: 1rem;
-    max-width: 100%;
   }
   
   .loginHeader {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 
 @media screen and (max-width: 480px) {
+  .loginRight {
+    padding: 0.75rem;
+  }
+  
+  .loginForm {
+    padding: 0.75rem;
+  }
+  
   .formGroup input {
     height: 3rem;
   }
@@ -220,4 +236,29 @@
   color: #dc2626;
   font-size: 0.875rem;
   text-align: center;
+}
+
+.leftPortionWrapper {
+  width: 45%;
+  height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+  .leftPortionWrapper {
+    display: none;  /* Hide left portion on mobile */
+  }
+
+  .loginRight {
+    width: 100%;  /* Make right portion full width */
+    padding: 1rem;
+  }
+
+  .loginForm {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .loginContainer {
+    justify-content: center;  /* Center the content */
+  }
 }

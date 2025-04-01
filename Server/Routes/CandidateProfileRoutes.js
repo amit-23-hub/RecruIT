@@ -1,33 +1,78 @@
 import express from 'express';
+import multer from 'multer';
 import { body } from 'express-validator';
-import { authenticateToken } from '../Middleware/auth.js';
+import { authenticateToken, isCandidate } from '../Middleware/auth.js';
 import {
+  getProfile,
   updateBasicInfo,
-  updateSkills,
-  getProfile
+  updateResumeSkills,
+  updateEducation,
+  updateIdentityVerification,
+  updateSocialLinks
 } from '../Controllers/CandidateProfileController.js';
+import { upload } from '../utils/fileUpload.js';
 
 const router = express.Router();
 
 // Get profile
-router.get('/profile', authenticateToken, getProfile);
+router.get('/profile', authenticateToken, isCandidate, getProfile);
 
-// Update basic info
-router.put('/basic-info', authenticateToken, [
-  body('title').trim().notEmpty().withMessage('Title is required'),
-  body('bio').trim().isLength({ max: 500 }).withMessage('Bio must not exceed 500 characters'),
-  body('currentLocation').trim().notEmpty().withMessage('Current location is required'),
-  body('availability').isIn(['Immediate', '15 Days', '30 Days', '60 Days', 'Not Available'])
-    .withMessage('Invalid availability status'),
-  body('experience').isObject().withMessage('Experience must be an object')
-], updateBasicInfo);
+// Step 1: Basic Info
+router.put('/basic-info', 
+  authenticateToken, 
+  isCandidate,
+  [
+    body('title').trim().notEmpty(),
+    body('currentLocation').isObject(),
+    body('availability').isIn(['Immediate', '15 Days', '30 Days', '60 Days', 'Not Available'])
+  ], 
+  updateBasicInfo
+);
 
-// Update skills
-router.put('/skills', authenticateToken, [
-  body('skills').isArray().withMessage('Skills must be an array'),
-  body('skills.*.name').trim().notEmpty().withMessage('Skill name is required'),
-  body('skills.*.level').isIn(['Beginner', 'Intermediate', 'Advanced', 'Expert'])
-    .withMessage('Invalid skill level')
-], updateSkills);
+// Step 2: Resume & Skills
+router.put('/resume-skills',
+  authenticateToken,
+  isCandidate,
+  upload.single('resume'),
+  updateResumeSkills
+);
+
+// Step 3: Education
+router.put('/education',
+  authenticateToken,
+  isCandidate,
+  [
+    body('education').isArray(),
+    body('education.*.schoolName').notEmpty(),
+    body('education.*.degreeType').notEmpty()
+  ],
+  updateEducation
+);
+
+// Step 4: Identity Verification
+router.put('/identity-verification',
+  authenticateToken,
+  isCandidate,
+  upload.single('proofDocument'),
+  [
+    body('proofType').isIn(['Aadhar Card', 'Passport', "Driver's License"]),
+    body('fullAddress').notEmpty(),
+    body('verificationConsent').isBoolean()
+  ],
+  updateIdentityVerification
+);
+
+// Step 5: Social Links
+router.put('/social-links',
+  authenticateToken,
+  isCandidate,
+  [
+    body('linkedin').optional().isURL(),
+    body('github').optional().isURL(),
+    body('portfolio').optional().isURL(),
+    body('personalWebsite').optional().isURL()
+  ],
+  updateSocialLinks
+);
 
 export default router;

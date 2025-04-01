@@ -35,7 +35,9 @@ const CandidateLogin = () => {
 
   return (
     <div className={styles.loginContainer}>
-      <CLeftPortion />
+      <div className={styles.leftPortionWrapper}>
+        <CLeftPortion />
+      </div>
       
       <div className={styles.loginRight}>
         <div className={styles.loginForm}>
