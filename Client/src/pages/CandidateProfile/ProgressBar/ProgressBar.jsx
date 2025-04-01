@@ -45,10 +45,10 @@ const ProgressBar = ({ currentStep, onStepChange, isMobileExpanded, setIsMobileE
       {/* Mobile View */}
       <div className={styles.mobileView}>
         <div className={styles.mobileHeader} onClick={toggleMobileView}>
-          <span>{steps.find(step => step.id === currentStep)?.label}</span>
+          {/* <span>{steps.find(step => step.id === currentStep)?.label}</span>
           <span className={styles.dropdownArrow}>
             {isMobileExpanded ? '▲' : '▼'}
-          </span>
+          </span> */}
         </div>
         {isMobileExpanded && (
           <ul className={styles.mobileSteps}>
