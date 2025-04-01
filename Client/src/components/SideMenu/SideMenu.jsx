@@ -11,8 +11,6 @@ const SideMenu = () => {
   return (
     <div
       className={`${styles.sideMenu} ${expanded ? styles.expanded : ""}`}
-      onMouseEnter={toggleMenu}
-      onMouseLeave={toggleMenu}
     >
       {/* Add hamburger menu */}
       <div className={`${styles.menuItem} ${styles.hamburger}`} onClick={toggleMenu}>

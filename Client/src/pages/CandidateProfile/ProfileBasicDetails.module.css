@@ -23,7 +23,7 @@
 .profileGrid {
   display: flex;
   gap: 1.25rem; /* 20px to rem */
-  width: 100%;
+  width: 90% ; 
 }
 
 .progressBarContainer {
@@ -83,7 +83,7 @@
 }
 
 .detailSection input {
-  width: 100%; /* Changed from 50% to 100% */
+  width: 80%; /* Changed from 50% to 100% */
   padding: 0.625rem; /* 10px to rem */
   border: 1px solid #ccc;
   border-radius: 0.25rem; /* 4px to rem */
@@ -91,7 +91,7 @@
 }
 
 .detailSection select {
-  width: 100%; /* Changed from 110% to 100% */
+  width: 90%; /* Changed from 110% to 100% */
   padding: 0.625rem;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
@@ -99,7 +99,7 @@
 }
 
 .phoneInput {
-  width: 100%;
+  width: 83%;
   display: flex;
   align-items: center;
 }
@@ -110,6 +110,7 @@
   border: 1px solid #ccc;
   border-radius: 0.25rem 0 0 0.25rem;
   font-size: 0.875rem; /* Added to match input font size */
+  margin-right: 1rem;
 }
 
 .phoneInput input {
@@ -148,16 +149,23 @@
 .row {
   display: flex;
   gap: 1.875rem; /* 30px to rem */
-  width: 100%;
+  width: 83.5%;
 }
 
 .row .detailSection {
-  flex: 1; /* Changed from flex: 0 0 calc(25% - 15px) to flex: 1 */
-  width: 50%;
+  flex: 1;
+  width: 94%;
+}
+
+/* Add this new rule to target inputs and selects within row's detailSection */
+/* .row .detailSection input, */
+.row .detailSection select {
+  width: 100%; /* Match the width of the pin input */
 }
 
 .detailSection .pin {
-  width: 100%; /* Changed from 220px to 100% */
+  width: 92%;
+  padding: none;
 }
 
 /* Add media queries for better responsiveness */
@@ -221,10 +229,16 @@
   }
 
   .detailSection select,
-  .detailSection input,
-  .phoneInput {
+  .detailSection input {
     width: 100%;
     background-color: white;
+  }
+  .phoneInput {
+    width: 108%;
+    background-color: white;
+  }
+  .row  .detailSection{
+    width: 108%;
   }
   .actionButtons {
     position: fixed;
