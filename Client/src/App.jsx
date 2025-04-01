@@ -21,6 +21,7 @@ import FindCandidate from './components/DashBoard/FindCandidate/FindCandidate';
 // import SignUp3 from './pages/SignUp/SignUp3';
 import ProfileManager from './pages/CandidateProfile/ProfileManager';
 import { AuthProvider } from './context/AuthContext';
+import { useEffect } from 'react';
 
 const App = () => {
   // Separate states for candidate and recruiter
@@ -108,6 +109,18 @@ const App = () => {
     setProfileStep(prev => prev - 1);
   };
 
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   return (
     <AuthProvider>
       <Router>
@@ -118,6 +131,7 @@ const App = () => {
           <Route path="/candidate-login" element={<CandidateLogin />} />
           <Route path="/verify-email" element={<EmailVerified />} />
           <Route path="/JDdashboard" element={<Dashboard />} />
+          <Route path="/profile-manager" element={<ProfileManager />} />
           <Route path="/" element={<Navigate to="/home" />} />
 
           {/* Protected routes */}
@@ -194,41 +208,45 @@ const App = () => {
           <Route
             path="/profile-steps"
             element={
-              <div className="profile-steps-container">
-                {profileStep === 1 && (
-                  <ProfileBasicDetails 
-                    onNext={handleNextProfileStep} 
-                    formData={profileData} 
-                  />
-                )}
-                {profileStep === 2 && (
-                  <ProfileResumeSkills 
-                    onNext={handleNextProfileStep}
-                    onPrevious={handlePreviousProfileStep}
-                    formData={profileData}
-                  />
-                )}
-                {profileStep === 3 && (
-                  <ProfileEducationCertification
-                    onNext={handleNextProfileStep}
-                    onPrevious={handlePreviousProfileStep}
-                    formData={profileData}
-                  />
-                )}
-                {profileStep === 4 && (
-                  <ProfileIdentityVerification
-                    onNext={handleNextProfileStep}
-                    onPrevious={handlePreviousProfileStep}
-                    formData={profileData}
-                  />
-                )}
-                {profileStep === 5 && (
-                  <ProfileSocialLinks
-                    onPrevious={handlePreviousProfileStep}
-                    formData={profileData}
-                  />
-                )}
-              </div>
+              isMobileView ? (
+                <ProfileManager />
+              ) : (
+                <div className="profile-steps-container">
+                  {profileStep === 1 && (
+                    <ProfileBasicDetails 
+                      onNext={handleNextProfileStep} 
+                      formData={profileData} 
+                    />
+                  )}
+                  {profileStep === 2 && (
+                    <ProfileResumeSkills 
+                      onNext={handleNextProfileStep}
+                      onPrevious={handlePreviousProfileStep}
+                      formData={profileData}
+                    />
+                  )}
+                  {profileStep === 3 && (
+                    <ProfileEducationCertification
+                      onNext={handleNextProfileStep}
+                      onPrevious={handlePreviousProfileStep}
+                      formData={profileData}
+                    />
+                  )}
+                  {profileStep === 4 && (
+                    <ProfileIdentityVerification
+                      onNext={handleNextProfileStep}
+                      onPrevious={handlePreviousProfileStep}
+                      formData={profileData}
+                    />
+                  )}
+                  {profileStep === 5 && (
+                    <ProfileSocialLinks
+                      onPrevious={handlePreviousProfileStep}
+                      formData={profileData}
+                    />
+                  )}
+                </div>
+              )
             }
           />
         </Routes>

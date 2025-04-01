@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProfileBasicDetail from './ProfileBasicDetails';
 import ProfileResume from './ProfileResumeSkills';
 import ProfileEducation from './ProfileEducationCertification';
@@ -7,20 +8,26 @@ import ProfileSocialLinks from './ProfileSocialLinks';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import styles from './ProfileManager.module.css';
 
-const ProfileManagerMobile = () => {
+const ProfileManager = () => {
   const [isMobileView, setIsMobileView] = useState(false);
   const [expandedDropdown, setExpandedDropdown] = useState(null);
+  const navigate = useNavigate();
 
-  // Check screen size on mount and resize
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobileView(window.innerWidth <= 768);
+      const isMobile = window.innerWidth <= 768;
+      setIsMobileView(isMobile);
+      
+      // Redirect to profile-steps if on desktop
+      if (!isMobile && window.location.pathname === '/profile-manager') {
+        navigate('/profile-steps');
+      }
     };
     
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
     return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
+  }, [navigate]);
 
   const dropdowns = [
     { id: 1, title: 'Personal Info', component: ProfileBasicDetail },
@@ -34,36 +41,46 @@ const ProfileManagerMobile = () => {
     setExpandedDropdown(expandedDropdown === id ? null : id);
   };
 
-  // Don't render anything if not mobile view
-  if (!isMobileView) {
-    return null;
+  if (isMobileView) {
+    return (
+      <div className={styles.mobileContainer}>
+        <h1 className={styles.mobileHeader}>My Profile</h1>
+        {dropdowns.map((dropdown) => (
+          <div key={dropdown.id} className={styles.dropdownContainer}>
+            <button 
+              className={styles.dropdownHeader}
+              onClick={() => toggleDropdown(dropdown.id)}
+              aria-expanded={expandedDropdown === dropdown.id}
+            >
+              <span>{dropdown.title}</span>
+              {expandedDropdown === dropdown.id ? <FiChevronUp /> : <FiChevronDown />}
+            </button>
+            
+            {expandedDropdown === dropdown.id && (
+              <div className={styles.dropdownContent}>
+                <dropdown.component />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    );
   }
 
-  // Mobile View - Only render when screen is <= 768px
+  // Desktop View
   return (
-    <div className={styles.mobileContainer}>
-      <h1 className={styles.mobileHeader}>My Profile</h1>
-      
-      {dropdowns.map((dropdown) => (
-        <div key={dropdown.id} className={styles.dropdownContainer}>
-          <button 
-            className={styles.dropdownHeader}
-            onClick={() => toggleDropdown(dropdown.id)}
-            aria-expanded={expandedDropdown === dropdown.id}
-          >
-            <span>{dropdown.title}</span>
-            {expandedDropdown === dropdown.id ? <FiChevronUp /> : <FiChevronDown />}
-          </button>
-          
-          {expandedDropdown === dropdown.id && (
-            <div className={styles.dropdownContent}>
-              <dropdown.component />
-            </div>
-          )}
-        </div>
-      ))}
+    <div className={styles.desktopContainer}>
+      <h1>My Profile</h1>
+      <div className={styles.componentsGrid}>
+        {dropdowns.map((dropdown) => (
+          <div key={dropdown.id} className={styles.componentSection}>
+            <h2>{dropdown.title}</h2>
+            <dropdown.component />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default ProfileManagerMobile;
+export default ProfileManager;
