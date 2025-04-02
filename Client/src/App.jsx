@@ -23,6 +23,8 @@ import ProfileManager from './pages/CandidateProfile/ProfileManager';
 import { AuthProvider } from './context/AuthContext';
 import { useEffect } from 'react';
 import HomePage from './pages/HomePage/HomePage';
+import TalentLanding from './pages/RecruiterFeatures/Landing/TalentLanding';
+import RecruiterFeatures from './pages/RecruiterFeatures/RecruiterFeatures';
 
 const App = () => {
   // Separate states for candidate and recruiter
@@ -131,6 +133,7 @@ const App = () => {
           <Route path="/recruiter-login" element={<RecruiterLogin />} />
           <Route path="/candidate-login" element={<CandidateLogin />} />
           <Route path="/email-verified" element={<EmailVerified />} />
+          <Route path="/recruiterfeature" element={<RecruiterFeatures/>} />
           <Route path="/" element={<Navigate to="/home" />} />
 
           {/* Protected Candidate Routes */}
