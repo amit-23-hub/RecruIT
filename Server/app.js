@@ -10,7 +10,7 @@ import path from 'path';
 dotenv.config();     
 
 const app = express();
-const PORT = process.env.Backend_URL.split(':').pop() || 5003;
+const PORT = process.env.PORT || 5001;  // Fix: Use proper port number
 
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
@@ -83,13 +83,13 @@ app.use('*', (req, res) => {
   });
 });
 
-// Start server only if this file is run directly
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
-    console.log(`Server running on ${process.env.Backend_URL}`);
-    console.log(`Frontend URL: ${FRONTEND_URL}`);
-  });
-}
+// Remove the server start code from here since it's in server.js
+// if (process.env.NODE_ENV !== 'test') {
+//   app.listen(PORT, () => {
+//     console.log(`Server running on ${process.env.Backend_URL}`);
+//     console.log(`Frontend URL: ${FRONTEND_URL}`);
+//   });
+// }
 
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));

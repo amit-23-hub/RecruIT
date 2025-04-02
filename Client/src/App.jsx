@@ -22,6 +22,7 @@ import FindCandidate from './components/DashBoard/FindCandidate/FindCandidate';
 import ProfileManager from './pages/CandidateProfile/ProfileManager';
 import { AuthProvider } from './context/AuthContext';
 import { useEffect } from 'react';
+import HomePage from './pages/HomePage/HomePage';
 
 const App = () => {
   // Separate states for candidate and recruiter
@@ -127,12 +128,34 @@ const App = () => {
         <Routes>
           {/* Public routes */}
           <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<RecruiterLogin />} />
+          <Route path="/recruiter-login" element={<RecruiterLogin />} />
           <Route path="/candidate-login" element={<CandidateLogin />} />
-          <Route path="/verify-email" element={<EmailVerified />} />
-          <Route path="/JDdashboard" element={<Dashboard />} />
-          <Route path="/profile-manager" element={<ProfileManager />} />
+          <Route path="/email-verified" element={<EmailVerified />} />
           <Route path="/" element={<Navigate to="/home" />} />
+
+          {/* Protected Candidate Routes */}
+          <Route path="/candidate-dashboard/*" element={
+            <ProtectedRoute allowedUserType="candidate">
+              <Home />
+            </ProtectedRoute>
+          } />
+          <Route path="/candidate-profile/*" element={
+            <ProtectedRoute allowedUserType="candidate">
+              <Profile />
+            </ProtectedRoute>
+          } />
+
+          {/* Protected Recruiter Routes */}
+          <Route path="/recruiter-dashboard/*" element={
+            <ProtectedRoute allowedUserType="recruiter">
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/find-candidate" element={
+            <ProtectedRoute allowedUserType="recruiter">
+              <FindCandidate />
+            </ProtectedRoute>
+          } />
 
           {/* Protected routes */}
           <Route path="/profile" element={
@@ -256,21 +279,22 @@ const App = () => {
 };
 
 // Protected Route component
-const ProtectedRoute = ({ children }) => {
-  const { user, isLoading } = useAuth();
+const ProtectedRoute = ({ children, allowedUserType }) => {
+  const token = localStorage.getItem('token');
+  const userType = localStorage.getItem('userType');
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && !user) {
-      navigate('/login');
+    if (!token) {
+      navigate(userType === 'recruiter' ? '/recruiter-login' : '/candidate-login');
+    } else if (allowedUserType && userType !== allowedUserType) {
+      // Redirect if user type doesn't match the allowed type
+      navigate(`/${userType === 'recruiter' ? 'recruiter' : 'candidate'}-dashboard`);
     }
-  }, [user, isLoading, navigate]);
+  }, [token, userType, navigate, allowedUserType]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  return user ? children : null;
+  if (!token) return null;
+  return children;
 };
 
 export default App;

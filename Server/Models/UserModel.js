@@ -71,11 +71,11 @@ const userSchema = new mongoose.Schema({
 });
 
 // Indexes
-userSchema.index({ phoneNumber: 1 }, { unique: true });
-userSchema.index({ email: 1 }, { 
-  unique: true,
-  partialFilterExpression: { email: { $exists: true } } 
-});
+// userSchema.index({ phoneNumber: 1 }, { unique: true });
+// userSchema.index({ email: 1 }, { 
+//   unique: true,
+//   partialFilterExpression: { email: { $exists: true } } 
+// });
 
 // Password hashing middleware
 userSchema.pre('save', async function(next) {

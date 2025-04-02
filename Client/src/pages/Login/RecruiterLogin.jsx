@@ -28,12 +28,22 @@ const RecruiterLogin = () => {
         password: formData.password
       });
       
+      if (response.data.needsVerification) {
+        setError("Please verify your email before logging in");
+        // Add a resend verification option here
+        return;
+      }
+
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userType", "recruiter");
       localStorage.setItem("userData", JSON.stringify(response.data.recruiter));
       navigate("/dashboard");
     } catch (error) {
-      setError(error.response?.data?.message || "Login failed");
+      if (error.response?.status === 403) {
+        setError("Please verify your email before logging in");
+      } else {
+        setError(error.response?.data?.message || "Login failed");
+      }
     }
   };
   

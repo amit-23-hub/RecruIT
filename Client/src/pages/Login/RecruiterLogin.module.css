@@ -262,3 +262,21 @@
     justify-content: center;  /* Center the content */
   }
 }
+
+.resendButton {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid #2d86ba;
+  color: #2d86ba;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.resendButton:hover {
+  background-color: #2d86ba;
+  color: white;
+}
