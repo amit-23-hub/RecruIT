@@ -134,7 +134,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="/home" />} />
 
           {/* Protected Candidate Routes */}
-          <Route path="/candidate-dashboard/*" element={
+          <Route path="/*" element={
             <ProtectedRoute allowedUserType="candidate">
               <Home />
             </ProtectedRoute>
@@ -151,16 +151,57 @@ const App = () => {
               <Dashboard />
             </ProtectedRoute>
           } />
+          <Route path="/recruiter-profile/*" element={
+            <ProtectedRoute allowedUserType="recruiter">
+              <Profile />
+            </ProtectedRoute>
+          } />
           <Route path="/find-candidate" element={
             <ProtectedRoute allowedUserType="recruiter">
               <FindCandidate />
             </ProtectedRoute>
           } />
 
-          {/* Protected routes */}
-          <Route path="/profile" element={
+          {/* Profile Steps Route */}
+          <Route path="/profile-steps/*" element={
             <ProtectedRoute>
-              <Profile />
+              {isMobileView ? <ProfileManager /> : (
+                <div className="profile-steps-container">
+                  {profileStep === 1 && (
+                    <ProfileBasicDetails 
+                      onNext={handleNextProfileStep} 
+                      formData={profileData} 
+                    />
+                  )}
+                  {profileStep === 2 && (
+                    <ProfileResumeSkills 
+                      onNext={handleNextProfileStep}
+                      onPrevious={handlePreviousProfileStep}
+                      formData={profileData}
+                    />
+                  )}
+                  {profileStep === 3 && (
+                    <ProfileEducationCertification
+                      onNext={handleNextProfileStep}
+                      onPrevious={handlePreviousProfileStep}
+                      formData={profileData}
+                    />
+                  )}
+                  {profileStep === 4 && (
+                    <ProfileIdentityVerification
+                      onNext={handleNextProfileStep}
+                      onPrevious={handlePreviousProfileStep}
+                      formData={profileData}
+                    />
+                  )}
+                  {profileStep === 5 && (
+                    <ProfileSocialLinks
+                      onPrevious={handlePreviousProfileStep}
+                      formData={profileData}
+                    />
+                  )}
+                </div>
+              )}
             </ProtectedRoute>
           } />
           <Route path="/findcandidate" element={<FindCandidate />} />
