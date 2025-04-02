@@ -3,52 +3,67 @@ import styles from './ProfileResumeSkills.module.css';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import ProgressBar from './ProgressBar/ProgressBar';
 import { FiEdit2 } from 'react-icons/fi';
+import { getCandidateProfile, updateResumeSkills } from '../../services/candidateProfileService';
 
 const ProfileResumeSkills = ({ onNext }) => {
   const currentStep = 2;
   const [isMobile, setIsMobile] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false); // State for edit mode
-  const [skills, setSkills] = useState([]); // State for skills
-  const [newSkill, setNewSkill] = useState(''); // State for new skill input
-  const [resume, setResume] = useState(null); // State for resume
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [skills, setSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState('');
+  const [resume, setResume] = useState(null);
+  const [resumePreview, setResumePreview] = useState(null);
 
-  // Mock data for skills
-  const mockSkills = [
-    'CSS',
-    'HTML',
-    'Responsive Design',
-    'JavaScript Frameworks',
-    'Version Control',
-    'Testing and Debugging',
-    'Cross-Browser Development',
-    'Search Engine Optimization (SEO)',
-    'User Experience',
-    'RESTful APIs',
-  ];
-
-  // Fetch skills and resume data from the backend (mock API call)
   useEffect(() => {
     const fetchData = async () => {
-      // Simulate fetching skills and resume data
-      setSkills(mockSkills);
-      setResume({
-        name: 'Sameer_resume.pdf',
-        size: '212kb',
-        url: 'https://www.asm.com/',
-      });
+      try {
+        setIsLoading(true);
+        const profile = await getCandidateProfile();
+        if (profile.skills) {
+          setSkills(profile.skills.map(skill => skill.name));
+        }
+        if (profile.resume) {
+          setResumePreview({
+            name: profile.resume.name,
+            size: profile.resume.size,
+            url: profile.resume.url
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchData();
   }, []);
 
   const handleEditClick = () => {
-    setIsEditMode(true); // Enable edit mode
+    setIsEditMode(true);
   };
 
-  const handleSaveClick = () => {
-    setIsEditMode(false); // Disable edit mode
-    // Save updated data to the backend
-    console.log('Saving data:', { skills, resume });
-    onNext(); // Proceed to the next step
+  const handleSaveClick = async () => {
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      if (resume) {
+        formData.append('resume', resume);
+      }
+      formData.append('skills', JSON.stringify(
+        skills.map(skill => ({ name: skill, level: 'Intermediate' }))
+      ));
+
+      await updateResumeSkills(formData);
+      setIsEditMode(false);
+      if (typeof onNext === 'function') {
+        onNext();
+      }
+    } catch (error) {
+      console.error('Error updating resume and skills:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleResumeChange = (e) => {

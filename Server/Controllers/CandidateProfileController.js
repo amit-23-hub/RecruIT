@@ -39,7 +39,7 @@ export const updateBasicInfo = async (req, res) => {
 // Update resume and skills
 export const updateResumeSkills = async (req, res) => {
   try {
-    const { skills } = req.body;
+    const { skills: skillsInput } = req.body;
     const resumeFile = req.file;
     let profile = await CandidateProfile.findOne({ user: req.user.id });
     
@@ -47,6 +47,7 @@ export const updateResumeSkills = async (req, res) => {
       profile = new CandidateProfile({ user: req.user.id });
     }
 
+    // Handle resume file upload
     if (resumeFile) {
       const fileInfo = await uploadToLocal(resumeFile);
       profile.resume = {
@@ -57,13 +58,53 @@ export const updateResumeSkills = async (req, res) => {
       };
     }
     
-    if (skills) {
-      profile.skills = skills;
+    // Handle skills update
+    if (skillsInput) {
+      let skillsArray;
+      
+      // Parse if skills is a JSON string
+      if (typeof skillsInput === 'string') {
+        try {
+          skillsArray = JSON.parse(skillsInput);
+        } catch (e) {
+          return res.status(400).json({ 
+            error: 'Invalid skills format - must be valid JSON array',
+            example: '[{"name":"JavaScript","level":"Intermediate"}]'
+          });
+        }
+      } else if (Array.isArray(skillsInput)) {
+        skillsArray = skillsInput;
+      } else {
+        return res.status(400).json({ 
+          error: 'Skills must be an array',
+          example: '[{"name":"JavaScript","level":"Intermediate"}]'
+        });
+      }
+      
+      // Validate each skill object
+      const isValidSkills = skillsArray.every(skill => 
+        skill && 
+        typeof skill === 'object' && 
+        skill.name && 
+        typeof skill.name === 'string' &&
+        skill.level && 
+        ['Beginner', 'Intermediate', 'Advanced', 'Expert'].includes(skill.level)
+      );
+      
+      if (!isValidSkills) {
+        return res.status(400).json({ 
+          error: 'Each skill must have a name (string) and level (Beginner/Intermediate/Advanced/Expert)',
+          example: '[{"name":"JavaScript","level":"Intermediate"}]'
+        });
+      }
+      
+      profile.skills = skillsArray;
     }
     
     await profile.save();
     res.json(profile);
   } catch (error) {
+    console.error('Error updating resume/skills:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -76,6 +117,11 @@ export const updateEducation = async (req, res) => {
     
     if (!profile) {
       profile = new CandidateProfile({ user: req.user.id });
+    }
+    
+    // Validate education array
+    if (!Array.isArray(education)) {
+      return res.status(400).json({ error: 'Education must be an array' });
     }
     
     profile.education = education;

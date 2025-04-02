@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import styles from './Profile.module.css';
 import data from '../../assets/dummyData/Profile.json';
 import SideMenu from '../../components/SideMenu/SideMenu';
-import ProfileHeader from '../../components/CandidateProfile/ProfileHeader';
-import ProfileRight from '../../components/CandidateProfile/ProfileRight';
-import ShortBio from '../../components/CandidateProfile/ShortBio';
-import SkillsAndPreferences from '../../components/CandidateProfile/SkillsAndPreferences';
+import ProfileHeader from '../../components/PhoneCandidateProfile/ProfileHeader';
+import ProfileRight from '../../components/PhoneCandidateProfile/ProfileRight';
+import ShortBio from '../../components/PhoneCandidateProfile/ShortBio';
+import SkillsAndPreferences from '../../components/PhoneCandidateProfile/SkillsAndPreferences';
 
 const Profile = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);

@@ -3,10 +3,56 @@ import React, { useState, useEffect } from 'react';
 import styles from './ProfileSocialLinks.module.css';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import ProgressBar from './ProgressBar/ProgressBar';
+import { getCandidateProfile, updateSocialLinks } from '../../services/candidateProfileService';
 
-const ProfileSocialLinks = () => {
+const ProfileSocialLinks = ({ onNext }) => {
   const currentStep = 5;
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [socialLinks, setSocialLinks] = useState({
+    linkedin: '',
+    github: '',
+    portfolio: '',
+    personalWebsite: ''
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const profile = await getCandidateProfile();
+        if (profile.socialLinks) {
+          setSocialLinks(profile.socialLinks);
+        }
+      } catch (error) {
+        console.error('Error fetching social links:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      await updateSocialLinks(socialLinks);
+      onNext();
+    } catch (error) {
+      console.error('Error updating social links:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSocialLinks(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   useEffect(() => {
     const handleResize = () => {

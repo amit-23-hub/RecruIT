@@ -2,49 +2,62 @@ import React, { useState, useEffect } from 'react';
 import styles from './ProfileEducationCertification.module.css';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import ProgressBar from './ProgressBar/ProgressBar';
+import { getCandidateProfile, updateEducation } from '../../services/candidateProfileService';
 
 const ProfileEducationCertification = ({ onNext }) => {
   const currentStep = 3;
   const [isMobile, setIsMobile] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false); // State for edit mode
-  const [educationDetails, setEducationDetails] = useState([]); // State for education details
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [educationDetails, setEducationDetails] = useState([]);
   const [newEducation, setNewEducation] = useState({
     schoolName: '',
     degreeType: '',
     startDate: '',
     endDate: '',
-  }); // State for new education input
+    current: false
+  });
 
-  // Mock data for education details
-  const mockEducationDetails = [
-    {
-      id: 1,
-      schoolName: 'ABC University, Gurgaon',
-      degreeType: 'Bachelors of Computer Science',
-      startDate: '2022',
-      endDate: '2025',
-    },
-  ];
-
-  // Fetch education details from the backend (mock API call)
   useEffect(() => {
-    const fetchEducationDetails = async () => {
-      // Simulate fetching education details
-      setEducationDetails(mockEducationDetails);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const profile = await getCandidateProfile();
+        if (profile.education) {
+          setEducationDetails(profile.education);
+        }
+      } catch (error) {
+        console.error('Error fetching education:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
-    fetchEducationDetails();
+    fetchData();
   }, []);
+
+  const handleSaveClick = async () => {
+    try {
+      setIsLoading(true);
+      await updateEducation(educationDetails);
+      setIsEditMode(false);
+      onNext();
+    } catch (error) {
+      console.error('Error updating education:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleEditClick = () => {
     setIsEditMode(true); // Enable edit mode
   };
 
-  const handleSaveClick = () => {
-    setIsEditMode(false); // Disable edit mode
-    // Save updated data to the backend
-    console.log('Saving data:', educationDetails);
-    onNext(); // Proceed to the next step
-  };
+  // const handleSaveClick = () => {
+  //   setIsEditMode(false); // Disable edit mode
+  //   // Save updated data to the backend
+  //   console.log('Saving data:', educationDetails);
+  //   onNext(); // Proceed to the next step
+  // };
 
   const handleAddEducation = () => {
     if (

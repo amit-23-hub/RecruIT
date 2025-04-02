@@ -3,10 +3,12 @@ import styles from "./ProfileBasicDetails.module.css";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import img from "../../assets/HomeImg.png";
+import { getCandidateProfile, updateBasicInfo } from "../../services/candidateProfileService";
 
 const ProfileBasicDetails = ({ onNext }) => {
   const currentStep = 1;
-  const [isEditMode, setIsEditMode] = useState(false); // State for edit mode
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     title: "",
@@ -19,11 +21,26 @@ const ProfileBasicDetails = ({ onNext }) => {
     pinCode: "",
   });
 
-  // Fetch user data from the backend (mock API call)
   useEffect(() => {
     const fetchUserData = async () => {
-      const userData = await fetchUserDataFromBackend(); // Call mock function
-      setFormData(userData);
+      try {
+        setIsLoading(true);
+        const profile = await getCandidateProfile();
+        if (profile.basicInfo) {
+          setFormData({
+            title: profile.basicInfo.title || "",
+            shortBio: profile.basicInfo.bio || "",
+            country: profile.basicInfo.currentLocation?.country || "",
+            state: profile.basicInfo.currentLocation?.state || "",
+            city: profile.basicInfo.currentLocation?.city || "",
+            pinCode: profile.basicInfo.currentLocation?.pinCode || "",
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchUserData();
   }, []);
@@ -34,17 +51,35 @@ const ProfileBasicDetails = ({ onNext }) => {
   };
 
   const handleEditClick = () => {
-    setIsEditMode(true); // Enable edit mode
+    setIsEditMode(true);
   };
 
-  const handleSaveClick = () => {
-    setIsEditMode(false); // Disable edit mode
-    saveUserDataToBackend(formData); // Call mock function to save data
-    onNext(); // Proceed to the next step
+  const handleSaveClick = async () => {
+    try {
+      setIsLoading(true);
+      const basicInfoData = {
+        title: formData.title,
+        bio: formData.shortBio,
+        currentLocation: {
+          country: formData.country,
+          state: formData.state,
+          city: formData.city,
+          pinCode: formData.pinCode,
+        },
+      };
+      await updateBasicInfo(basicInfoData);
+      setIsEditMode(false);
+      onNext();
+    } catch (error) {
+      console.error("Error updating basic info:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const isFormValid = () => {
-    return Object.values(formData).every((value) => value.trim() !== "");
+    const requiredFields = ["title", "shortBio", "country", "state", "city"];
+    return requiredFields.every((field) => formData[field]?.trim());
   };
 
   // Dummy data for dropdowns (replace with actual data)
@@ -254,27 +289,6 @@ const ProfileBasicDetails = ({ onNext }) => {
       </div>
     </div>
   );
-};
-
-// Mock function to fetch user data from the backend
-const fetchUserDataFromBackend = async () => {
-  return {
-    fullName: "John Doe",
-    title: "Software Engineer",
-    shortBio: "I am a passionate developer.",
-    email: "john.doe@example.com",
-    phone: "1234567890",
-    country: "India",
-    state: "Maharashtra",
-    city: "Mumbai",
-    pinCode: "400001",
-  };
-};
-
-// Mock function to save user data to the backend
-const saveUserDataToBackend = async (data) => {
-  console.log("Saving data to backend:", data);
-  // Replace with actual API call
 };
 
 export default ProfileBasicDetails;

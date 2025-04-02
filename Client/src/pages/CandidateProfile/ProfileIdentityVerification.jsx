@@ -2,14 +2,57 @@ import React, { useState, useEffect } from 'react';
 import styles from './ProfileIdentityVerification.module.css';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import ProgressBar from './ProgressBar/ProgressBar';
+import { getCandidateProfile, updateIdentityVerification } from '../../services/candidateProfileService';
 
 const ProfileIdentityVerification = ({ onNext }) => {
   const currentStep = 4;
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [proofType, setProofType] = useState('');
   const [proofFile, setProofFile] = useState(null);
   const [fullAddress, setFullAddress] = useState('');
   const [isVerified, setIsVerified] = useState(false);
+  const [verificationStatus, setVerificationStatus] = useState('Pending');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const profile = await getCandidateProfile();
+        if (profile.identityVerification) {
+          setProofType(profile.identityVerification.proofType || '');
+          setFullAddress(profile.identityVerification.fullAddress || '');
+          setIsVerified(profile.identityVerification.verificationConsent || false);
+          setVerificationStatus(profile.identityVerification.verificationStatus || 'Pending');
+        }
+      } catch (error) {
+        console.error('Error fetching verification details:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleVerify = async () => {
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      if (proofFile) {
+        formData.append('proofDocument', proofFile);
+      }
+      formData.append('proofType', proofType);
+      formData.append('fullAddress', fullAddress);
+      formData.append('verificationConsent', isVerified);
+
+      await updateIdentityVerification(formData);
+      onNext();
+    } catch (error) {
+      console.error('Error updating verification:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleProofTypeChange = (e) => {
     setProofType(e.target.value);
@@ -19,15 +62,6 @@ const ProfileIdentityVerification = ({ onNext }) => {
     const file = e.target.files[0];
     if (file) {
       setProofFile(file);
-    }
-  };
-
-  const handleVerify = () => {
-    if (proofType && proofFile && fullAddress && isVerified) {
-      console.log('Verifying:', { proofType, proofFile, fullAddress });
-      onNext();
-    } else {
-      alert('Please fill all fields and agree to the verification.');
     }
   };
 

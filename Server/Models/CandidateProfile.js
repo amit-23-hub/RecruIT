@@ -43,7 +43,8 @@ const candidateProfileSchema = new mongoose.Schema({
     },
     level: {
       type: String,
-      enum: ['Beginner', 'Intermediate', 'Advanced', 'Expert']
+      enum: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+      required: true
     }
   }],
   // Step 3: Education
@@ -129,12 +130,12 @@ candidateProfileSchema.pre('save', function(next) {
   
   // Resume & Skills completion
   this.completionStatus.resumeSkills = !!(
-    this.skills.length > 0
+    this.skills && this.skills.length > 0
   );
   
   // Education completion
   this.completionStatus.education = !!(
-    this.education.length > 0
+    this.education && this.education.length > 0
   );
   
   // Identity verification completion
