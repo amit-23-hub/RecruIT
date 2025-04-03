@@ -1,6 +1,8 @@
 .container {
     width: 100%;
-    max-height: 100vh;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: 100vh;
     background: radial-gradient(circle at center,
         white 0%,
         white 15%,
@@ -13,9 +15,9 @@
 
 
 .content {
-  max-width: 1400px;
+  max-width: 100vh;
   margin: 0 auto;
-  padding: 2rem 4rem;
+  /* padding: 2rem 4rem; */
   position: relative;
   padding-top: calc(64px + 2rem); /* Navbar height + desired spacing */
 }
@@ -81,7 +83,7 @@
   gap: 1rem;
   margin-top: -5rem;
   padding: 0 2rem;
-  max-width: 1400px;
+  max-width: 100vh;
   /* margin: 3rem auto 0; */
 }
 
@@ -270,5 +272,40 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 2rem;
+  }
+  
+  .content {
+    max-width: 100%;
+    padding-top: calc(64px + 1rem);
+  }
+
+  .mainContent h1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .mainContent h1 {
+    font-size: 2.2rem;
+  }
+
+  .mainContent p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .getStartedButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
   }
 }
