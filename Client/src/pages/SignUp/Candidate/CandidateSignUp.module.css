@@ -8,16 +8,23 @@
   overflow-x: hidden;
 }
 
-
+.signupLeft {
+  position: relative;
+  width: 50%;
+  height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .signupRight {
   position: relative;
   width: 50%;
-  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .signupForm {
@@ -31,9 +38,10 @@
 .createAccount {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: #363636;
   margin: 0;
+  line-height: 1.3;
 }
 
 .subtitle {
@@ -41,6 +49,7 @@
   font-size: 1rem;
   color: #969696;
   margin: 0;
+  line-height: 1.5;
 }
 
 .error {
@@ -51,7 +60,7 @@
 
 .progressContainer {
   width: 100%;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
 }
 
 .progressBar {
@@ -64,7 +73,7 @@
 
 .progress {
   height: 100%;
-  background: blue;
+  background: #2e007a;
   border-radius: 4.875rem;
   transition: width 0.3s ease;
 }
@@ -80,14 +89,14 @@
 .formInput {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
   width: 100%;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
   width: 100%;
 }
 
@@ -100,18 +109,25 @@
 
 .formGroup input {
   width: 100%;
-  height: 2.75rem;
+  height: 3rem;
   padding: 0 1rem;
   border: 1px solid #e8ebec;
   border-radius: 0.5rem;
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
-  color: #969696;
+  color: #363636;
+  transition: all 0.3s ease;
 }
 
 .formGroup input:focus {
   outline: none;
   border-color: #2e007a;
+  box-shadow: 0 0 0 2px rgba(46, 0, 122, 0.1);
+}
+
+.formGroup input::placeholder {
+  color: #969696;
+  opacity: 1;
 }
 
 .phoneInputGroup {
@@ -137,23 +153,23 @@
 
 .countryCodeInput input,
 .phoneNumberInput input {
-  height: 2.75rem;
+  height: 3rem;
   padding: 0 1rem;
   border: 1px solid #e8ebec;
   border-radius: 0.5rem;
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
-  color: #969696;
+  color: #363636;
 }
 
 .buttonContainer {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
   width: 100%;
 }
 
 .nextButton {
   width: 100%;
-  height: 2.75rem;
+  height: 3rem;
   background: #2e007a;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
@@ -162,16 +178,24 @@
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .nextButton:hover {
   background: #3a0098;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nextButton:active {
+  transform: translateY(0);
 }
 
 .nextButton:disabled {
   background: #cccccc;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .loginLink {
@@ -180,32 +204,56 @@
   color: #969696;
   text-align: center;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .loginLink a {
   color: #2d86ba;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.loginLink a:hover {
+  color: #1a6a9c;
+  text-decoration: underline;
 }
 
 /* Responsive Adjustments */
 @media screen and (max-width: 1024px) {
-  .signupContainer {
-    flex-direction: column;
+  .signupRight {
+    padding: 1.5rem;
   }
   
-  .signupLeft, .signupRight {
-    width: 100%;
-    height: auto;
-    min-height: 50vh;
+  .signupForm {
+    max-width: 26rem;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .signupForm {
+  .signupContainer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 1rem;
+  }
+  
+  .signupLeft {
+    display: none;
+  }
+  
+  .signupRight {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+  }
+  
+  .signupForm {
+    padding: 2rem 1.5rem;
     max-width: 100%;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
   
   .phoneInputGroup {
@@ -216,11 +264,30 @@
   .phoneNumberInput {
     width: 100%;
   }
+  
+  .createAccount {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .subtitle {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .progressContainer {
+    margin: 1.25rem 0;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  .signupForm {
+    padding: 1.5rem 1rem;
+    gap: 1.25rem;
+  }
+  
   .createAccount {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
   
   .subtitle {
@@ -230,11 +297,16 @@
   .formGroup input,
   .countryCodeInput input,
   .phoneNumberInput input {
-    height: 2.5rem;
+    height: 2.75rem;
+    font-size: 0.8125rem;
   }
   
   .nextButton {
-    height: 2.5rem;
-    font-size: 0.875rem;
+    height: 2.75rem;
+    font-size: 0.9375rem;
+  }
+  
+  .loginLink {
+    font-size: 0.8125rem;
   }
 }

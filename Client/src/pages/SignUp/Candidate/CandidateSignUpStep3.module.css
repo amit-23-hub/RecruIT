@@ -4,10 +4,9 @@
   min-height: 100vh;
   display: flex;
   background: #ffffff;
-  font-family: var(--font-poppins);
+  font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
 }
-
 
 .signupRight {
   position: relative;
@@ -16,7 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .signupForm {
@@ -25,37 +24,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.75rem;
-  padding: 1rem;
+  gap: 2rem;
+  padding: 2rem;
 }
 
 .emailIcon {
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
 }
 
 .emailIcon svg {
   width: 100%;
   height: 100%;
+  color: #2e007a;
 }
 
 .verifyText {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.75rem;
+  font-weight: 600;
   color: #212121;
   text-align: center;
   margin: 0;
+  line-height: 1.3;
 }
 
 .emailMessage {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 400;
   color: #212121;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
+  max-width: 28rem;
 }
 
 .emailMessage strong {
@@ -64,20 +68,29 @@
 }
 
 .resendButton {
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 2rem;
   background: #2e007a;
   color: white;
   border: none;
   border-radius: 0.5rem;
-  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  width: auto;
+  min-width: 12rem;
 }
 
 .resendButton:hover:not(:disabled) {
   background: #3a0098;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 0, 122, 0.2);
+}
+
+.resendButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .resendButton:disabled,
@@ -88,60 +101,103 @@
 }
 
 .loginLink {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: #969696;
   text-align: center;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .loginLink a {
   color: #2d86ba;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.loginLink a:hover {
+  color: #1a6a9c;
+  text-decoration: underline;
 }
 
 /* Responsive Adjustments */
 @media screen and (max-width: 1024px) {
-  .signupContainer {
-    flex-direction: column;
+  .signupRight {
+    width: 60%;
+    padding: 1.5rem;
   }
   
-  .signupLeft, .signupRight {
-    width: 100%;
-    height: auto;
-    min-height: 50vh;
+  .signupForm {
+    padding: 1.5rem;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .signupContainer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .signupRight {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+  }
+  
   .signupForm {
-    padding: 1rem;
-    max-width: 100%;
+    max-width: 28rem;
+    padding: 3rem 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
   
   .verifyText {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
   
   .emailMessage {
-    font-size: 0.875rem;
+    font-size: 1rem;
+  }
+  
+  .resendButton {
+    padding: 0.75rem 1.75rem;
   }
 }
 
 @media screen and (max-width: 480px) {
+  .signupRight {
+    padding: 1.5rem 1rem;
+  }
+  
+  .signupForm {
+    padding: 2.5rem 1.5rem;
+    gap: 1.5rem;
+  }
+  
   .emailIcon {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+  
+  .verifyText {
+    font-size: 1.375rem;
+  }
+  
+  .emailMessage {
+    font-size: 0.9375rem;
   }
   
   .resendButton {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+    min-width: 10rem;
   }
   
   .loginLink {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
   }
 }

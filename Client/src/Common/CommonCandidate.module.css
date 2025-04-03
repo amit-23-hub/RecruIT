@@ -10,7 +10,7 @@
 
 .signupLeft {
   position: relative;
-  /* width: 50%; */
+  width: 50%;
   height: 100vh;
   background: linear-gradient(
     180deg,
@@ -180,6 +180,9 @@
   .signupForm {
     padding: 1rem;
     max-width: 100%;
+  }
+  .signupLeft {
+   display: none;
   }
 }
 
