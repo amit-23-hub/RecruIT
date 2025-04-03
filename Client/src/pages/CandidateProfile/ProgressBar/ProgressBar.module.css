@@ -22,6 +22,19 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
+}
+
+/* Add this new style for the vertical line */
+.steps::after {
+  content: '';
+  position: absolute;
+  right: 1.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #ddd;
+  z-index: 1;
 }
 
 .step {
@@ -33,6 +46,20 @@
   font-size: 0.875rem;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+/* Add this new style for the active line */
+.step.active::after {
+  content: '';
+  position: absolute;
+  right: 1.5rem;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background-color: #8a01da;
+  z-index: 2;
 }
 
 .step:hover {

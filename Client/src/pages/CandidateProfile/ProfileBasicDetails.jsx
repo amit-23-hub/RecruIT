@@ -6,7 +6,7 @@ import img from "../../assets/HomeImg.png";
 import { getCandidateProfile, updateBasicInfo } from "../../services/candidateProfileService";
 
 const ProfileBasicDetails = ({ onNext }) => {
-  const currentStep = 1;
+  const [currentStep, setCurrentStep] = useState(1); // Convert to state
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -105,6 +105,10 @@ const ProfileBasicDetails = ({ onNext }) => {
     Wales: ["Cardiff", "Swansea", "Newport"],
   };
 
+  const handleStepChange = (stepId) => {
+    setCurrentStep(stepId);
+  };
+
   return (
     <div className={styles.profileContainer}>
       <div className={styles.sideMenuContainer}>
@@ -114,7 +118,12 @@ const ProfileBasicDetails = ({ onNext }) => {
       <div className={styles.profileContent}>
         <div className={styles.profileGrid}>
           <div className={styles.progressBarContainer}>
-            <ProgressBar currentStep={currentStep} />
+            <ProgressBar 
+              currentStep={currentStep} 
+              onStepChange={handleStepChange}
+              isMobileExpanded={false}
+              setIsMobileExpanded={() => {}}
+            />
           </div>
 
           <div className={styles.profileDetailsContainer}>
