@@ -12,16 +12,15 @@ const TalentLanding = () => {
 
   return (
     <div className={styles.container}>
-      <Navbar />
+      <div className={styles.navbar}>
+        <Navbar />
+      </div>
       <div className={styles.content}>
-        
-
-        <span className={styles.mainContent}>
+        <div className={styles.mainContent}>
           <h1>
-            Find Top Talent <span>Faster </span>
-            <br></br>
-            <span>with AI-Powered Solutions</span>
+            Find Top Talent <span>Faster</span>
           </h1>
+          <h1>with AI-Powered Solutions</h1>
           <p>
             Streamline your hiring process, uncover the best candidates, and
             make smarter decisions with our cutting-edge AI tools.
@@ -29,7 +28,7 @@ const TalentLanding = () => {
           <button className={styles.getStartedButton}>
             Get started <span>→</span>
           </button>
-        </span>
+        </div>
         <div className={styles.profileGrid}>
           {profiles.map((profile, index) => (
             <div 
