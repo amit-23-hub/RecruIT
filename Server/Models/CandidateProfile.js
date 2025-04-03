@@ -108,7 +108,38 @@ const candidateProfileSchema = new mongoose.Schema({
     default: 0
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: { 
+    virtuals: true,
+    transform: function(doc, ret) {
+      // Remove the internal _id and __v fields
+      delete ret._id;
+      delete ret.__v;
+      // Flatten the user object if populated
+      if (ret.user && typeof ret.user === 'object') {
+        ret.fullName = ret.user.fullName;
+        ret.email = ret.user.email;
+        ret.phone = `${ret.user.countryCode || ''}${ret.user.phoneNumber || ''}`;
+        delete ret.user;
+      }
+      return ret;
+    }
+  },
+  toObject: { virtuals: true }
+});
+
+// Virtual fields for user data
+candidateProfileSchema.virtual('fullName').get(function() {
+  return this.user?.fullName || '';
+});
+
+candidateProfileSchema.virtual('email').get(function() {
+  return this.user?.email || '';
+});
+
+candidateProfileSchema.virtual('phone').get(function() {
+  if (!this.user) return '';
+  return `${this.user.countryCode || ''}${this.user.phoneNumber || ''}`;
 });
 
 // Calculate completion percentage

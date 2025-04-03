@@ -188,6 +188,10 @@
       min-height: initial;
       background: transparent;
     }
+    .profileGrid {
+      display:block;
+      gap: 20px;
+    }
   
     .profileContent {
       background: transparent;

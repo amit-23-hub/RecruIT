@@ -13,7 +13,13 @@ const getAuthHeader = (isMultipart = false) => ({
 export const getCandidateProfile = async () => {
   try {
     const response = await axios.get(`${API_URL}/profile`, getAuthHeader(false));
-    return response.data;
+    return {
+      ...response.data,
+      // Ensure these fields are properly formatted
+      phone: response.data.phone || '',
+      email: response.data.email || '',
+      fullName: response.data.fullName || ''
+    };
   } catch (error) {
     throw error.response?.data || error.message;
   }

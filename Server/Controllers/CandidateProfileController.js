@@ -5,18 +5,35 @@ import { uploadToLocal, deleteFile } from '../utils/fileUpload.js';
 export const getProfile = async (req, res) => {
   try {
     const profile = await CandidateProfile.findOne({ user: req.user.id })
-      .populate('user', 'fullName email phoneNumber');
+      .populate('user', 'fullName email phoneNumber countryCode');
     
     if (!profile) {
-      return res.status(404).json({ message: 'Profile not found' });
+      // Return a new object with user data if no profile exists yet
+      const user = await User.findById(req.user.id);
+      return res.json({
+        ...user.toObject(), // Include user data at root level
+        basicInfo: {},
+        skills: [],
+        education: [],
+        socialLinks: {}
+      });
     }
     
-    res.json(profile);
+    // Merge profile and user data
+    const response = {
+      ...profile.toObject(),
+      fullName: profile.user?.fullName || '',
+      email: profile.user?.email || '',
+      phone: profile.user?.countryCode + profile.user?.phoneNumber || '',
+      // Remove the nested user object
+      user: undefined
+    };
+    
+    res.json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
-
 // Update basic info
 export const updateBasicInfo = async (req, res) => {
   try {

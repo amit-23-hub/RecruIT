@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './ProfileResumeSkills.module.css';
 import SideMenu from '../../components/SideMenu/SideMenu';
 import ProgressBar from './ProgressBar/ProgressBar';
 import { FiEdit2 } from 'react-icons/fi';
 import { getCandidateProfile, updateResumeSkills } from '../../services/candidateProfileService';
 
-const ProfileResumeSkills = ({ onNext }) => {
+const ProfileResumeSkills = () => {
   const currentStep = 2;
   const [isMobile, setIsMobile] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -14,6 +15,7 @@ const ProfileResumeSkills = ({ onNext }) => {
   const [newSkill, setNewSkill] = useState('');
   const [resume, setResume] = useState(null);
   const [resumePreview, setResumePreview] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,18 +49,20 @@ const ProfileResumeSkills = ({ onNext }) => {
     try {
       setIsLoading(true);
       const formData = new FormData();
-      if (resume) {
+      
+      // Add resume file if it's a new upload
+      if (resume && resume instanceof File) {
         formData.append('resume', resume);
       }
+      
+      // Format skills for backend
       formData.append('skills', JSON.stringify(
         skills.map(skill => ({ name: skill, level: 'Intermediate' }))
       ));
 
       await updateResumeSkills(formData);
       setIsEditMode(false);
-      if (typeof onNext === 'function') {
-        onNext();
-      }
+      navigate('/profile-steps/education'); // Navigate to next step
     } catch (error) {
       console.error('Error updating resume and skills:', error);
     } finally {
@@ -69,24 +73,32 @@ const ProfileResumeSkills = ({ onNext }) => {
   const handleResumeChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setResume({
+      setResume(file); // Store the File object directly
+      setResumePreview({
         name: file.name,
-        size: `${(file.size / 1024).toFixed(2)}kb`,
-        url: URL.createObjectURL(file),
+        size: `${(file.size / 1024).toFixed(2)} KB`,
+        url: URL.createObjectURL(file)
       });
     }
   };
 
   const handleAddSkill = () => {
-    if (newSkill.trim() !== '') {
-      setSkills([...skills, newSkill.trim()]); // Add new skill to the list
-      setNewSkill(''); // Clear the input field
+    if (newSkill.trim() !== '' && !skills.includes(newSkill.trim())) {
+      setSkills([...skills, newSkill.trim()]);
+      setNewSkill('');
     }
   };
 
   const handleRemoveSkill = (index) => {
-    const updatedSkills = skills.filter((_, i) => i !== index); // Remove skill by index
+    const updatedSkills = [...skills];
+    updatedSkills.splice(index, 1);
     setSkills(updatedSkills);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleAddSkill();
+    }
   };
 
   useEffect(() => {
@@ -105,10 +117,15 @@ const ProfileResumeSkills = ({ onNext }) => {
           <SideMenu />
         </div>
       )}
+      
       <div className={styles.profileContent}>
         <div className={styles.profileGrid}>
           <div className={styles.progressBarContainer}>
-            <ProgressBar currentStep={currentStep} />
+            <ProgressBar 
+              currentStep={currentStep}
+              isMobileExpanded={false}
+              setIsMobileExpanded={() => {}}
+            />
           </div>
 
           <div className={styles.profileDetailsContainer}>
@@ -116,7 +133,11 @@ const ProfileResumeSkills = ({ onNext }) => {
               <div className={styles.headerRow}>
                 <h1>Resume & Skills</h1>
                 {!isEditMode && (
-                  <button className={styles.editIcon} onClick={handleEditClick}>
+                  <button 
+                    className={styles.editIcon} 
+                    onClick={handleEditClick}
+                    disabled={isLoading}
+                  >
                     <FiEdit2 />
                   </button>
                 )}
@@ -128,46 +149,68 @@ const ProfileResumeSkills = ({ onNext }) => {
               {/* Skills Section */}
               <div className={styles.skillsSection}>
                 <h2>Skills *</h2>
-                {isEditMode && (
-                  <div className={styles.addSkillContainer}>
-                    <input
-                      type="text"
-                      placeholder="Add a new skill"
-                      value={newSkill}
-                      onChange={(e) => setNewSkill(e.target.value)}
-                      className={styles.skillInput}
-                    />
-                    <button onClick={handleAddSkill} className={styles.addSkillButton}>
-                      Add
-                    </button>
+                {isEditMode ? (
+                  <>
+                    <div className={styles.addSkillContainer}>
+                      <input
+                        type="text"
+                        placeholder="Add a new skill"
+                        value={newSkill}
+                        onChange={(e) => setNewSkill(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        className={styles.skillInput}
+                      />
+                      <button 
+                        onClick={handleAddSkill} 
+                        className={styles.addSkillButton}
+                        disabled={!newSkill.trim()}
+                      >
+                        Add
+                      </button>
+                    </div>
+                    <div className={styles.skillsList}>
+                      {skills.map((skill, index) => (
+                        <div key={index} className={styles.skillItem}>
+                          {skill}
+                          <span
+                            className={styles.removeSkill}
+                            onClick={() => handleRemoveSkill(index)}
+                          >
+                            ×
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className={styles.skillsList}>
+                    {skills.length > 0 ? (
+                      skills.map((skill, index) => (
+                        <div key={index} className={styles.skillItem}>
+                          {skill}
+                        </div>
+                      ))
+                    ) : (
+                      <p>No skills added yet</p>
+                    )}
                   </div>
                 )}
-                <div className={styles.skillsList}>
-                  {skills.map((skill, index) => (
-                    <div key={index} className={styles.skillItem}>
-                      {skill}
-                      {isEditMode && (
-                        <span
-                          className={styles.removeSkill}
-                          onClick={() => handleRemoveSkill(index)}
-                        >
-                          ❌
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
               </div>
 
               {/* Resume Section */}
               <div className={styles.resumeSection}>
                 <h2>Resume</h2>
                 <div className={styles.resumeUpload}>
-                  {resume ? (
+                  {resumePreview ? (
                     <div className={styles.resumeFile}>
-                      <span className={styles.resumeName}>{resume.name}</span>
-                      <span className={styles.resumeSize}>{resume.size}</span>
-                      <a href={resume.url} target="_blank" rel="noopener noreferrer">
+                      <span className={styles.resumeName}>{resumePreview.name}</span>
+                      <span className={styles.resumeSize}>{resumePreview.size}</span>
+                      <a 
+                        href={resumePreview.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className={styles.viewLink}
+                      >
                         View
                       </a>
                     </div>
@@ -175,25 +218,40 @@ const ProfileResumeSkills = ({ onNext }) => {
                     <p>No resume uploaded.</p>
                   )}
                   {isEditMode && (
-                    <input
-                      type="file"
-                      accept=".pdf"
-                      onChange={handleResumeChange}
-                      className={styles.resumeInput}
-                    />
+                    <div className={styles.fileInputContainer}>
+                      <label className={styles.fileInputLabel}>
+                        Choose File
+                        <input
+                          type="file"
+                          accept=".pdf,.doc,.docx"
+                          onChange={handleResumeChange}
+                          className={styles.resumeInput}
+                        />
+                      </label>
+                      {resumePreview && (
+                        <span className={styles.fileName}>{resumePreview.name}</span>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* Action Buttons */}
             {isEditMode && (
               <div className={styles.actionButtons}>
-                <button className={styles.cancelButton} onClick={() => setIsEditMode(false)}>
+                <button 
+                  className={styles.cancelButton} 
+                  onClick={() => setIsEditMode(false)}
+                  disabled={isLoading}
+                >
                   Cancel
                 </button>
-                <button className={styles.saveButton} onClick={handleSaveClick}>
-                  Save & Next
+                <button 
+                  className={styles.saveButton} 
+                  onClick={handleSaveClick}
+                  disabled={isLoading || skills.length === 0}
+                >
+                  {isLoading ? 'Saving...' : 'Save & Next'}
                 </button>
               </div>
             )}
