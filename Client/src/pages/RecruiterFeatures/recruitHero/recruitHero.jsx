@@ -4,6 +4,7 @@ import img from '../../../assets/recruiterPhoneHero.png';
 import leftBg from '../../../assets/recruiterWave.png';
 import { ArrowRight } from 'lucide-react';
 import Header from '../../../components/Navbar/NavBar';
+import wavePattern from '../../../assets/recruitermidleWave.png'; // Add this import
 
 const RecruiterMobile = () => {
   return (
@@ -11,9 +12,11 @@ const RecruiterMobile = () => {
       <div className={styles.headerWrapper}>
         <Header/>
       </div>
-      {/* <div className={styles.backgroundPattern}></div> */}
-      <div className={styles.leftBackground} >
-        <img src={leftBg} alt="background"  />
+      <div className={styles.leftBackground}>
+        <img src={leftBg} alt="background" />
+      </div>
+      <div className={styles.wavePatternWrapper}>
+        <img src={wavePattern} alt="wave pattern" className={styles.wavePattern} />
       </div>
       <div className={styles.contentSection}>
         <div className={styles.headerContent}>
@@ -29,10 +32,7 @@ const RecruiterMobile = () => {
         </div>
         <div className={styles.imageSection}>
           <img src={img} alt="Recruitment AI" className={styles.profileImage} />
-          <div className={styles.matchScore}>
-            <span>95%</span>
-            <span>MATCH SCORE</span>
-          </div>
+          
         </div>
       </div>
     </div>

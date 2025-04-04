@@ -182,3 +182,18 @@
     display: none;
   }
 }
+
+.wavePatternWrapper {
+  position: absolute;
+  width: 62%;
+  top: 75%;
+  left: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  opacity: 1.6;
+}
+.wavePattern {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
