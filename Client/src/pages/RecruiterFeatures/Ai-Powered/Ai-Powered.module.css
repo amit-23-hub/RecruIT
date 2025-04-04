@@ -1,12 +1,15 @@
 .featuresContainer {
+  width: 100%;
   max-width: 1440px;
   margin: 3rem auto;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   overflow: hidden;
+  overflow-x: hidden;
 }
 
 .feature {
@@ -17,10 +20,9 @@
   width: 100%;
 }
 
-.feature.reverse {
+/* .feature.reverse {
   /* flex-direction: row-reverse; */
-}
-
+ 
 .featureContent {
   flex: 1;
 }

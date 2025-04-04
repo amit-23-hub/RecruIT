@@ -11,6 +11,7 @@
   );
   position: relative;
   overflow: hidden;
+  overflow-x: hidden;
 }
 
 .content {
