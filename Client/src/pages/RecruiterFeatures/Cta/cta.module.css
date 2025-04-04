@@ -1,0 +1,110 @@
+
+  
+  .ctaSection {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    
+  }
+  
+  .ctaSection h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 48px;
+    color: #363636;
+    text-align: center;
+  
+    @media (max-width: 768px) {
+      font-size: 24px;
+      line-height: 36px;
+    }
+  
+    @media (max-width: 480px) {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+  
+  .ctaButton {
+    margin-top: 10px;
+    padding: 12px 32px;
+    background-color: #2E007A;
+    color: #ffffff;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 219px;
+    height: 54px;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .arrow-forward {
+    width: 24px;
+    height: 24px;
+    transform: rotate(-90deg);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .ctaButton:hover {
+    background-color: #4B00B2; 
+  }
+  .ctaButton:hover .arrow-forward {
+    transform: rotate(0deg);
+  }
+  .mobileHeaderContainer {
+    display: none;
+    width: 100%;
+    margin-bottom: 1rem;
+    
+    @media (max-width: 768px) {
+      display: block;
+      order: -1;
+    }
+  }
+  
+  .mobileHeaderContent {
+    padding: 0;
+    text-align: center;
+  }
+  
+  .mobileSubTitle {
+    font-family: 'Lato';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #8a01da;
+    margin-bottom: 4px;
+    display: block;
+  }
+  
+  .mobileMainTitle {
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: #363636;
+    margin: 0;
+    
+    @media (max-width: 480px) {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+  

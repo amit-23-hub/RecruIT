@@ -6,12 +6,20 @@ import img2 from '../../../assets/recruiterFeature2.png';
 import img3 from '../../../assets/recruiterFeature3.png';
 import img4 from '../../../assets/recruiterFeature4.png';
 import img5 from '../../../assets/recruiterFeature5.png';
+import topRightBg from '../../../assets/rightWaveforrecruiter.png'
+import leftBg from '../../../assets/leftWaveforrecruiter.png'
 
 const TalentLanding = () => {
   const profiles = [img1, img2, img3, img4, img5];
 
   return (
     <div className={styles.container}>
+      <div className={styles.topRightBackground}>
+        <img src={topRightBg} alt="" />
+      </div>
+      <div className={styles.leftBackground}>
+        <img src={leftBg} alt="" />
+      </div>
       <div className={styles.navbar}>
         <Navbar />
       </div>

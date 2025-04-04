@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  max-width: 1440px;
+  
   margin: 0 auto;
   min-height: fit-content;
   background: radial-gradient(circle at center,
@@ -41,6 +41,41 @@ margin: 0 auto 2rem;
 font-size: clamp(1rem, 1.5vw, 1.1rem);
 color: #656565;
 }
+.topRightBackground {
+  position: absolute;
+  top :-3rem ; 
+  right: 0rem;
+  z-index: 1;
+  opacity: 1.3;
+  /* scale: 1.8; */
+  transform: rotate(-3.11deg);
+  pointer-events: none;
+}
+
+.topRightBackground img {
+  max-width: 600px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.leftBackground {
+  position: absolute;
+  left: 0;
+  top: 64%;
+  transform: translateY(-45%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.leftBackground img {
+  max-width: 500px;
+  height: auto;
+  opacity: 0.8;
+}
+
+
+
+
 
 .profileGrid {
 display: flex;
