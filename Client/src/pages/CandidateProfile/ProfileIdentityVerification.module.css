@@ -72,6 +72,7 @@
   
   .profileDetailsContainer {
     flex: 1;
+    padding: 1.25rem;
   }
   
   .profileHeader {

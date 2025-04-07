@@ -94,7 +94,7 @@ const Header = () => {
                                 {userType === 'candidate' ? (
                                     <>
                                         <Link to="/candidate-profile">Profile</Link>
-                                        <Link to="/profile-steps">Update Profile</Link>
+                                        <Link to="/profile-steps/basic-details">Update Profile</Link>
                                     </>
                                 ) : (
                                     <>

@@ -29,7 +29,7 @@
 .steps::after {
   content: '';
   position: absolute;
-  right: 1.5rem;
+  right: -2.5rem;
   top: 0;
   bottom: 0;
   width: 2px;
@@ -54,7 +54,7 @@
 .step.active::after {
   content: '';
   position: absolute;
-  right: 1.5rem;
+  right: -2.5rem;
   top: 0;
   height: 100%;
   width: 2px;

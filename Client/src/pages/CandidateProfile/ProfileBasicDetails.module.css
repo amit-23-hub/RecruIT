@@ -89,6 +89,13 @@
   border-radius: 0.25rem; /* 4px to rem */
   font-size: 0.875rem; /* 14px to rem */
 }
+.detailSection   textarea {
+  width: 80%; /* Changed from 50% to 100% */
+  padding: 0.625rem; /* 10px to rem */
+  border: 1px solid #ccc;
+  border-radius: 0.25rem; /* 4px to rem */
+  font-size: 0.875rem; /* 14px to rem */
+}
 
 .detailSection select {
   width: 90%; /* Changed from 110% to 100% */

@@ -2,6 +2,7 @@
     display: flex;
     min-height: 100vh;
     background: linear-gradient(291.21deg, #faf7ff 8.45%, #f3ecff 90.27%);
+    
   }
   
   .sideMenuContainer {
@@ -29,6 +30,7 @@
   
   .profileDetailsContainer {
     flex: 1;
+    padding: 2rem;
   }
   
   .profileHeader {
@@ -217,3 +219,4 @@
       min-width: 120px;
     }
   }
+  
